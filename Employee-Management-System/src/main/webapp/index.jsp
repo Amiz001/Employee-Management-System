@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/login-style.css">
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/css/login-style.css">
 </head>
 <body>
     <div id="header">
@@ -19,19 +19,19 @@
             <button id="LearnMore" type="button">Learn More</button>
             <div id="Features">
                 <div class="feature">
-                    <img src="images/check1.png" alt="check1">
+                    <img src="assets/images/check1.png" alt="check1">
                     <h3>Attendance Tracking </i></h3> 
                 </div>
                 <div class="feature">
-                    <img src="images/check1.png" alt="check1">
+                    <img src="assets/images/check1.png" alt="check1">
                     <h3>Secure Role-Based Access</h3>
                 </div>
                 <div class="feature">
-                    <img src="images/check1.png" alt="check1">
+                    <img src="assets/images/check1.png" alt="check1">
                     <h3>Payroll Management</h3>
                 </div>
                 <div class="feature">
-                    <img src="images/check1.png" alt="check1">
+                    <img src="assets/images/check1.png" alt="check1">
                     <h3>Employee Self-Service</h3>
                 </div>
             </div>  
@@ -64,7 +64,7 @@
         </div>
     </div>
     
-    <script src="js/login-script.js"></script> 
+    <script src="assets/js/login-script.js"></script> 
     <script src="https://kit.fontawesome.com/1f59e04ed2.js" crossorigin="anonymous"></script>
 </body>
 </html>
