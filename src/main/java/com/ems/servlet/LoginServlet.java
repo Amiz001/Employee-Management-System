@@ -1,10 +1,11 @@
 package com.ems.servlet;
 
-import com.ems.service.UserDAO;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+
+import com.ems.dao.UserDAO;
+
 import java.io.IOException;
 
 @WebServlet("/LoginServlet") 

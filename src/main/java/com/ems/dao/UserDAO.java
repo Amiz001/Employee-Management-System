@@ -1,4 +1,4 @@
-package com.ems.service;
+package com.ems.dao;
 
 import com.ems.util.DBConnection;
 
