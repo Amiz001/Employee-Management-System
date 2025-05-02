@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO dao = new UserDAO();
 
         if (dao.validate(email, password)) {
-            response.sendRedirect("admin.jsp");
+            response.sendRedirect("dashboard/employee/test.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid Email or Password");
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

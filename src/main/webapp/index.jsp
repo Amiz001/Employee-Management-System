@@ -64,7 +64,7 @@
         </div>
     </div>
   
-    <script src="js/login-script.js"></script> 
+    <script src="assets/js/login-script.js"></script> 
     <script src="https://kit.fontawesome.com/1f59e04ed2.js" crossorigin="anonymous"></script>
 </body>
 </html>

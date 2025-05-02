@@ -1,15 +1,22 @@
 @charset "UTF-8";
-/* General Styling */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: #f4f6f9;
     position:relative;
     height: 100vh;
     width: 100vw;
     overflow-x: hidden;
 }
+
+/*------- sidebar ---------*/
+
 .sidebar {
-    width: 250px;
+    width: 270px;
     height: 100vh;
     background: #ffffff;
     padding: 15px;
@@ -18,20 +25,19 @@ body {
     display:flex;
     flex-direction: column;
     align-items: left;
-    justify-content: center;
     z-index: 200;
 }
 
 .sidebar .title{
 	text-align: center;
-	margin-top: -60px;
+	margin-top: 15px;
 	font-weight: 550;
 	font-size: 26px;
 }
 
-.sidebar .profile {
+.sidebar .sidebar-profile {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 50px;
     display:flex;
     flex-direction: column;
@@ -39,19 +45,20 @@ body {
     justify-content: center;
 }
 
-.sidebar .profile img {
+.sidebar .sidebar-profile img {
     width: 80px;
     height: 80px;
     border-radius: 20%;
+    box-shadow: 0px 2px 5px rgba(128, 128, 128, 0.1);
 }
 
-.sidebar .profile #name{
+.sidebar .sidebar-profile #name{
 	margin-top: 20px;
 	margin-bottom: 0px;
 	font-size: 18px;
 }
 
-.sidebar .profile #role{
+.sidebar .sidebar-profile #role{
 	font-size: 14px;
 	color: #808080
 }
@@ -76,11 +83,16 @@ margin-right: 10px;
     border-radius: 5px;
 }
 .sidebar a:hover, .sidebar .active {
-    background: #e3e6eb;
+    background: #f0f3fb;
 }
 
-/* Menu Bar Styles */
-.contents {
+.sidebar #log-out{
+	margin-top: 210px;
+}
+
+/*------- Navigation bar ---------*/
+
+.nav-container {
    display: flex;
    margin-left: 240px;
    margin-bottom: 20px;
@@ -89,10 +101,11 @@ margin-right: 10px;
 	position: fixed;
 	z-index: 50;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    width: 1290px;
+    justify-content: flex-end;
+    gap: 105px;
+    padding: 10px 20px;
+    width: 100vw;
     background: #ffffff;
     box-shadow: 0px 2px 5px rgba(128, 128, 128, 0.1);
 }
@@ -101,31 +114,97 @@ margin-right: 10px;
    display: flex;
    align-items: center;
    gap: 15px;
-   margin-left: 1050px;
+   margin-right: 260px;
+   padding: 8px 15px;
+   border-radius: 35px;
+   cursor: pointer;
 }
 
-.user-profile i {
+.user-profile:hover{
+	background-color: #f0f3fb;
+}
+
+.user-profile:active{
+	background-color: #dee5fa;
+}
+
+.menu-bar #bell {
    font-size: 20px;
    cursor: pointer;
+   margin-right:-95px;
+   padding: 10px 12px;
+   border-radius: 100%;
  }
+ 
+ .menu-bar #bell:hover {
+ 	background-color: #f0f3fb;
+ }
+ 
+ .menu-bar #bell:active{
+	background-color: #dee5fa;
+}
 
  .user-profile img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
  }
+ 
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 80px; 
+    right: 290px;
+    background-color: #f3f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    border: none;
+    overflow: hidden;
+    z-index: 1000;
+    width: 150px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+	font-size: 15px;
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #d5d5d5;
+}
+
+.dropdown-menu a i{
+	margin-right: 12px;
+	font-size: 15px;
+}
 
 
-/*Content*/
+/*------- Main Content---------*/
+
 .content {
     margin-left: 270px;
     padding: 20px;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
-.content h5{
-	font-weight: bold;
-	font-size: 30px;
+.content #main-title{
+	font-weight: 550;
+	font-size: 20px;
+	margin: 20px 40px 30px 5px;
+	color: #444444;
 }
 
 .table-container {
@@ -160,10 +239,8 @@ margin-right: 10px;
     object-fit: cover;
     position: absolute;
     left: 40px;
-
 }
 
-/* Search Bar & Tool bar Container */
 .search-toolbar {
     background: #dde3f1;
     padding: 10px;
@@ -173,10 +250,8 @@ margin-right: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
     height: 60px;
-
 }
 
-/* Search Box */
 .search-box {
     display: flex;
     align-items: center;
@@ -201,41 +276,48 @@ margin-right: 10px;
     margin-right: 5px;
 }
 
-/* Tool bar Icons */
 .toolbar-icons {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-right: 20px;
+    gap: 10px;
+    margin-right: 15px;
 }
 
-.toolbar-icons i {
-    font-size: 18px;
+.toolbar-icons span {
+    font-size: 22px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-/*.toolbar-icons i:hover {
-    color: #007bff;
-*/
+.toolbar-icons span:hover {
+ 	background-color: #c5d1f1;
+ }
+ 
+.toolbar-icons span:active{
+	background-color: #bac6e5;
+}
 
 #add-icon {
-    color: #00ac00;
+    color: #4caf50;
+   	padding: 10px 12px;
+   	border-radius: 100%;
 }
 
 #download-icon {
-    color: blue;
+    color: #2196f3;
+   	padding: 10px 12px;
+   	border-radius: 100%;
+   	font-size: 26px;	
 }
 
 #update-icon {
-    color: blue;
+    color: #6b7bef;
 }
 
 #delete-icon {
-    color: red;
+    color: #fe5b0e;
 }        
         
-/* Add button */  
 .toolbar-icons .btnlogin-popup{
     width: 130px;
     height: 50px;
@@ -254,8 +336,9 @@ margin-right: 10px;
     background-color: #05190A;
     color: #fff; 
 }    
-    
-/*Pop up styles*/   
+ 
+/*------- Insert-popup ---------*/  
+  
 .cover_box {
     position: fixed;
     left:50%;
