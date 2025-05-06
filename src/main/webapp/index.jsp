@@ -38,7 +38,8 @@
         </div>
         <div class="alert" id="alert">Invalid Input</div>
         <div id="serverMessage" style="display: none;">
-   			 <%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "" %>
+   			 <%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+
 		</div>
         
         <div class="form-container">

@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="../../assets/css/payroll-style.css">
     <link rel="icon" href="../../assets/images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
 <!-- Side bar -->
 <div class="sidebar">
-    <h2 class="title">CoreHR</h2>
+    <h2 class="title">Core<span style="color: #a05aff;">HR</span></h2>
     <div class="sidebar-profile">
          <img src="https://img.freepik.com/premium-photo/official-girl-iamges-hd-wallpaper-free-download-girl-model-with-pant-shairt-product-view-ad_88650-3237.jpg?w=2000">
          <p id="name">Sarah Smith</p>
@@ -29,13 +29,13 @@
      <a href="paydashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="PayGetAllServlet#" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="login.jsp" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
-    
 </div>
 
 
 <!-- Navigation bar -->
 <div class="nav-container">
     <nav class="menu-bar">
+    	<span id="darkModeToggle" class="material-icons">light_mode</span>
     	<i id="bell" class="fa-solid fa-bell"></i>
         <div class="user-profile">
             <span>Sarah Smith</span>
@@ -51,12 +51,11 @@
 
 
 
-
 <!-- Main Content-->
 <div class="content">
     <h5 id="main-title">Employee salary</h5>
     <div class="table-container">
-        <table class="table table-striped">
+        <table class="table table-striped my-table">
             <thead>
 
                 <div class="search-toolbar">   
@@ -67,8 +66,7 @@
                    
                     <div class="toolbar-icons"> 
                     	<span onclick="activatePopup()" id="add-icon" class="material-symbols-outlined">add_circle</span>
-                        <span class="material-symbols-outlined" id="download-icon">download</span>
-                        <i class="fa-solid fa-money-check-dollar"></i>     
+                        <span class="material-symbols-outlined" id="download-icon">download</span>     
                     </div>
                 </div>
                 <tr>
@@ -89,7 +87,7 @@
                   <td>Rs.${payment.basic}</td>
                   <td>Rs.${payment.ot}</td>
                   <td>Rs.${payment.allowance}</td>
-                  <td>Rs.${payment.salary}</td>
+                  <td><i class="fa-solid fa-money-check-dollar"></i>Rs.${payment.salary}</td>
           
                    <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
                        

@@ -21,17 +21,3 @@ function activateUpdatePopup(id, name, basic, ot, allowance, salary) {
 function deactivateUpdatePopup() {
     document.getElementById("updatePopup").classList.remove('cover_box-active');
 }
-
-//dropdown menu
-document.querySelector('.user-profile').addEventListener('click', function () {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownMenu.classList.toggle('show');
-});
-
-window.addEventListener('click', function (e) {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const userProfile = document.querySelector('.user-profile');
-    if (!userProfile.contains(e.target)) {
-        dropdownMenu.classList.remove('show');
-    }
-});
