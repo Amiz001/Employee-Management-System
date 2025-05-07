@@ -11,15 +11,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/payroll-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/common.css">
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
 <!-- Side bar -->
 <div class="sidebar">
-    <h2 class="title">CoreHR</h2>
+    <h2 class="title">Core<span style="color: #a05aff;">HR</span></h2>
     <div class="sidebar-profile">
          <img src="https://img.freepik.com/premium-photo/official-girl-iamges-hd-wallpaper-free-download-girl-model-with-pant-shairt-product-view-ad_88650-3237.jpg?w=2000">
          <p id="name">Sarah Smith</p>
@@ -30,13 +31,13 @@
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/payrollemployees.jsp"><i class="fa-solid fa-user"></i> Employees</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="login.jsp" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
-    
 </div>
 
 
 <!-- Navigation bar -->
 <div class="nav-container">
     <nav class="menu-bar">
+    	<span id="darkModeToggle" class="material-icons">light_mode</span>
     	<i id="bell" class="fa-solid fa-bell"></i>
         <div class="user-profile">
             <span>Sarah Smith</span>
@@ -52,12 +53,11 @@
 
 
 
-
 <!-- Main Content-->
 <div class="content">
     <h5 id="main-title">Employee salary</h5>
     <div class="table-container">
-        <table class="table table-striped">
+        <table class="table table-striped my-table">
             <thead>
 
                 <div class="search-toolbar">   
@@ -68,7 +68,9 @@
                   
                     <div class="toolbar-icons"> 
                     	<span onclick="activatePopup()" id="add-icon" class="material-symbols-outlined">add_circle</span>
-                        <span class="material-symbols-outlined" id="download-icon">download</span>  
+
+                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+
                     </div>
                 </div>
                 <tr>
@@ -85,6 +87,7 @@
             
             <c:forEach var="payroll" items="${allsalary}">
             <tr>
+
                   <td>${payroll.pay_id}</td>
                   <td>${payroll.emp_id}</td>
                   <td>Rs.${payroll.basic}</td>
@@ -92,8 +95,9 @@
                   <td>Rs.${payroll.allowance}</td>
                   <td>Rs.${payroll.total_salary}</td>
                   <td>${payroll.date}</td>
-                  
-                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
+                              
+                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
+
                        
                        <i class="fa-regular fa-pen-to-square" id="update-icon" onclick="activateUpdatePopup('${payroll.pay_id}', '${payroll.emp_id}', '${payroll.basic}', '${payroll.ot}', '${payroll.allowance}', '${payroll.total_salary}', '${payroll.date}')"></i>
                        <form action="PayrollDeleteServlet" method="post">
@@ -115,7 +119,7 @@
    </a>
    <div class="form-box-login">
        <h2>Employee Salary</h2>
-           <form action="PayrollInsertServlet" method="post">
+           <form action="${pageContext.request.contextPath}/PayrollInsertServlet" method="post">
                <div class="input-box">
                     <input type="text" id="emp_id" name="emp_id" required>
                     <label>Employee ID</label>
@@ -208,6 +212,7 @@ document.getElementById("searchInput").addEventListener("input", filterTable);
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/payroll-script.js"></script>
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    

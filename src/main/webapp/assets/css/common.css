@@ -1,12 +1,10 @@
 @charset "UTF-8";
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&family=Silkscreen:wght@400;700&display=swap');
 
 body {
     font-family: "Inter", sans-serif;
-    background-color: #f4f6f9;
+    /*background-color: #f4f6f9;*/
+    background-color: #f5f3ff;
     position:relative;
     height: 100vh;
     width: 100vw;
@@ -83,11 +81,11 @@ margin-right: 10px;
     border-radius: 5px;
 }
 .sidebar a:hover, .sidebar .active {
-    background: #f0f3fb;
+    background: #e9e4f9;
 }
 
 .sidebar #log-out{
-	margin-top: 210px;
+	margin-top: 170px;
 }
 
 /*------- Navigation bar ---------*/
@@ -103,7 +101,7 @@ margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 105px;
+    gap: 20px;
     padding: 10px 20px;
     width: 100vw;
     background: #ffffff;
@@ -120,28 +118,19 @@ margin-right: 10px;
    cursor: pointer;
 }
 
-.user-profile:hover{
-	background-color: #f0f3fb;
-}
-
-.user-profile:active{
-	background-color: #dee5fa;
-}
-
-.menu-bar #bell {
+.menu-bar #bell , .menu-bar #darkModeToggle{
    font-size: 20px;
    cursor: pointer;
-   margin-right:-95px;
    padding: 10px 12px;
    border-radius: 100%;
  }
  
- .menu-bar #bell:hover {
- 	background-color: #f0f3fb;
- }
- 
- .menu-bar #bell:active{
-	background-color: #dee5fa;
+.menu-bar #bell:hover, .menu-bar #darkModeToggle:hover, .user-profile:hover {
+  background-color: #e9e4f9;
+}
+
+.menu-bar #bell:active, .menu-bar #darkModeToggle:active, .user-profile:active {
+  background-color: #dee5fa;
 }
 
  .user-profile img {
@@ -153,8 +142,8 @@ margin-right: 10px;
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: 80px; 
-    right: 290px;
+    top: 70px; 
+    right: 287px;
     background-color: #f3f1f1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 7px;
@@ -242,7 +231,8 @@ margin-right: 10px;
 }
 
 .search-toolbar {
-    background: #dde3f1;
+    /*background:#a05aaa;*/
+    background: linear-gradient(to right, #cec6f8, #b9aef5);	
     padding: 10px;
     display: flex;
     align-items: center;
@@ -290,21 +280,21 @@ margin-right: 10px;
 }
 
 .toolbar-icons span:hover {
- 	background-color: #c5d1f1;
+ 	background-color: #e9e4f9;
  }
  
 .toolbar-icons span:active{
-	background-color: #bac6e5;
+	background-color: #dee5fa;
 }
 
 #add-icon {
-    color: #4caf50;
+    color: #2e7d5e;
    	padding: 10px 12px;
    	border-radius: 100%;
 }
 
 #download-icon {
-    color: #2196f3;
+    color: #3a67d9;
    	padding: 10px 12px;
    	border-radius: 100%;
    	font-size: 26px;	
@@ -312,10 +302,20 @@ margin-right: 10px;
 
 #update-icon {
     color: #6b7bef;
+    cursor: pointer;
 }
 
 #delete-icon {
     color: #fe5b0e;
+    cursor: pointer;
+}
+
+#update-icon:hover{
+	color: #6374f1;
+} 
+
+#delete-icon:hover {
+	color: #f04f04;
 }        
         
 .toolbar-icons .btnlogin-popup{
@@ -337,7 +337,7 @@ margin-right: 10px;
     color: #fff; 
 }    
  
-/*------- Insert-popup ---------*/  
+/*------- Insert-popup --------- 
   
 .cover_box {
     position: fixed;
@@ -468,4 +468,158 @@ margin-right: 10px;
     font-size: 1em;
     color: #fff;
     font-weight: 500;
-}    
+}*/
+
+/*-------Form Custom boostrap----------*/
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.btn{
+	width: 20%;
+}
+.btn-purple {
+  background-color: #a05aff;
+  color: white;
+}
+.btn-purple:hover {
+  background-color: #8b3dff;
+  color: white;
+}
+
+.btn-black {
+  background-color: #333;
+  color: white;
+}
+.btn-black:hover {
+  background-color: #222;
+  color:white;
+}
+
+.form-control:focus {
+  border-color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+
+.modal-body.custom-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c5c5c5 transparent;
+}
+.modal-body.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-body.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-body.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: rgb(161, 161, 161);
+  border-radius: 6px;
+}
+
+
+/*------- Dark Mode Styles ---------*/ 
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar {
+    background: #1e1e1e;
+}
+
+body.dark-mode .sidebar .features a {
+    color: #ddd;
+}
+
+body.dark-mode .sidebar a:hover, 
+body.dark-mode .sidebar .active {
+    background: #2a2a2a;
+}
+
+body.dark-mode .menu-bar {
+    background: #1e1e1e;
+    color: #ddd;
+}
+
+body.dark-mode .menu-bar #bell:hover, 
+body.dark-mode .menu-bar #darkModeToggle:hover,
+body.dark-mode .user-profile:hover {
+	background: #2a2a2a;
+}
+
+body.dark-mode .menu-bar #bell:active, 
+body.dark-mode .menu-bar #darkModeToggle:active,
+body.dark-mode .user-profile:active {
+	background: #202020;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+body.dark-mode .dropdown-menu a {
+    color: #fff;
+}
+
+body.dark-mode .dropdown-menu a:hover {
+    background-color: #3a3a3a;
+}
+
+
+/*---Main content---*/
+
+body.dark-mode .content #main-title{
+	color: #fff;
+}
+
+body.dark-mode .table-container {
+    background: #1e1e1e;
+}
+
+body.dark-mode .table thead {
+    background: #2c2c2c;
+    color: #fff;
+}
+
+body.dark-mode .table tr td,
+body.dark-mode .table tr th {
+    color: #fff;
+    background-color: #3a3a3a;
+}
+
+body.dark-mode .search-toolbar {
+    background: #2a2a2a;
+}
+
+body.dark-mode .search-box {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+body.dark-mode .search-box input {
+    background: transparent;
+    color: #fff;
+}
+
+body.dark-mode .toolbar-icons #add-icon {
+    color: #66bb6a; 
+}
+
+body.dark-mode .toolbar-icons #download-icon {
+    color: #4dabf7;	
+}
+
+body.dark-mode .toolbar-icons span:hover {
+    background-color: #333;
+}
+
+
+
