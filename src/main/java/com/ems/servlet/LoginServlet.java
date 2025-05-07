@@ -35,8 +35,8 @@ public class LoginServlet extends HttpServlet {
                     case "supervisor":
                         response.sendRedirect("./dashboard/supervisor/dashboard.jsp");
                         break;
-                    case "financial analyst":
-                        response.sendRedirect("./dashboard/finacialAnalyst/dashboard.jsp");
+                    case "finance analyst":
+                        response.sendRedirect("./dashboard/financialAnalyst/dashboard.jsp");
                         break;
                     case "hr manager":
                         response.sendRedirect("./dashboard/hrManager/dashboard.jsp");

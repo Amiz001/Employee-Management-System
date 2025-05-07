@@ -13,8 +13,7 @@
     String name = (String) session.getAttribute("name");
     String role = (String) session.getAttribute("role");
     String profilePhoto = (String) session.getAttribute("profilePhoto");
-    
-    List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
+  
 %>
 
 <!DOCTYPE html>
@@ -98,6 +97,8 @@
             </thead>
             
             <%
+            List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
+            
 		    if (leaveList != null) {
 		        for (Leave leave : leaveList) {
 			%>
