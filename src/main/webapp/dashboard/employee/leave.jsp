@@ -43,7 +43,26 @@
      <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/LeaveServlet" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i>Request Leave</a>
      <a href="${pageContext.request.contextPath}/dashboard/employee/attendance.jsp"><i class="fa-solid fa-user-check"></i> Attendance</a>
-     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+</div>
+
+<!--  logout popup -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-light-purple text-white rounded-top-4">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Are you sure you want to log out from your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -65,10 +84,40 @@
 </div>
 
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Leave record successfully updated!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+
+<%  
+String status = request.getParameter("status");
+
+%>
 
 <!-- Main Content-->
 <div class="content">
     <h5 id="main-title">Request Leave</h5>
+
     <div class="table-container">
         <table class="table table-striped my-table">
             <thead>

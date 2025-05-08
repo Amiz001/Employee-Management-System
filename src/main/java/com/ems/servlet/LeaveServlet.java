@@ -26,10 +26,14 @@ public class LeaveServlet extends HttpServlet {
         	
             LeaveDAO dao = new LeaveDAO();
             List<Leave> leaves = dao.getLeaves(email);
+            
+            String status = null;
+            status = request.getParameter("status");
 
             request.setAttribute("leaveList", leaves);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/leave.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/leave.jsp?status=" + status);
             dispatcher.forward(request, response);
+            
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -335,9 +335,72 @@ margin-right: 10px;
 .toolbar-icons .btnlogin-popup:hover{
     background-color: #05190A;
     color: #fff; 
-}    
- 
+}  
 
+/*------- alerts custom css -----------*/
+
+  .toast-purple {
+    background-color: #f3e8ff; /* light purple */
+    color: #3b006e;
+    border-left: 6px solid #a05aff;
+  }
+
+  .toast-purple .toast-header {
+    background-color: #a05aff;
+    color: white;
+    border-bottom: 1px solid #d5bfff;
+  }
+
+  .toast-purple .btn-close {
+    filter: invert(1);
+  }
+
+  .toast-red {
+    background-color: #ffe6e9; /* light red */
+    color: #6e0011;
+    border-left: 6px solid #ff4f81;
+  }
+
+  .toast-red .toast-header {
+    background-color: #ff4f81;
+    color: white;
+    border-bottom: 1px solid #ffcbd7;
+  }
+
+  .toast-red .btn-close {
+    filter: invert(1);
+  }
+  
+  
+
+  .bg-light-purple {
+    background-color: #a05aff;
+  }
+
+  .btn-purple {
+    background-color: #a05aff;
+    color: white;
+    border: none;
+  }
+
+  .btn-purple:hover {
+    background-color: #8438f4;
+    color: white;
+  }
+
+  .modal-content {
+    border-radius: 1rem;
+  }
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .modal-footer {
+    border-top: none;
+  }
+  
+ 
 /*-------Form Custom boostrap----------*/
 
 .modal-footer {

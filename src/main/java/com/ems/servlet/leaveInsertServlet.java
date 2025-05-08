@@ -36,8 +36,11 @@ public class leaveInsertServlet extends HttpServlet {
 			LeaveDAO dao = new LeaveDAO();
 			
 			if(dao.insertLeave(leave)) {
-				response.sendRedirect("LeaveServlet");
+				response.sendRedirect("LeaveServlet?status=add_success");
 			}
+			else {
+            	response.sendRedirect("LeaveServlet?status=error");
+            }
 			
 		}catch(Exception e) {
 			e.printStackTrace();

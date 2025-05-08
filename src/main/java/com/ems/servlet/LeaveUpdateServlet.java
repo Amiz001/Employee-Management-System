@@ -37,7 +37,10 @@ public class LeaveUpdateServlet extends HttpServlet {
             LeaveDAO dao = new LeaveDAO();
             
             if(dao.updateLeave(leave)) {
-            	response.sendRedirect("LeaveServlet");
+            	response.sendRedirect("LeaveServlet?status=update_success");
+            }
+            else {
+            	response.sendRedirect("LeaveServlet?status=error");
             }
    
         } catch (Exception e) {

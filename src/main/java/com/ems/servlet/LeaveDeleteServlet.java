@@ -19,9 +19,14 @@ public class LeaveDeleteServlet extends HttpServlet {
 
         try {
             LeaveDAO dao = new LeaveDAO(); 
-            dao.deleteLeave(leaveId);
             
-            response.sendRedirect("LeaveServlet");
+            
+            if(dao.deleteLeave(leaveId)) {
+            	response.sendRedirect("LeaveServlet?status=delete_success");
+            }
+            else {
+            	response.sendRedirect("LeaveServlet?status=error");
+            }
             
         } catch (Exception e) {
             e.printStackTrace();
