@@ -14,6 +14,8 @@ public class Employee {
     private String role;
     private String profilePhoto;
 
+    public Employee() {}
+
     public Employee(int empId, String name, String email, String role, String profilePhoto) {
         this.empId = empId;
     	this.name = name;

@@ -60,16 +60,16 @@ public class EmployeeDAO {
     	
         Connection conn = DBConnection.getConnection();
         
-        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=?, profile_photo=? WHERE emp_id=?";
+        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
         ps.setString(2, employee.getEmail());
-        ps.setString(3, employee.getRole());
-        ps.setString(4, employee.getDepartment());
-        ps.setDate(5, employee.getDob());
-        ps.setString(6, employee.getGender());
-        ps.setString(7, employee.getProfilePhoto());
+        ps.setString(3, employee.getPhone());
+        ps.setString(4, employee.getRole());
+        ps.setString(5, employee.getDepartment());
+        ps.setDate(6, employee.getDob());
+        ps.setString(7, employee.getGender());
         ps.setInt(8, employee.getEmpId());
         
         return ps.executeUpdate() > 0;
