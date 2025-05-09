@@ -21,9 +21,12 @@ public class DepartmentServlet extends HttpServlet {
             String message = request.getParameter("message");
             request.setAttribute("message", message);
             request.setAttribute("departments", departments);
+            
+            String status = null;
+            status = request.getParameter("status");
 
             // Forward to JSP
-            request.getRequestDispatcher("./dashboard/hrManager/department.jsp").forward(request, response);
+            request.getRequestDispatcher("./dashboard/hrManager/department.jsp?status=" + status).forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("unsuccess.jsp");

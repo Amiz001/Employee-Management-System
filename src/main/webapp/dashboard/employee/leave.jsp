@@ -111,7 +111,6 @@
 
 <%  
 String status = request.getParameter("status");
-
 %>
 
 <!-- Main Content-->

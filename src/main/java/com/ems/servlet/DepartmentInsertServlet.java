@@ -23,10 +23,9 @@ public class DepartmentInsertServlet extends HttpServlet {
 		boolean isTrue = DepartmentDAO.insertdata(dep_id, name, no_of_emp, phone, email, supervisor_id);
 
         if (isTrue) {
-        	response.sendRedirect("DepartmentServlet?message=Data inserted successfully"); 
+        	response.sendRedirect("DepartmentServlet?status=add_success"); 
         } else {
-            RequestDispatcher dis2 = request.getRequestDispatcher("unsuccess.jsp");
-            dis2.forward(request, response);
+        	response.sendRedirect("DepartmentServlet?status=error"); 
         }
 	}
 }

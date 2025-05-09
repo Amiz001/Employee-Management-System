@@ -36,10 +36,9 @@ public class DepartmentUpdateServlet extends HttpServlet {
             boolean isTrue = DepartmentDAO.updateDepartment(dep_id, name, no_of_emp, phone, email, supervisor_id);
       
             if (isTrue) {
-                response.sendRedirect("DepartmentServlet?message=Update successful");
-
+            	response.sendRedirect("DepartmentServlet?status=update_success"); 
             } else {
-                response.sendRedirect("unsuccess.jsp");
+            	response.sendRedirect("DepartmentServlet?status=error"); 
             }
         }catch(Exception e) {
         	e.printStackTrace();

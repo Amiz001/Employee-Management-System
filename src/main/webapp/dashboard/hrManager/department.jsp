@@ -46,6 +46,33 @@
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Leave record successfully updated!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+<% 
+String status = request.getParameter("status");
+%>
 
 <!-- Navigation bar -->
 <div class="nav-container">

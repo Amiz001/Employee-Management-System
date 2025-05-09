@@ -22,9 +22,9 @@ public class DepartmentDeleteServlet extends HttpServlet {
             boolean isTrue = DepartmentDAO.deleteDepartment(dep_id);
 
             if (isTrue) {
-                response.sendRedirect("DepartmentServlet?message=Department deleted successfully");
+            	response.sendRedirect("DepartmentServlet?status=delete_success"); 
             } else {
-                response.sendRedirect("unsuccess.jsp");
+            	response.sendRedirect("DepartmentServlet?status=error"); 
             }
         }catch (Exception e) {
             e.printStackTrace();
