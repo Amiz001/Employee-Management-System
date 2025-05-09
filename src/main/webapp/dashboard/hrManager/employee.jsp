@@ -41,7 +41,7 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/hrManager/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/EmployeeServlet" class="active"><i class="fa-solid fa-users"></i>Employee</a>
-     <a href="${pageContext.request.contextPath}/dashboard/hrManager/department.jsp"><i class="fa-solid fa-cube"></i> Department</a>
+     <a href="${pageContext.request.contextPath}/DepartmentServlet"><i class="fa-solid fa-cube"></i> Department</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
