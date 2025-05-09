@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.*, com.ems.model.Payroll" %>
+
+
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -41,8 +44,8 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/payrollemployees.jsp"><i class="fa-solid fa-address-book"></i> Employee info</a>
-     <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar" class="active"></i> Payroll</a>
+     <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/employees.jsp"><i class="fa-solid fa-address-book"></i> Employee info</a>
+     <a href="${pageContext.request.contextPath}/PayrollGetAllServlet" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
@@ -64,7 +67,34 @@
     </nav>
 </div>
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
 
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Payroll record successfully updated!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+
+<%  
+String status = request.getParameter("status");
+%>
 
 <!-- Main Content-->
 <div class="content">
@@ -80,7 +110,7 @@
                     </div>
                   
                     <div class="toolbar-icons"> 
-                    	<span onclick="activatePopup()" id="add-icon" class="material-symbols-outlined">add_circle</span>
+                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
 
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
 
@@ -98,101 +128,148 @@
                 </tr>
             </thead>
             
-            <c:forEach var="payroll" items="${allsalary}">
+            <%
+            List<Payroll> payList = (List<Payroll>) request.getAttribute("allsalary");
+            
+		    if (payList != null) {
+		        for (Payroll payroll : payList) {
+			%>
+            
+           
             <tr>
 
-                  <td>${payroll.pay_id}</td>
-                  <td>${payroll.emp_id}</td>
-                  <td>Rs.${payroll.basic}</td>
-                  <td>Rs.${payroll.ot}</td>
-                  <td>Rs.${payroll.allowance}</td>
-                  <td>Rs.${payroll.total_salary}</td>
-                  <td>${payroll.date}</td>
+                  <td><%= payroll.getPay_id() %></td>
+                  <td><%= payroll.getEmp_id() %></td>
+                  <td><%= payroll.getBasic() %></td>
+                  <td><%= payroll.getOt() %></td>
+                  <td><%= payroll.getAllowance() %></td>
+                  <td><%= payroll.getTotal_salary() %></td>
+                  <td><%= payroll.getDate() %></td>
                               
-                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
+                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">               
 
                        
-                       <i class="fa-regular fa-pen-to-square" id="update-icon" onclick="activateUpdatePopup('${payroll.pay_id}', '${payroll.emp_id}', '${payroll.basic}', '${payroll.ot}', '${payroll.allowance}', '${payroll.total_salary}', '${payroll.date}')"></i>
-                       <form action="PayrollDeleteServlet" method="post">
-                       <input type="hidden" name="pay_id" value="${payroll.pay_id}"><button  style="border:none"><i class="fa-regular fa-trash-can" id="delete-icon"></i></button>
-                       </form>
-                    
+                       <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= payroll.getPay_id() %>', '<%= payroll.getEmp_id() %>', '<%= payroll.getBasic() %>', '<%= payroll.getOt() %>', '<%= payroll.getAllowance() %>', '<%= payroll.getTotal_salary() %>', '<%= payroll.getDate() %>')"></i>
+                        <a href="${pageContext.request.contextPath}/PayrollDeleteServlet?pay_id=<%= payroll.getPay_id() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                       
+                     
                   </td>
             </tr>
-            </c:forEach>
+            <%
+		        } 
+	    	} else {
+			%>
+			        <tr><td colspan="2" style="text-align: center">No payroll records found</td></tr>
+			<%
+			    }
+			%>
             
         </table>
     </div>
 </div> 
     
 <!-- Insert Popup-->
-<div class="cover_box">
-   <a href="PayrollGetAllServlet#">
-      <span class="icon-close"><i onclick='deactivateCoverPopup()' class="fa-solid fa-xmark"></i></span>
-   </a>
-   <div class="form-box-login">
-       <h2>Employee Salary</h2>
-           <form action="${pageContext.request.contextPath}/PayrollInsertServlet" method="post">
-               <div class="input-box">
-                    <input type="text" id="emp_id" name="emp_id" required>
-                    <label>Employee ID</label>
-               </div>
-               <div class="input-box">
-                    <input type="text" id="basic" name="basic" required>
-                    <label>Basic Salary</label>
-               </div>   
-               <div class="input-box">
-                    <input type="text" id="ot" name="ot" required>
-                    <label>Over Time</label>
-               </div> 
-               <div class="input-box">
-                    <input type="text" id="allowance" name="allowance" required>
-                    <label>Allowance</label>
-               </div>
-               <div class="input-box">
-                    <input type="date" id="date" name="date" required>
-                    <label>Date</label>
-               </div>
-               <button type="submit" class="btn">Submit</button>    
-           </form>  
-   </div>
-</div> 
 
-<div id="updatePopup" class="cover_box">
-    <a href="PayrollGetAllServlet#">
-        <span class="icon-close"><i onclick='deactivateUpdatePopup()' class="fa-solid fa-xmark"></i></span>
-    </a>
-    <div class="form-box-login">
-        <h2>Employee Salary</h2>
-        <form action="${pageContext.request.contextPath}/PayrollUpdateServlet" method="post">
-              <div class="input-box">
-                    <input type="text" id="updatePId" name="pay_id" required>
-                    <label>Payroll ID</label>
-               </div>
-             <div class="input-box">
-                    <input type="text" id="updateEId" name="emp_id" required>
-                    <label>Employee ID</label>
-               </div>
-              <div class="input-box">
-                    <input type="text" id="updateBasic" name="basic" required>
-                    <label>Basic Salary</label>
-              </div> 
-              <div class="input-box">
-                    <input type="text" id="updateOt" name="ot" required>
-                    <label>Over Time</label>
-              </div> 
-              <div class="input-box">
-                    <input type="text" id="updateAllowance" name="allowance" required>
-                    <label>Allowance</label>
-              </div>
-               <div class="input-box">
-                    <input type="date" id="updatedate" name="date" required>
-                    <label>Date</label>
-               </div>
-              <button type="submit" class="btn">Update</button>    
-        </form>       
-    </div>
-</div>     
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form method="post" action="${pageContext.request.contextPath}/PayrollInsertServlet">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEmployeeModalLabel">Employee Salary</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body custom-scroll">
+          <div class="mb-3">
+            <label for="emp_id" class="form-label">Employee ID</label>
+            <input type="number" class="form-control" name="emp_id" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="basic" class="form-label">Basic Salary</label>
+            <input type="number" class="form-control" name="basic" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="ot" class="form-label">Over Time</label>
+            <input type="number" class="form-control" name="ot" required>
+          </div>
+
+          <div class="row g-3">
+             <div class="mb-3">
+            <label for="allowance" class="form-label">Allowance</label>
+            <input type="number" class="form-control" name="allowance" required>
+          </div>
+          
+            <div class="col-md-6">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" name="date" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+		  <button type="submit" class="btn btn-purple">Submit</button>
+		  <button type="button" class="btn btn-black" data-bs-dismiss="modal">Cancel</button>
+		</div>
+	    </form>
+	  </div>
+	</div>
+</div>
+  
+
+<!-- Update Popup -->
+
+<div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form method="post" action="${pageContext.request.contextPath}/PayrollUpdateServlet">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEmployeeModalLabel">Edit Employee Salary</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body custom-scroll">
+           <div class="mb-3">
+            <label for="emp_id" class="form-label">Employee ID</label>
+            <input type="number" class="form-control" name="emp_id" value="" id="updateemp_id" required>
+          </div>
+          
+	      <div class="mb-3">
+            <label for="basic" class="form-label">Basic Salary</label>
+            <input type="number" class="form-control" name="basic" value="" id="updatebasic" required>
+          </div>
+          
+          <input type="hidden" class="form-control" name="pay_id" value="" id="updatepay_id" required>
+          
+         
+          <div class="mb-3">
+            <label for="ot" class="form-label">Over Time</label>
+            <input type="number" class="form-control" name="ot" value="" id="updateot" required>
+          </div>
+         
+          <div class="mb-3">
+            <label for="allowance" class="form-label">Allowance</label>
+            <input type="number" class="form-control" name="allowance" value="" id="updateallowance" required>
+          </div>
+            
+           
+            <div class="col-md-6">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" name="date" id="updatedate" value="" required>
+            </div>
+           
+        </div>
+
+        <div class="modal-footer">
+		  <button type="submit" class="btn btn-purple">Save</button>
+		  <button type="button" class="btn btn-black" data-bs-dismiss="modal">Cancel</button>
+		</div>
+	    </form>
+	  </div>
+	</div>
+</div>
+  
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>

@@ -1,25 +1,38 @@
-//insert popup
-function activatePopup(){
-    document.querySelector('.cover_box').classList.add('cover_box-active');
-}
-
-function deactivateCoverPopup(){
-    document.querySelector('.cover_box').classList.remove('cover_box-active');
-}
-
 //update popup
-function activateUpdatePopup(pay_id, emp_id, basic, ot, allowance, date) {
-    document.getElementById("updatePopup").classList.add('cover_box-active');
+function fillUpdateForm(updatepay_id, updateemp_id, updatebasic, updateot, updateallowance, updatedate) {
 
-    document.getElementById("updatePId").value = pay_id;
-    document.getElementById("updateEId").value = emp_id;
-    document.getElementById("updateBasic").value = basic;
-    document.getElementById("updateOt").value = ot;
-    document.getElementById("updateAllowance").value = allowance;
-	document.getElementById("updatedate").value = date;
+    document.getElementById("updatepay_id").value = updatepay_id;
+    document.getElementById("updateemp_id").value = updateemp_id;
+    document.getElementById("updatebasic").value = updatebasic;
+    document.getElementById("updateot").value = updateot;
+    document.getElementById("updateallowance").value = updateallowance;
+	document.getElementById("updatedate").value = updatedate;
 	
 }
 
-function deactivateUpdatePopup() {
-    document.getElementById("updatePopup").classList.remove('cover_box-active');
-}
+//alert trigger
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    if (status === 'update_success') {
+      const toast = new bootstrap.Toast(document.getElementById('successToast'));
+	  document.querySelector("#successToast .toast-body").textContent = "Payroll record successfully updated!";
+      toast.show();
+	  
+	} else if (status === 'add_success') {
+	   const toast = new bootstrap.Toast(document.getElementById('successToast'));
+	   document.querySelector("#successToast .toast-body").textContent = "Payroll record successfully added!";
+	   toast.show();
+	   
+	} else if (status === 'delete_success') {
+	   const toast = new bootstrap.Toast(document.getElementById('errorToast'));
+	   document.querySelector("#errorToast .toast-header .me-auto").textContent = "Success";
+	   document.querySelector("#errorToast .toast-body").textContent = "Payroll record successfully deleted!";
+	   toast.show();   
+   
+    } else if (status === 'error') {
+      const toast = new bootstrap.Toast(document.getElementById('errorToast'));
+      toast.show();
+    }
+  });	

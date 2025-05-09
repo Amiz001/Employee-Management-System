@@ -2,67 +2,57 @@ package com.ems.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.ems.dao.PayrollDAO;
 import com.ems.model.Payroll;
 
 @WebServlet("/PayrollUpdateServlet")
 public class PayrollUpdateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  
-		 int pay_id= Integer.parseInt(request.getParameter("pay_id"));
-		 int emp_id= Integer.parseInt(request.getParameter("emp_id"));
-		 double basic= Double.parseDouble(request.getParameter("basic"));
-		 double ot= Double.parseDouble(request.getParameter("ot"));
-	     double allowance= Double.parseDouble(request.getParameter("allowance"));
-	     Date date = Date.valueOf(request.getParameter("date"));
-	     
-	     try {
-				// Convert String to double for calculation
-				//double basicc = Double.parseDouble(basic);
-				//double ott = Double.parseDouble(ot);
-				//double allowancee = Double.parseDouble(allowance);
+    private static final long serialVersionUID = 1L;
 
-				// Calculate total salary
-				double total_salary = basic + ot + allowance;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        
+        try {
+            // Get form parameters
+            int pay_id = Integer.parseInt(request.getParameter("pay_id"));
+            int emp_id = Integer.parseInt(request.getParameter("emp_id"));
+            double basic = Double.parseDouble(request.getParameter("basic"));
+            double ot = Double.parseDouble(request.getParameter("ot"));
+            double allowance = Double.parseDouble(request.getParameter("allowance"));
+            Date date = Date.valueOf(request.getParameter("date"));
 
-				// Convert salary back to String (if needed for database insertion)
-				//String salary = String.valueOf(salaryy);
-			
-				// Insert data into the database
-				boolean isTrue = PayrollDAO.updatedata(pay_id, emp_id, basic, ot, allowance, total_salary, date);
+            // Calculate total salary
+            double total_salary = basic + ot + allowance;
 
-				// Redirect based on success or failure
-				if (isTrue == true) {
-					List<Payroll> salarydetails = PayrollDAO.getById(pay_id);
-					request.setAttribute("salarydetails", salarydetails);
-					 
-					 String alertMessage = "Data Update Successful";
-					 response.getWriter().println("<script> alert('"+alertMessage+"'); window.location.href='PayrollGetAllServlet'</script>");
-				} else {
-					RequestDispatcher dis2 = request.getRequestDispatcher("wrong.jsp");
-					dis2.forward(request, response);
-				}
-			} catch (NumberFormatException e) {
-				// Handle invalid input (non-numeric values)
-				response.getWriter().println("<script> alert('Invalid input. Please enter numeric values for salary fields.'); window.history.back(); </script>");
-			}
-	
-	}
+            // Create Payroll object
+            Payroll payroll = new Payroll();
+            payroll.setPay_id(pay_id);
+            payroll.setEmp_id(emp_id);
+            payroll.setBasic(basic);
+            payroll.setOt(ot);
+            payroll.setAllowance(allowance);
+            payroll.setTotal_salary(total_salary);
+            payroll.setDate(date);
 
+            // Update payroll in DB
+            boolean isUpdated = PayrollDAO.updatedata(pay_id,emp_id,basic,ot,allowance,total_salary,date);
+
+
+            if (isUpdated) {
+            	response.sendRedirect("PayrollGetAllServlet?status=update_success"); 
+            } else {
+            	response.sendRedirect("PayrollGetAllServlet?status=error"); 
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("<script>alert('An error occurred. Check server logs.'); window.history.back();</script>");
+        }
+    }
 }
+
 

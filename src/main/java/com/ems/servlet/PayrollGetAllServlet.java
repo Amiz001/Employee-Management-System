@@ -18,17 +18,23 @@ public class PayrollGetAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	try {	
+	    	List <Payroll> allsalary = PayrollDAO.getAllDetails();
+			request.setAttribute("allsalary", allsalary);
+			
+			 String status = null;
+	         status = request.getParameter("status");
+	         
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/dashboard/financialAnalyst/payroll.jsp?status=" + status);
+			dispatcher.forward(request, response);
+			response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-    	List <Payroll> allsalary = PayrollDAO.getAllDetails();
-		request.setAttribute("allsalary", allsalary);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.sendRedirect("./dashboard/financialAnalyst/payroll.jsp?error=Server error");
+	    }
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/dashboard/financialAnalyst/payroll.jsp");
-		dispatcher.forward(request, response);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
 }

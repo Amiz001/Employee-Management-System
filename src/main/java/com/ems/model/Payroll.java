@@ -12,7 +12,9 @@ public class Payroll {
 	private double total_salary;
 	private Date date;
 	
-	public Payroll(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, Date date) {
+	 public Payroll() {}
+	
+	public Payroll(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, java.sql.Date date) {
 		super();
 		this.pay_id = pay_id;
 		this.emp_id = emp_id;

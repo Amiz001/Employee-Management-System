@@ -41,7 +41,7 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/payrollemployees.jsp" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
+     <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/employees.jsp" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
@@ -78,7 +78,9 @@
                     </div>
                    
                     <div class="toolbar-icons"> 
-                    	<span onclick="activatePopup()" id="add-icon" class="material-symbols-outlined">add_circle</span>
+                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
+
+                        <span class="material-symbols-outlined" id="download-icon">download</span>     
                      
                     </div>
                 </div>
@@ -124,36 +126,52 @@
 </div> 
 
 <!-- Insert Popup-->
-<div class="cover_box">
-    <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/payrollemployees.jsp">
-      <span class="icon-close"><i onclick='deactivateCoverPopup()' class="fa-solid fa-xmark"></i></span>
-   </a>
-   <div class="form-box-login">
-       <h2>Employee Salary</h2>
-           <form action="${pageContext.request.contextPath}/PayrollInsertServlet" method="post">
-               <div class="input-box">
-                    <input type="text" id="emp_id" name="emp_id" required>
-                    <label>Employee ID</label>
-               </div>
-               <div class="input-box">
-                    <input type="text" id="basic" name="basic" required>
-                    <label>Basic Salary</label>
-               </div>   
-               <div class="input-box">
-                    <input type="text" id="ot" name="ot" required>
-                    <label>Over Time</label>
-               </div> 
-               <div class="input-box">
-                    <input type="text" id="allowance" name="allowance" required>
-                    <label>Allowance</label>
-               </div>
-               <div class="input-box">
-                    <input type="date" id="date" name="date" required>
-                    <label>Date</label>
-               </div>
-               <button type="submit" class="btn">Submit</button>    
-           </form>  
-   </div>
+
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <form method="post" action="${pageContext.request.contextPath}/PayrollInsertServlet">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEmployeeModalLabel">Employee Salary</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body custom-scroll">
+          <div class="mb-3">
+            <label for="empid" class="form-label">Employee ID</label>
+            <input type="text" class="form-control" name="empid" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="basic" class="form-label">Basic Salary</label>
+            <input type="text" class="form-control" name="basic" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="ot" class="form-label">Over Time</label>
+            <input type="text" class="form-control" name="ot" required>
+          </div>
+
+          <div class="row g-3">
+             <div class="mb-3">
+            <label for="allowance" class="form-label">Allowance</label>
+            <input type="text" class="form-control" name="allowance" required>
+          </div>
+          
+            <div class="col-md-6">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" name="date" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+		  <button type="submit" class="btn btn-purple">Submit</button>
+		  <button type="button" class="btn btn-black" data-bs-dismiss="modal">Cancel</button>
+		</div>
+	    </form>
+	  </div>
+	</div>
 </div>
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
