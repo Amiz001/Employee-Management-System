@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.*, com.ems.model.Employee" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -41,7 +42,7 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/employees.jsp" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
+     <a href="${pageContext.request.contextPath}/EmployeeInfoServlet" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
@@ -78,8 +79,6 @@
                     </div>
                    
                     <div class="toolbar-icons"> 
-                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
-
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
                      
                     </div>
@@ -88,38 +87,46 @@
                     <th>Employee ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Phone</th>
-                    <th>Role</th>
                     <th>Department</th>
                     <th>DOB</th>
                     <th>Gender</th>
-                    <th>Actions</th>
+                    <th>Role</th>  
+                    <th>Actions</th> 
                 </tr>
             </thead>
             
-            <c:forEach var="employee" items="${allsalary}">
+            <%
+            
+            List<Employee> employeeList = (List<Employee>) request.getAttribute("employeeList");
+            
+		    if (employeeList != null) {
+		        for (Employee employee : employeeList) {
+			%>
+			
             <tr>
-                  <td>${employee.emp_id}</td>
-                  <td>${employee.name}</td>
-                  <td>${employee.email}</td>
-                  <td>${employee.password}</td>
-                  <td>${employee.phone}</td>
-                  <td>${payment.role}</td>
-                  <td>${payment.department}</td>
-                  <td>${payment.dob}</td>
-                  <td>${payment.gender}</td>
-          
-                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
-                       
-                       <i class="fa-regular fa-pen-to-square" id="update-icon" onclick="activateUpdatePopup('${payment.id}', '${payment.name}', '${payment.basic}', '${payment.ot}', '${payment.allowance}', '${payment.salary}')"></i>
-                        <div class="toolbar-icons"> 
-                    	<span onclick="activatePopup()" id="add-icon" class="material-symbols-outlined">add_circle</span>
-                     
-                    </div>
+                  <td><%= employee.getEmpId() %></td>
+		          <td><%= employee.getName() %></td>
+		          <td><%= employee.getEmail() %></td>
+		          <td><%= employee.getPhone() %></td>
+		          <td><%= employee.getDepartment() %></td>
+		          <td><%= employee.getDob() %></td> 
+		          <td><%= employee.getGender() %></td>
+		          <td><%= employee.getRole() %></td>
+		          
+                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                                                                                                                                                                                                      
+                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
+                    
                   </td>
             </tr>
-            </c:forEach>
+            <%
+		        } 
+	    	} else {
+			%>
+			        <tr><td colspan="2" style="text-align: center">No leave records found</td></tr>
+			<%
+			    }
+			%>
             
         </table>
     </div>
