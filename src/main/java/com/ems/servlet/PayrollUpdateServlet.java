@@ -23,7 +23,7 @@ public class PayrollUpdateServlet extends HttpServlet {
             double basic = Double.parseDouble(request.getParameter("basic"));
             double ot = Double.parseDouble(request.getParameter("ot"));
             double allowance = Double.parseDouble(request.getParameter("allowance"));
-            Date date = Date.valueOf(request.getParameter("date"));
+            Date created_date = Date.valueOf(request.getParameter("created_date"));
 
             // Calculate total salary
             double total_salary = basic + ot + allowance;
@@ -36,10 +36,10 @@ public class PayrollUpdateServlet extends HttpServlet {
             payroll.setOt(ot);
             payroll.setAllowance(allowance);
             payroll.setTotal_salary(total_salary);
-            payroll.setDate(date);
+            payroll.setCreated_date(created_date);
 
             // Update payroll in DB
-            boolean isUpdated = PayrollDAO.updatedata(pay_id,emp_id,basic,ot,allowance,total_salary,date);
+            boolean isUpdated = PayrollDAO.updatedata(pay_id,emp_id,basic,ot,allowance,total_salary,created_date);
 
 
             if (isUpdated) {

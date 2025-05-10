@@ -1,12 +1,12 @@
 //update popup
-function fillUpdateForm(updatepay_id, updateemp_id, updatebasic, updateot, updateallowance, updatedate) {
+function fillUpdateForm(updatepay_id, updateemp_id, updatebasic, updateot, updateallowance, updatecreated_date) {
 
     document.getElementById("updatepay_id").value = updatepay_id;
     document.getElementById("updateemp_id").value = updateemp_id;
     document.getElementById("updatebasic").value = updatebasic;
     document.getElementById("updateot").value = updateot;
     document.getElementById("updateallowance").value = updateallowance;
-	document.getElementById("updatedate").value = updatedate;
+	document.getElementById("updatecreated_date").value = updatecreated_date;
 	
 }
 

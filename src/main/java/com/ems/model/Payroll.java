@@ -10,11 +10,11 @@ public class Payroll {
 	private double ot;
 	private double allowance;
 	private double total_salary;
-	private Date date;
+	private Date created_date;
 	
 	 public Payroll() {}
 	
-	public Payroll(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, java.sql.Date date) {
+	public Payroll(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, Date created_date) {
 		super();
 		this.pay_id = pay_id;
 		this.emp_id = emp_id;
@@ -22,7 +22,7 @@ public class Payroll {
 		this.ot = ot;
 		this.allowance = allowance;
 		this.total_salary = total_salary;
-		this.date = date;
+		this.created_date = created_date;
 	}
 
 	public int getPay_id() {
@@ -73,12 +73,13 @@ public class Payroll {
 		this.total_salary = total_salary;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreated_date() {
+		return created_date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreated_date(Date created_date) {
+		this.created_date = created_date;
 	}
+
 
 }

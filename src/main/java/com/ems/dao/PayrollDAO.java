@@ -1,6 +1,7 @@
 package com.ems.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ import com.ems.util.DBConnection;
 public class PayrollDAO {
 
     // Insert Data Function
-    public static boolean insertdata(int emp_id, double basic, double ot, double allowance, double total_salary, java.sql.Date date) {
+    public static boolean insertdata(int emp_id, double basic, double ot, double allowance, double total_salary, Date created_date) {
         boolean isSuccess = false;
-        String sql = "INSERT INTO payroll (emp_id, basic, ot, allowance, total_salary, date) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO payroll (emp_id, basic, ot, allowance, total_salary, created_date) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -24,7 +25,7 @@ public class PayrollDAO {
             pstmt.setDouble(3, ot);
             pstmt.setDouble(4, allowance);
             pstmt.setDouble(5, total_salary);
-            pstmt.setDate(6, date);
+            pstmt.setDate(6, created_date);
 
             int rows = pstmt.executeUpdate();
             isSuccess = rows > 0;
@@ -54,7 +55,7 @@ public class PayrollDAO {
                     rs.getDouble("ot"),
                     rs.getDouble("allowance"),
                     rs.getDouble("total_salary"),
-                    rs.getDate("date")
+                    rs.getDate("created_date")
                 );
                 payment.add(pay);
             }
@@ -81,7 +82,7 @@ public class PayrollDAO {
                     rs.getDouble("ot"),
                     rs.getDouble("allowance"),
                     rs.getDouble("total_salary"),
-                    rs.getDate("date")
+                    rs.getDate("created_date")
                 );
                 payments.add(pay);
             }
@@ -92,9 +93,9 @@ public class PayrollDAO {
     }
 
     // Update Data
-    public static boolean updatedata(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, java.sql.Date date) {
+    public static boolean updatedata(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, Date created_date) {
         boolean isSuccess = false;
-        String sql = "UPDATE payroll SET emp_id = ?, basic = ?, ot = ?, allowance = ?, total_salary = ?, date = ? WHERE pay_id = ?";
+        String sql = "UPDATE payroll SET emp_id = ?, basic = ?, ot = ?, allowance = ?, total_salary = ?, created_date = ? WHERE pay_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -104,7 +105,7 @@ public class PayrollDAO {
             pstmt.setDouble(3, ot);
             pstmt.setDouble(4, allowance);
             pstmt.setDouble(5, total_salary);
-            pstmt.setDate(6, date);
+            pstmt.setDate(6, created_date);
             pstmt.setInt(7, pay_id);
 
             int rows = pstmt.executeUpdate();

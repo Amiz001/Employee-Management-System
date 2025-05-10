@@ -24,13 +24,13 @@ public class PayrollInsertServlet extends HttpServlet {
 			double basic = Double.parseDouble(request.getParameter("basic"));
 			double ot = Double.parseDouble(request.getParameter("ot"));
 			double allowance = Double.parseDouble(request.getParameter("allowance"));
-			Date date = Date.valueOf(request.getParameter("date"));
+			Date created_date = Date.valueOf(request.getParameter("created_date"));
 
 			// Business logic: calculate total salary
 			double total_salary = basic + ot + allowance;
 
 			// Call DAO to insert
-			boolean success = PayrollDAO.insertdata(emp_id, basic, ot, allowance, total_salary, date);
+			boolean success = PayrollDAO.insertdata(emp_id, basic, ot, allowance, total_salary, created_date);
            
 			if (success) {
 				response.sendRedirect("PayrollGetAllServlet?status=add_success");
