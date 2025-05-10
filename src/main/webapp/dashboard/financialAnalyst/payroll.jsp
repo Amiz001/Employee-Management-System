@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.util.*, com.ems.model.Payroll" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 
 
 <%
@@ -129,8 +128,6 @@ String status = request.getParameter("status");
             </thead>
             
             <%
-            
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             List<Payroll> payList = (List<Payroll>) request.getAttribute("allsalary");
             
 		    if (payList != null) {
@@ -146,12 +143,12 @@ String status = request.getParameter("status");
                   <td><%= payroll.getOt() %></td>
                   <td><%= payroll.getAllowance() %></td>
                   <td><%= payroll.getTotal_salary() %></td>
-                  <td><%= dateFormat.format(payroll.getCreated_date()) %></td>
+                  <td><%= payroll.getCreated_date() %></td>
                               
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">               
 
                        
-                       <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= payroll.getPay_id() %>', '<%= payroll.getEmp_id() %>', '<%= payroll.getBasic() %>', '<%= payroll.getOt() %>', '<%= payroll.getAllowance() %>', '<%= payroll.getTotal_salary() %>', '<%= dateFormat.format(payroll.getCreated_date()) %>')"></i>
+                       <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%=payroll.getPay_id()%>', '<%=payroll.getEmp_id()%>', '<%=payroll.getBasic()%>', '<%=payroll.getOt()%>', '<%=payroll.getAllowance()%>',  '<%=payroll.getCreated_date()%>')"></i>
                         <a href="${pageContext.request.contextPath}/PayrollDeleteServlet?pay_id=<%= payroll.getPay_id() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
                        
                      
@@ -255,10 +252,9 @@ String status = request.getParameter("status");
             <input type="number" class="form-control" name="allowance" value="" id="updateallowance" required>
           </div>
             
-           
             <div class="col-md-6">
-              <label for="created_date" class="form-label">Date</label>
-              <input type="date" class="form-control" name="created_date" id="updatecreated_date" value="" required>
+              <label for="updatecreated_date" class="form-label">Date</label>
+              <input type="date" class="form-control" name="created_date" id="updatecreated_date" required>
             </div>
            
         </div>

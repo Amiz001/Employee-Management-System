@@ -7,7 +7,6 @@ function fillUpdateForm(updatepay_id, updateemp_id, updatebasic, updateot, updat
     document.getElementById("updateot").value = updateot;
     document.getElementById("updateallowance").value = updateallowance;
 	document.getElementById("updatecreated_date").value = updatecreated_date;
-	
 }
 
 //alert trigger
