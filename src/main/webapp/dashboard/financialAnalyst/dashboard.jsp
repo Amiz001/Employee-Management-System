@@ -24,9 +24,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dashboard.css">
     <link rel="icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 </head>
 <body>
@@ -84,53 +86,132 @@
 </div>
 
 
+<!-- Main Content-->
+<div class="content" id="main-content">
+    <h5 id="main-title">Dashboard</h5>
 
-     <!-- Content -->
-     <div class="main-content">
-     
-        <!--  removed for now, add a separate css file for these  
-        
-        <div class="cards">
-           <div>
-            <div class="card green">
-                <h4>New Projects</h4>
-                <h2>102</h2>
-                
-            </div>
-            <div class="card blue">
-                <h4>New Customers</h4>
-                <h2>154</h2>
-                
-            </div>
+    <div class="row g-4 mb-5">
+      <div class="col-md-3">
+        <div class="card card-stat bg-gradient-primary" id="card1" style="background: linear-gradient(45deg, #4e73df, #224abe);">
+          <div class="card-body">
+            <h3 class="fw-bold">92%</h3>
+            <p>Attendance</p>
           </div>
-          <div>
-            <div class="card purple">
-                <h4>Inquiry</h4>
-                <h2>524</h2>
-                
-            </div>
-            <div class="card orange">
-                <h4>Earning</h4>
-                <h2>$2,453</h2>
-                
-            </div>
-         </div>   
-        </div> -->
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stat" id="card2" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
+          <div class="card-body">
+            <h3 class="fw-bold">6 Days</h3>
+            <p>Remaining Leaves</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stat" id="card3" style="background: linear-gradient(45deg, #f6c23e, #dda20a);">
+          <div class="card-body">
+            <h3 class="fw-bold">Rs. 120,000</h3>
+            <p>Salary</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card card-stat" id="card4" style="background: linear-gradient(45deg, #e74a3b, #be2617);">
+          <div class="card-body">
+            <h3 class="fw-bold">3 Tasks</h3>
+            <p>Pending Approvals</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        setInterval(() => {
-            let earnings = document.querySelector(".card.orange h2");
-            let newAmount = (Math.random() * 3000).toFixed(2);
-            earnings.innerText = `$${newAmount}`;
-        }, 5000);
-    });
-    </script> 
+    <div class="row g-4">
+      <div class="col-md-6">
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <h5 class="card-title mb-3">📢 Announcements</h5>
+      <div class="announcement-scroll">
+        <div class="announcement-item p-3 mb-2 rounded">
+          <div class="fw-semibold">Annual Meeting</div>
+          <div class="text-muted small">Scheduled for May 25th.</div>
+        </div>
+        <div class="announcement-item p-3 mb-2 rounded">
+          <div class="fw-semibold">April Reports Due</div>
+          <div class="text-muted small">Please submit by May 15th.</div>
+        </div>
+        <div class="announcement-item p-3 mb-2 rounded">
+          <div class="fw-semibold">Company Outing</div>
+          <div class="text-muted small">Fun event planned in June.</div>
+        </div>
+        <div class="announcement-item p-3 mb-2 rounded">
+          <div class="fw-semibold">HR Policy Update</div>
+          <div class="text-muted small">New guidelines available on portal.</div>
+        </div>
+        <div class="announcement-item p-3 mb-2 rounded">
+          <div class="fw-semibold">Performance Reviews</div>
+          <div class="text-muted small">Starting next week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="col-md-6">
+  <div class="calendar-card bg-white">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5>📊 Employee Attendance</h5>
+      <button class="btn btn-outline-dark btn-sm rounded-pill" id="card-date">4 June 2024</button>
+    </div>
+
+    <div class="text-center">
+      <canvas id="attendanceChart" width="120" height="120" class="mx-auto d-block" style="max-width: 120px; max-height: 120px;"></canvas>
+    </div>
+
+    <div class="row text-center mt-4">
+      <div class="col-6 col-md-3"><span class="badge bg-primary me-1">&nbsp;</span> Present: 100</div>
+      <div class="col-6 col-md-3"><span class="badge bg-warning me-1">&nbsp;</span> On Leave: 10</div>
+      <div class="col-6 col-md-3"><span class="badge bg-success me-1">&nbsp;</span> On Holiday: 25</div>
+      <div class="col-6 col-md-3"><span class="badge bg-purple me-1" style="background-color:#6f42c1;">&nbsp;</span> Absent: 04</div>
+    </div>
+
+    <div class="text-center mt-3">
+      <button class="btn btn-outline-dark btn-sm">View Details</button>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div> 
+  
+  <script>
+  const ctx = document.getElementById('attendanceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Present', 'On Leave', 'On Holiday', 'Absent'],
+      datasets: [{
+        data: [100, 10, 25, 4],
+        backgroundColor: ['#0d6efd', '#ffc107', '#198754', '#6f42c1'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: true }
+      },
+      cutout: '60%',
+    }
+  });
+</script>
+
     
     <script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/payroll-script.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
