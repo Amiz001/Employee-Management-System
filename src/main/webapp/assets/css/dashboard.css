@@ -1,0 +1,71 @@
+
+    #main-content {
+      padding: 2rem;
+    }
+
+    .card-stat {
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+    }
+
+    .card-stat .card-body {
+      padding: 1.25rem;
+    }
+
+    .announcement-card, .calendar-card {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+
+      .navbar {
+        margin-left: 0;
+      }
+    }
+    
+    
+    .announcement-scroll {
+	  max-height: 250px;
+	  overflow-y: auto;
+	}
+	
+	.announcement-item {
+	  background-color: #f9f9f9;
+	  transition: background-color 0.2s ease;
+	  cursor: pointer;
+	}
+	
+	.announcement-item:hover {
+	  background-color: #f1f1f1;
+	}
+	
+	#card1, #card2, #card3, #card4{
+	animation: slide-up 0.4s forwards ease-in-out;
+	}
+	
+	@keyframes slide-up{
+		0%{
+			translate: 4% 10%;
+			opacity: 0%
+		}
+		100%{
+			translate: 0% 0%;
+			opacity: 100%
+		}
+	}
+	#card1:hover, #card2:hover, #card3:hover, #card4:hover{
+		box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+	}
+	
+	#card-date{
+		width: 200px;
+	}
+
+    
