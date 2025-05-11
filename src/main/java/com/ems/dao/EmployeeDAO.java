@@ -74,6 +74,30 @@ public class EmployeeDAO {
         
         return ps.executeUpdate() > 0;
     }
+    
+    public boolean updateProfile(Employee emp) {
+        String sql = "UPDATE employee SET name = ?, email = ?, phone = ?, gender = ?, dob = ? WHERE emp_id = ?";
+        
+        try {
+            
+        	Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, emp.getName());
+            ps.setString(2, emp.getEmail());
+            ps.setString(3, emp.getPhone());
+            ps.setString(4, emp.getGender());
+            ps.setDate(5, emp.getDob());
+            ps.setInt(6, emp.getEmpId());
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     
     public boolean deleteEmployee(int empId) throws SQLException {
@@ -84,6 +108,19 @@ public class EmployeeDAO {
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setInt(1, empId);
+        return ps.executeUpdate() > 0;
+    }
+    
+    public boolean updatePassword(int empId, String password) throws SQLException {
+    	
+        Connection conn = DBConnection.getConnection();
+        
+        String sql = "UPDATE employee SET password = ? WHERE emp_id=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setString(1, password);
+        ps.setInt(2, empId);
+        
         return ps.executeUpdate() > 0;
     }
 
@@ -103,6 +140,7 @@ public class EmployeeDAO {
             return new Employee(
                 rs.getString("name"),
                 rs.getString("email"),
+                rs.getString("password"),
                 rs.getString("phone"),
                 rs.getString("department"),
                 rs.getDate("dob"),

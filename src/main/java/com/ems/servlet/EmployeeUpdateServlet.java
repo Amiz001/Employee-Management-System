@@ -18,29 +18,29 @@ public class EmployeeUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
     	
-		int empId = Integer.parseInt(request.getParameter("empId"));
-		String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String department = request.getParameter("department");
-        String gender = request.getParameter("gender");
-        String role = request.getParameter("role");
-
-        String dobStr = request.getParameter("dob");    
-        Date dob = Date.valueOf(dobStr);
-
-        Employee employee = new Employee();
-        
-        employee.setEmpId(empId);
-        employee.setName(name);
-        employee.setEmail(email);
-        employee.setPhone(phone);
-        employee.setDepartment(department);
-        employee.setGender(gender);
-        employee.setRole(role);
-        employee.setDob(dob);
-
         try {
+        	int empId = Integer.parseInt(request.getParameter("empId"));
+    		String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String department = request.getParameter("department");
+            String gender = request.getParameter("gender");
+            String role = request.getParameter("role");
+
+            String dobStr = request.getParameter("dob");    
+            Date dob = Date.valueOf(dobStr);
+
+            Employee employee = new Employee();
+            
+            employee.setEmpId(empId);
+            employee.setName(name);
+            employee.setEmail(email);
+            employee.setPhone(phone);
+            employee.setDepartment(department);
+            employee.setGender(gender);
+            employee.setRole(role);
+            employee.setDob(dob);
+            
             EmployeeDAO dao = new EmployeeDAO();
             
             if(dao.updateEmployee(employee)) {

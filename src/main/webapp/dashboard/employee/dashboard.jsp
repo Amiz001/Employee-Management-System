@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
+
 <%
     if (session == null || session.getAttribute("role") == null) {
         response.sendRedirect("../../index.jsp");
@@ -43,7 +44,7 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/LeaveServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Request Leave</a>
-     <a href="${pageContext.request.contextPath}/dashboard/employee/attendance.jsp"><i class="fa-solid fa-user-check"></i> Attendance</a>
+     <a href="${pageContext.request.contextPath}/AttendanceServlet"><i class="fa-solid fa-user-check"></i> Attendance</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
@@ -59,7 +60,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/EmployeeProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>

@@ -134,6 +134,33 @@ public class PayrollDAO {
         }
         return isSuccess;
     }
+    
+    public static Payroll getByEmpId(int empid) {
+        String sql = "SELECT * FROM payroll WHERE emp_id = ?";
 
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, empid);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) { 
+                Payroll pay = new Payroll(
+                    rs.getInt("pay_id"),
+                    rs.getInt("emp_id"),
+                    rs.getDouble("basic"),
+                    rs.getDouble("ot"),
+                    rs.getDouble("allowance"),
+                    rs.getDouble("total_salary"),
+                    rs.getDate("created_date")
+                );
+
+                return pay;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; 
+    }  
 }
-
