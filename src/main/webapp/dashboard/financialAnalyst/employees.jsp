@@ -44,9 +44,27 @@
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/EmployeeInfoServlet" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
-     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
+<!--  logout popup -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-light-purple text-white rounded-top-4">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Are you sure you want to log out from your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Navigation bar -->
 <div class="nav-container">
@@ -145,29 +163,29 @@
   
         <div class="modal-body custom-scroll">
           <div class="mb-3">
-            <label for="empid" class="form-label">Employee ID</label>
-            <input type="text" class="form-control" name="empid" required>
+            <label for="emp_id" class="form-label">Employee ID</label>
+            <input type="number" class="form-control" name="emp_id" required>
           </div>
           
           <div class="mb-3">
             <label for="basic" class="form-label">Basic Salary</label>
-            <input type="text" class="form-control" name="basic" required>
+            <input type="number" class="form-control" name="basic" required>
           </div>
           
           <div class="mb-3">
             <label for="ot" class="form-label">Over Time</label>
-            <input type="text" class="form-control" name="ot" required>
+            <input type="number" class="form-control" name="ot" required>
           </div>
 
           <div class="row g-3">
              <div class="mb-3">
             <label for="allowance" class="form-label">Allowance</label>
-            <input type="text" class="form-control" name="allowance" required>
+            <input type="number" class="form-control" name="allowance" required>
           </div>
           
             <div class="col-md-6">
-              <label for="date" class="form-label">Date</label>
-              <input type="date" class="form-control" name="date" required>
+              <label for="created_date" class="form-label">Date</label>
+              <input type="date" class="form-control" name="created_date" required>
             </div>
           </div>
         </div>
@@ -180,6 +198,7 @@
 	  </div>
 	</div>
 </div>
+  
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
