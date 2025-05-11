@@ -73,7 +73,7 @@
 
     <div class="row g-4 mb-5">
       <div class="col-md-3">
-        <div class="card card-stat bg-gradient-primary" id="top-card" style="background: linear-gradient(45deg, #4e73df, #224abe);">
+        <div class="card card-stat bg-gradient-primary" id="card1" style="background: linear-gradient(45deg, #4e73df, #224abe);">
           <div class="card-body">
             <h3 class="fw-bold">92%</h3>
             <p>Attendance</p>
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card card-stat" id="top-card" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
+        <div class="card card-stat" id="card2" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
           <div class="card-body">
             <h3 class="fw-bold">6 Days</h3>
             <p>Remaining Leaves</p>
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card card-stat" id="top-card" style="background: linear-gradient(45deg, #f6c23e, #dda20a);">
+        <div class="card card-stat" id="card3" style="background: linear-gradient(45deg, #f6c23e, #dda20a);">
           <div class="card-body">
             <h3 class="fw-bold">Rs. 120,000</h3>
             <p>Salary</p>
@@ -97,7 +97,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card card-stat" id="top-card" style="background: linear-gradient(45deg, #e74a3b, #be2617);">
+        <div class="card card-stat" id="card4" style="background: linear-gradient(45deg, #e74a3b, #be2617);">
           <div class="card-body">
             <h3 class="fw-bold">3 Tasks</h3>
             <p>Pending Approvals</p>

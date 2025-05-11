@@ -46,7 +46,7 @@
 	  background-color: #f1f1f1;
 	}
 	
-	#top-card{
+	#card1, #card2, #card3, #card4{
 	animation: slide-up 0.4s forwards ease-in-out;
 	}
 	
@@ -60,7 +60,7 @@
 			opacity: 100%
 		}
 	}
-	#top-card:hover{
+	#card1:hover, #card2:hover, #card3:hover, #card4:hover{
 		box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
 	}
 	
