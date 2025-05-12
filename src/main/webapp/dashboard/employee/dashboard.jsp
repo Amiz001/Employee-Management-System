@@ -45,9 +45,27 @@
      <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/LeaveServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Request Leave</a>
      <a href="${pageContext.request.contextPath}/AttendanceServlet"><i class="fa-solid fa-user-check"></i> Attendance</a>
-     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a data-bs-toggle="modal" data-bs-target="#logoutModal" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
+<!--  logout popup -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-light-purple text-white rounded-top-4">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Are you sure you want to log out from your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Navigation bar -->
 <div class="nav-container">
@@ -61,7 +79,7 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
                 <a href="${pageContext.request.contextPath}/EmployeeProfileServlet"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt" ></i> Logout</a>
         </div>
     </nav>
 </div>

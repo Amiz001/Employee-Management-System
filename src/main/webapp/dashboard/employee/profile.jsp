@@ -47,9 +47,27 @@
      <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/LeaveServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Request Leave</a>
      <a href="${pageContext.request.contextPath}/AttendanceServlet"><i class="fa-solid fa-user-check"></i> Attendance</a>
-     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
+<!--  logout popup -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-light-purple text-white rounded-top-4">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Are you sure you want to log out from your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Navigation bar -->
 <div class="nav-container">
@@ -63,12 +81,38 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
                 <a href="${pageContext.request.contextPath}/EmployeeProfileServlet"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt" ></i> Logout</a>
         </div>
     </nav>
 </div>
 
-<%
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Leave record successfully updated!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+<%  
+	String status = request.getParameter("status");
+    		  
 	Employee employee = (Employee) request.getAttribute("employee");
 	Payroll payroll = (Payroll) request.getAttribute("payroll");
 	
@@ -83,7 +127,6 @@
 <!-- Main Content-->
 <div class="content" id="main-content">
     
-    <!-- Profile Header -->
     <div class="profile-header mb-5">
       <div class="d-flex align-items-center profile-top">
         <img src="${pageContext.request.contextPath}/assets/uploads/<%= profilePhoto%>" class="profile-img me-4 shadow" alt="Profile">
@@ -105,11 +148,8 @@
       </div>
     </div>
 
-    <!-- Split Layout -->
     <div class="row align-items-stretch" style="margin-top:-20px">
-      <!-- Left Column -->
       <div class="col-lg-6 d-flex flex-column">
-        <!-- Personal Details -->
         <div class="glass-card flex-fill">
           <div class="section-title">Personal Details</div>
           <div class="row">
@@ -122,7 +162,6 @@
           </div>
         </div>
 
-        <!-- Security -->
         <div class="glass-card">
           <div class="section-title">Security</div>
           <div class="mb-3">
@@ -144,15 +183,15 @@
         </div>
       </div>
 
-      <!-- Right Column -->
+
       <div class="col-lg-6">
-        <!-- Salary Details -->
+
         <div class="glass-card h-100" style="max-height: 384px; max-width: 567px;">
           <div class="section-title">Salary Details</div>
           <div class="row">
             <div class="col-md-6 mb-2"><span class="info-label">Basic:</span> Rs.<%= payroll.getBasic() %></div>
             <div class="col-md-6 mb-2"><span class="info-label">Allowances:</span> Rs.<%= payroll.getAllowance() %></div>
-            <div class="col-md-6 mb-2"><span class="info-label">Over Time:</span> <%= payroll.getOt() %> Hours</div>
+            <div class="col-md-6 mb-2"><span class="info-label">Over Time:</span> <%= payroll.getOt() %></div>
             <div class="col-md-6 mb-2"><span class="info-label">Net Salary:</span> <span class="net-salary">Rs.<%= payroll.getTotal_salary() %></span></div>
           </div>
           <button class="btn btn-outline-dark" style="text-align:center; position: absolute; left: 61%; margin-top: 25px;">

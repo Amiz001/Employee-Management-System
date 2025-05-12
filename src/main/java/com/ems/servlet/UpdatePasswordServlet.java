@@ -24,13 +24,13 @@ public class UpdatePasswordServlet extends HttpServlet {
         	EmployeeDAO dao = new EmployeeDAO();
 
             if (dao.updatePassword(empId, password)) {
-            	response.sendRedirect("DepartmentServlet?status=update_success"); 
+            	response.sendRedirect("EmployeeProfileServlet?status=update_success"); 
             } else {
-            	response.sendRedirect("DepartmentServlet?status=error"); 
+            	response.sendRedirect("EmployeeProfileServlet?status=error"); 
             }
         }catch(Exception e) {
         	e.printStackTrace();
-        	response.getWriter().println("<script>alert('An error occured. Check Server logs.'); window.history.back();</script>");
+        	response.sendRedirect("EmployeeProfileServlet?status=error");
         }
     }
 }

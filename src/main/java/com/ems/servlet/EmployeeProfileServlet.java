@@ -21,6 +21,7 @@ import com.ems.model.Payroll;
 public class EmployeeProfileServlet extends HttpServlet {
 	
 	private static final String UPLOAD_DIR = "assets/uploads";
+	String status = null;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -34,17 +35,19 @@ public class EmployeeProfileServlet extends HttpServlet {
             Employee employee = dao.getEmployeeById(empId);
             
             Payroll pay = PayrollDAO.getByEmpId(empId);
+            
+            status = request.getParameter("status");
 
             request.setAttribute("payroll", pay);
             request.setAttribute("employee", employee);
             
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/profile.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/profile.jsp?status=" + status);
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("./dashboard/employee/profile.jsp?error=Server error");
+            response.sendRedirect("./dashboard/employee/profile.jsp?status=" + status);
         }
 	}
 	
@@ -77,13 +80,13 @@ public class EmployeeProfileServlet extends HttpServlet {
 		            System.out.print("DAO called");
 		            
 		            if(dao.updateProfile(employee)) {
-		            	response.sendRedirect("EmployeeProfileServlet");
+		            	response.sendRedirect("EmployeeProfileServlet?status=update_success");
 		            } else {
-		                System.out.println("Update failed");
+		            	response.sendRedirect("EmployeeProfileServlet?status=error");
 		            }
 		   
 		        } catch (Exception e) {
-		        	System.out.print("Exception");
+		        	response.sendRedirect("EmployeeProfileServlet?status=error");
 		            e.printStackTrace();
 		        }  
 		    }
