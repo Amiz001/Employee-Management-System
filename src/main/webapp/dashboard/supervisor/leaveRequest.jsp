@@ -41,10 +41,34 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
+<<<<<<< HEAD
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+=======
+     <a href="${pageContext.request.contextPath}/LeaveServlet"class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
+      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 </div>
 
+
+<!--  logout popup -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-light-purple text-white rounded-top-4">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Are you sure you want to log out from your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Navigation bar -->
 <div class="nav-container">
@@ -58,7 +82,7 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
                 <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+               <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
         </div>
     </nav>
 </div>

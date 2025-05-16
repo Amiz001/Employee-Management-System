@@ -72,6 +72,7 @@ public class LeaveDAO {
         	
             return new Leave(
                 rs.getInt("leave_id"),
+                rs.getInt("leave_count"),
                 rs.getInt("emp_id"),
                 rs.getString("leave_type"),
                 rs.getDate("start_date"),
@@ -98,6 +99,7 @@ public class LeaveDAO {
 	
 	    while (rs.next()) {
 	    	int leaveId = rs.getInt("leave_id");
+	    	int leaveCount = rs.getInt("leave_count");
 	        int empId = rs.getInt("emp_id");
 	        String leaveType = rs.getString("leave_type");
 	        java.sql.Date startDate = rs.getDate("start_date");
@@ -106,7 +108,7 @@ public class LeaveDAO {
 	        String reason = rs.getString("reason");
 	        String status = rs.getString("status");
 
-	        Leave leave = new Leave(leaveId, empId, leaveType, startDate, endDate, totalDays, reason, status);
+	        Leave leave = new Leave(leaveId, leaveCount, empId, leaveType, startDate, endDate, totalDays, reason, status);
 	        leaves.add(leave);
 	    }
 	    return leaves;
