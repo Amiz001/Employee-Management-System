@@ -77,7 +77,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/PayrollProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
