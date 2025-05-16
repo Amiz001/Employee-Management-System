@@ -53,6 +53,14 @@ public class Leave {
 		this.leaveId = leaveId;
 	}
 
+	public int getLeaveCount() {
+		return leaveCount;
+	}
+
+	public void setLeaveCount(int leaveCount) {
+		this.leaveCount = leaveCount;
+	}
+	
 	public int getEmpId() {
 		return empId;
 	}

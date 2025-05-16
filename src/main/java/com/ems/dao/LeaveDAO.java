@@ -72,7 +72,7 @@ public class LeaveDAO {
         	
             return new Leave(
                 rs.getInt("leave_id"),
-                rs.getInt("leave_count"),
+                rs.getInt("leave_count "),
                 rs.getInt("emp_id"),
                 rs.getString("leave_type"),
                 rs.getDate("start_date"),

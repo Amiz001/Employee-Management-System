@@ -33,7 +33,6 @@ public class LeaveServlet extends HttpServlet {
             request.setAttribute("leaveList", leaves);
             RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/leave.jsp?status=" + status);
             dispatcher.forward(request, response);
-            
 
         } catch (Exception e) {
             e.printStackTrace();

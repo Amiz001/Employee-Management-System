@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="java.util.*, com.ems.model.Taskmanagement" %>
+<%@ page import="java.util.*, com.ems.model.Leave" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -137,45 +137,45 @@ String status = request.getParameter("status");
                     </div>
                 </div>
                 <tr>
-                    
-            <th>Task ID</th>
-            <th>Title</th>
-            <th>Employee ID</th>
-            <th>Deadline</th>
-            <th>Start Date</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-       </thead>
+                    <th>Leave ID</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total days</th>
+                    <th>Reason</th>
+                    <th>Status</th>  
+                    <th>Actions</th>         
+                </tr>
+            </thead>
             
             <%
-            List<Taskmanagement> taskList = (List<Taskmanagement>) request.getAttribute("taskDetails");
+            List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
             
-		    if (taskList != null) {
-		        for (Taskmanagement task : taskList) {
+		    if (leaveList != null) {
+		        for (Leave leave : leaveList) {
 			%>
 			
-
             <tr>
-                <td><%= task.getTask_id() %></td>
-                <td><%= task.getTitle() %></td>
-                <td><%= task.getEmp_id() %></td>
-                <td><%= task.getDeadline() %></td>
-                <td><%= task.getStart_date() %></td>
-                <td><%= task.getStatus() %></td>
-                
-                <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
+                  <td><%= leave.getLeaveId() %></td>
+		          <td><%= leave.getLeaveType() %></td>
+		          <td><%= leave.getStartDate() %></td>
+		          <td><%= leave.getEndDate() %></td>
+		          <td><%= leave.getTotalDays() %></td>
+		          <td><%= leave.getReason() %></td> 
+		          <td><%= leave.getStatus() %></td> 
+		          
+                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
                        
-                   <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= task.getTask_id() %>', '<%= task.getTitle()%>', '<%=task.getEmp_id()%>', '<%=task.getDeadline()%>','<%=task.getStart_date()%>','<%= task.getStatus() %>')"></i>
-                    <a href="${pageContext.request.contextPath}/TaskmanagementDeleteServlet?task_id=<%= task.getTask_id()%>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
-                </td>    
+                  	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= leave.getLeaveId() %>', '<%= leave.getLeaveType()%>', '<%=leave.getStartDate()%>', '<%=leave.getEndDate()%>','<%=leave.getReason()%>')"></i>
+                    <a href="${pageContext.request.contextPath}/LeaveDeleteServlet?leaveId=<%= leave.getLeaveId() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                    
+                  </td>
             </tr>
-           
             <%
 		        } 
 	    	} else {
 			%>
-			        <tr><td colspan="2" style="text-align: center">No task records found</td></tr>
+			        <tr><td colspan="2" style="text-align: center">No leave records found</td></tr>
 			<%
 			    }
 			%>

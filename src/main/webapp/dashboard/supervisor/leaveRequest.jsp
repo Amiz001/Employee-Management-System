@@ -41,13 +41,10 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
-<<<<<<< HEAD
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
-=======
      <a href="${pageContext.request.contextPath}/LeaveServlet"class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
       <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 </div>
 
 
@@ -88,14 +85,100 @@
 </div>
 
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Task record successfully updated!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+
+<%  
+String status = request.getParameter("status");
+%>
+
 
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Dashboard</h5>
+    <h5 id="main-title">Leave Request</h5>
     <div class="table-container">
-        
+        <table class="table table-striped my-table">
+            <thead>
+
+                <div class="search-toolbar">   
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search...">
+                    </div>
+                   
+                    <div class="toolbar-icons"> 
+                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+                    </div>
+                </div>
+                <tr>
+                    
+            <th>Task ID</th>
+            <th>Title</th>
+            <th>Employee ID</th>
+            <th>Deadline</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+       </thead>
+            
+            <%
+            List<Taskmanagement> taskList = (List<Taskmanagement>) request.getAttribute("taskDetails");
+            
+		    if (taskList != null) {
+		        for (Taskmanagement task : taskList) {
+			%>
+			
+
+            <tr>
+                <td><%= task.getTask_id() %></td>
+                <td><%= task.getTitle() %></td>
+                <td><%= task.getEmp_id() %></td>
+                <td><%= task.getDeadline() %></td>
+                <td><%= task.getStart_date() %></td>
+                <td><%= task.getStatus() %></td>
+                
+                <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
+                       
+                   <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= task.getTask_id() %>', '<%= task.getTitle()%>', '<%=task.getEmp_id()%>', '<%=task.getDeadline()%>','<%=task.getStart_date()%>','<%= task.getStatus() %>')"></i>
+                    <a href="${pageContext.request.contextPath}/TaskmanagementDeleteServlet?task_id=<%= task.getTask_id()%>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                </td>    
+            </tr>
+           
+            <%
+		        } 
+	    	} else {
+			%>
+			        <tr><td colspan="2" style="text-align: center">No task records found</td></tr>
+			<%
+			    }
+			%>
+            
+        </table>
     </div>
-</div> 
+</div>
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
