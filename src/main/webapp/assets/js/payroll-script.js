@@ -35,3 +35,11 @@ window.addEventListener('DOMContentLoaded', () => {
       toast.show();
     }
   });	
+  
+  //update popup
+  function fillUpdateForms(updateemp_id, updatebasic) {
+     
+      document.getElementById("updateemp_id").value = updateemp_id;
+      document.getElementById("updatebasic").value = updatebasic;
+    
+  }
