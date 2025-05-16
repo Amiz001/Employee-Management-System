@@ -12,6 +12,8 @@ public class Employee {
     private Date dob;
     private String gender;
     private String role;
+    private int leaveCount;
+    private double basicSalary;
     private String profilePhoto;
 
     public Employee() {}
@@ -37,7 +39,7 @@ public class Employee {
 	}
 
 	public Employee(int empId, String name, String email, String phone, String department, Date dob, String gender,
-			String role, String profilePhoto) {
+			String role, int leaveCount, double basiSalary, String profilePhoto) {
 		super();
 		this.empId = empId;
 		this.name = name;

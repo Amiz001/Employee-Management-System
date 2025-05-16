@@ -173,9 +173,11 @@ public class EmployeeDAO {
 	        Date dob = rs.getDate("dob");
 	        String gender = rs.getString("gender");
 	        String role = rs.getString("role");
+            int leaveCount = rs.getInt("leave_count");
+            double basicSalary = rs.getDouble("basic_salary");
 	        String profilePhoto = rs.getString("profile_photo");
 
-	        Employee employee = new Employee(empId, name, email, phone, department, dob, gender, role, profilePhoto);
+	        Employee employee = new Employee(empId, name, email, phone, department, dob, gender, role, leaveCount, basicSalary, profilePhoto);
 	        employees.add(employee);
 	    }
 	    return employees;
