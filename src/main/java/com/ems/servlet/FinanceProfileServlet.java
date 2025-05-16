@@ -16,8 +16,9 @@ import com.ems.dao.PayrollDAO;
 import com.ems.model.Employee;
 import com.ems.model.Payroll;
 
-@WebServlet("/PayrollProfileServlet")
-public class PayrollProfileServlet extends HttpServlet {
+
+@WebServlet("/FinanceProfileServlet")
+public class FinanceProfileServlet extends HttpServlet {
 	private static final String UPLOAD_DIR = "assets/uploads";
 	String status = null;
    
@@ -79,16 +80,15 @@ public class PayrollProfileServlet extends HttpServlet {
 		            
 		            if(dao.updateProfile(employee)) {
 		            	session.setAttribute("name", name);
-		            	response.sendRedirect("PayrollProfileServlet?status=update_success");
+		            	response.sendRedirect("FinanceProfileServlet?status=update_success");
 		      
 		            } else {
-		            	response.sendRedirect("PayrollProfileServlet?status=error");
+		            	response.sendRedirect("FinanceProfileServlet?status=error");
 		            }
 		   
 		        } catch (Exception e) {
-		        	response.sendRedirect("PayrollProfileServlet?status=error");
+		        	response.sendRedirect("FinanceProfileServlet?status=error");
 		            e.printStackTrace();
 		        }  
 		    }
-
 }

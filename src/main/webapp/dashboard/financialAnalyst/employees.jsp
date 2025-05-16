@@ -77,7 +77,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="${pageContext.request.contextPath}/PayrollProfileServlet"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/FinanceProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
@@ -109,7 +109,8 @@
                     <th>Department</th>
                     <th>DOB</th>
                     <th>Gender</th>
-                    <th>Role</th>  
+                    <th>Role</th> 
+                    
                     <th>Actions</th> 
                 </tr>
             </thead>
@@ -132,8 +133,10 @@
 		          <td><%= employee.getGender() %></td>
 		          <td><%= employee.getRole() %></td>
 		          
+		          
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                                                                                                                                                                                                      
-                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
+                  	
+                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" onclick="fillUpdateForms('<%=employee.getEmpId()%>')">add_circle</span>
                     
                   </td>
             </tr>
@@ -164,12 +167,12 @@
         <div class="modal-body custom-scroll">
           <div class="mb-3">
             <label for="emp_id" class="form-label">Employee ID</label>
-            <input type="number" class="form-control" name="emp_id" required>
+            <input type="number" class="form-control" name="emp_id" id="updateemp_id"required>
           </div>
           
           <div class="mb-3">
             <label for="basic" class="form-label">Basic Salary</label>
-            <input type="number" class="form-control" name="basic" required>
+            <input type="number" class="form-control" name="basic" id="updatebasic"required>
           </div>
           
           <div class="mb-3">

@@ -15,6 +15,7 @@ public class Employee {
     private int leaveCount;
     private double basicSalary;
     private String profilePhoto;
+    
 
     public Employee() {}
 
