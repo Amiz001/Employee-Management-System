@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="java.util.*, com.ems.model.Leave" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -40,9 +39,9 @@
          <p id="role"><%= role %></p></div>
          	
     <div class="features">
-     <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp" ><i class="fa-solid fa-user"></i> Dashboard</a>
+     <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
-     <a href="${pageContext.request.contextPath}/LeaveServlet"class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
+     <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
@@ -64,72 +63,15 @@
     </nav>
 </div>
 
+
+
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Request Leave</h5>
+    <h5 id="main-title">Dashboard</h5>
     <div class="table-container">
-        <table class="table table-striped my-table">
-            <thead>
-
-                <div class="search-toolbar">   
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search...">
-                    </div>
-                   
-                    <div class="toolbar-icons"> 
-                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
-                    </div>
-                </div>
-                <tr>
-                    <th>Leave ID</th>
-                    <th>Leave Type</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Total days</th>
-                    <th>Reason</th>
-                    <th>Status</th>  
-                    <th>Actions</th>         
-                </tr>
-            </thead>
-            
-            <%
-            List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
-            
-		    if (leaveList != null) {
-		        for (Leave leave : leaveList) {
-			%>
-			
-            <tr>
-                  <td><%= leave.getLeaveId() %></td>
-		          <td><%= leave.getLeaveType() %></td>
-		          <td><%= leave.getStartDate() %></td>
-		          <td><%= leave.getEndDate() %></td>
-		          <td><%= leave.getTotalDays() %></td>
-		          <td><%= leave.getReason() %></td> 
-		          <td><%= leave.getStatus() %></td> 
-		          
-                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
-                       
-                  	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= leave.getLeaveId() %>', '<%= leave.getLeaveType()%>', '<%=leave.getStartDate()%>', '<%=leave.getEndDate()%>','<%=leave.getReason()%>')"></i>
-                    <a href="${pageContext.request.contextPath}/LeaveDeleteServlet?leaveId=<%= leave.getLeaveId() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
-                    
-                  </td>
-            </tr>
-            <%
-		        } 
-	    	} else {
-			%>
-			        <tr><td colspan="2" style="text-align: center">No leave records found</td></tr>
-			<%
-			    }
-			%>
-            
-        </table>
+        
     </div>
 </div> 
-
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>

@@ -80,6 +80,8 @@ public class EmployeeProfileServlet extends HttpServlet {
 		            System.out.print("DAO called");
 		            
 		            if(dao.updateProfile(employee)) {
+		            	session.setAttribute("name", name);
+		                
 		            	response.sendRedirect("EmployeeProfileServlet?status=update_success");
 		            } else {
 		            	response.sendRedirect("EmployeeProfileServlet?status=error");

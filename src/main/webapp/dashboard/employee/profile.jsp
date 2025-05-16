@@ -16,6 +16,13 @@
     String name = (String) session.getAttribute("name");
     String role = (String) session.getAttribute("role");
     String profilePhoto = (String) session.getAttribute("profilePhoto");
+
+    
+	String status = request.getParameter("status");
+    		  
+	Employee employee = (Employee) request.getAttribute("employee");
+	Payroll payroll = (Payroll) request.getAttribute("payroll");
+	
 %>
 
 <!DOCTYPE html>
@@ -110,26 +117,13 @@
   </div>
 </div>
 
-<%  
-	String status = request.getParameter("status");
-    		  
-	Employee employee = (Employee) request.getAttribute("employee");
-	Payroll payroll = (Payroll) request.getAttribute("payroll");
-	
-	if (employee != null){
-		
-	}
-	
-
-%>
-
 
 <!-- Main Content-->
 <div class="content" id="main-content">
     
     <div class="profile-header mb-5">
       <div class="d-flex align-items-center profile-top">
-        <img src="${pageContext.request.contextPath}/assets/uploads/<%= profilePhoto%>" class="profile-img me-4 shadow" alt="Profile">
+        <img src="${pageContext.request.contextPath}/assets/uploads/<%= profilePhoto %>" class="profile-img me-4 shadow" alt="Profile">
         <div>
           <h4><%= name %></h4>
           <p class="mb-1"><%= role %> · <%= employee.getDepartment() %></p>
