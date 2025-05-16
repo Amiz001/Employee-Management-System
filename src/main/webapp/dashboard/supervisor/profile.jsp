@@ -16,13 +16,6 @@
     String name = (String) session.getAttribute("name");
     String role = (String) session.getAttribute("role");
     String profilePhoto = (String) session.getAttribute("profilePhoto");
-
-    
-	String status = request.getParameter("status");
-    		  
-	Employee employee = (Employee) request.getAttribute("employee");
-	Payroll payroll = (Payroll) request.getAttribute("payroll");
-	
 %>
 
 <!DOCTYPE html>
@@ -51,10 +44,12 @@
          <p id="role"><%= role %></p></div>
          	
     <div class="features">
-     <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/LeaveServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Request Leave</a>
-     <a href="${pageContext.request.contextPath}/AttendanceServlet"><i class="fa-solid fa-user-check"></i> Attendance</a>
+     <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
+     <a href="${pageContext.request.contextPath}/TaskmanagementServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Task</a>
+     <a href="${pageContext.request.contextPath}/LeaveRequestServlet"><i class="fa-solid fa-user-check"></i> Leave Request</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     
+     
 </div>
 
 <!--  logout popup -->
@@ -87,7 +82,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="${pageContext.request.contextPath}/EmployeeProfileServlet"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/SupervisorProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt" ></i> Logout</a>
         </div>
     </nav>
@@ -117,13 +112,26 @@
   </div>
 </div>
 
+<%  
+	String status = request.getParameter("status");
+    		  
+	Employee employee = (Employee) request.getAttribute("employee");
+	Payroll payroll = (Payroll) request.getAttribute("payroll");
+	
+	if (employee != null){
+		
+	}
+	
+
+%>
+
 
 <!-- Main Content-->
 <div class="content" id="main-content">
     
     <div class="profile-header mb-5">
       <div class="d-flex align-items-center profile-top">
-        <img src="${pageContext.request.contextPath}/assets/uploads/<%= profilePhoto %>" class="profile-img me-4 shadow" alt="Profile">
+        <img src="${pageContext.request.contextPath}/assets/uploads/<%= profilePhoto%>" class="profile-img me-4 shadow" alt="Profile">
         <div>
           <h4><%= name %></h4>
           <p class="mb-1"><%= role %> · <%= employee.getDepartment() %></p>
@@ -204,7 +212,7 @@
   <div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <form method="post" action="${pageContext.request.contextPath}/EmployeeProfileServlet">
+      <form method="post" action="${pageContext.request.contextPath}/SupervisorProfileServlet">
         <div class="modal-header">
           <h5 class="modal-title" id="addEmployeeModalLabel">Edit Employee Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

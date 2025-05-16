@@ -17,8 +17,8 @@ import com.ems.dao.PayrollDAO;
 import com.ems.model.Employee;
 import com.ems.model.Payroll;
 
-@WebServlet("/EmployeeProfileServlet")
-public class EmployeeProfileServlet extends HttpServlet {
+@WebServlet("/SupervisorProfileServlet")
+public class SupervisorProfileServlet extends HttpServlet {
 	
 	private static final String UPLOAD_DIR = "assets/uploads";
 	String status = null;
@@ -42,12 +42,12 @@ public class EmployeeProfileServlet extends HttpServlet {
             request.setAttribute("employee", employee);
             
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/profile.jsp?status=" + status);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/supervisor/profile.jsp?status=" + status);
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("./dashboard/employee/profile.jsp?status=" + status);
+            response.sendRedirect("./dashboard/supervisor/profile.jsp?status=" + status);
         }
 	}
 	
@@ -80,15 +80,13 @@ public class EmployeeProfileServlet extends HttpServlet {
 		            System.out.print("DAO called");
 		            
 		            if(dao.updateProfile(employee)) {
-		            	session.setAttribute("name", name);
-		                
-		            	response.sendRedirect("EmployeeProfileServlet?status=update_success");
+		            	response.sendRedirect("SupervisorProfileServlet?status=update_success");
 		            } else {
-		            	response.sendRedirect("EmployeeProfileServlet?status=error");
+		            	response.sendRedirect("SupervisorProfileServlet?status=error");
 		            }
 		   
 		        } catch (Exception e) {
-		        	response.sendRedirect("EmployeeProfileServlet?status=error");
+		        	response.sendRedirect("SupervisorProfileServlet?status=error");
 		            e.printStackTrace();
 		        }  
 		    }

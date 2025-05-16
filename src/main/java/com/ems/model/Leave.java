@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Leave {
 	
 	private int leaveId;
+	private int leaveCount;
     private int empId;
     private String leaveType;
     private java.sql.Date startDate;
@@ -32,8 +33,9 @@ public class Leave {
 		this.reason = reason;
     }
 
-	public Leave(int leaveId, int empId, String leaveType, java.sql.Date startDate, java.sql.Date endDate, int totalDays, String reason, String status) {
+	public Leave(int leaveId, int leaveCount, int empId, String leaveType, java.sql.Date startDate, java.sql.Date endDate, int totalDays, String reason, String status) {
         this.leaveId = leaveId;
+        this.leaveCount = leaveCount;
     	this.empId = empId;
         this.leaveType = leaveType;
         this.startDate = startDate;
