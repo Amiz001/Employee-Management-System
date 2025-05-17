@@ -40,7 +40,12 @@ public class Employee {
 	}
 
 	public Employee(int empId, String name, String email, String phone, String department, Date dob, String gender,
+<<<<<<< HEAD
 			String role, int leaveCount, double basiSalary, String profilePhoto) {
+=======
+			String role, int leaveCount, double basicSalary, String profilePhoto) {
+		super();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 		this.empId = empId;
 		this.name = name;
 		this.email = email;
@@ -49,8 +54,12 @@ public class Employee {
 		this.dob = dob;
 		this.gender = gender;
 		this.role = role;
+<<<<<<< HEAD
 		this.leaveCount = leaveCount;
 		this.basicSalary = basiSalary;
+=======
+		this.basicSalary = basicSalary;
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 		this.profilePhoto = profilePhoto;
 	}
 
@@ -139,6 +148,7 @@ public class Employee {
 		this.role = role;
 	}
 	
+<<<<<<< HEAD
 	public int getLeaveCount() {
 		return leaveCount;
 	}
@@ -147,6 +157,8 @@ public class Employee {
 		this.leaveCount = leaveCount;
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	public double getBasicSalary() {
 		return basicSalary;
 	}

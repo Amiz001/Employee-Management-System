@@ -47,6 +47,20 @@
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      
+    </div>
+  </div>
+</div>
+
 <!--  logout popup -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -110,7 +124,7 @@
                     <th>DOB</th>
                     <th>Gender</th>
                     <th>Role</th> 
-                    
+                    <th>Basic Salary</th>
                     <th>Actions</th> 
                 </tr>
             </thead>
@@ -132,11 +146,12 @@
 		          <td><%= employee.getDob() %></td> 
 		          <td><%= employee.getGender() %></td>
 		          <td><%= employee.getRole() %></td>
-		          
+		          <td><%= employee.getBasicSalary() %></td>
 		          
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                                                                                                                                                                                                      
                   	
-                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" onclick="fillUpdateForms('<%=employee.getEmpId()%>')">add_circle</span>
+                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" 
+                  	onclick="UpdateForm('<%=employee.getEmpId()%>','<%= employee.getBasicSalary() %>')">add_circle</span>
                     
                   </td>
             </tr>
@@ -167,12 +182,12 @@
         <div class="modal-body custom-scroll">
           <div class="mb-3">
             <label for="emp_id" class="form-label">Employee ID</label>
-            <input type="number" class="form-control" name="emp_id" id="updateemp_id"required>
+            <input type="text" class="form-control" name="emp_id" id="emp_idid" required>
           </div>
           
           <div class="mb-3">
             <label for="basic" class="form-label">Basic Salary</label>
-            <input type="number" class="form-control" name="basic" id="updatebasic"required>
+            <input type="text" class="form-control" name="basic" id="basicc" required>
           </div>
           
           <div class="mb-3">

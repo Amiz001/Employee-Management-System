@@ -37,9 +37,9 @@ window.addEventListener('DOMContentLoaded', () => {
   });	
   
   //update popup
-  function fillUpdateForms(updateemp_id, updatebasic) {
+  function UpdateForm(emp_idid, basicc) {
      
-      document.getElementById("updateemp_id").value = updateemp_id;
-      document.getElementById("updatebasic").value = updatebasic;
+      document.getElementById("emp_idid").value = emp_idid;
+      document.getElementById("basicc").value = basicc;
     
   }
