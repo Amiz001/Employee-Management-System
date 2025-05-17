@@ -44,7 +44,8 @@ S
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
-     <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a href="${pageContext.request.contextPath}/EmployeeInfo2Servlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
+      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
 
@@ -95,24 +96,24 @@ S
       <div class="col-md-3">
         <div class="card card-stat bg-gradient-primary" id="card1" style="background: linear-gradient(45deg, #4e73df, #224abe);">
           <div class="card-body">
-            <h3 class="fw-bold">88%</h3>
-            <p>Attendance</p>
+            <h3 class="fw-bold">28 Leaves</h3>
+            <p>Overall Leave Count</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card card-stat" id="card2" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
           <div class="card-body">
-            <h3 class="fw-bold">5 Days</h3>
-            <p>Remaining Leaves</p>
+            <h3 class="fw-bold">5 Leaves</h3>
+            <p>Pending Leave Approvals</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card card-stat" id="card3" style="background: linear-gradient(45deg, #f6c23e, #dda20a);">
           <div class="card-body">
-            <h3 class="fw-bold">Rs. 120,000</h3>
-            <p>Salary</p>
+            <h3 class="fw-bold">1 Task</h3>
+            <p>Tasks Overdue</p>
           </div>
         </div>
       </div>

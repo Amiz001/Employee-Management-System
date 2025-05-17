@@ -16,8 +16,16 @@
     String name = (String) session.getAttribute("name");
     String role = (String) session.getAttribute("role");
     String profilePhoto = (String) session.getAttribute("profilePhoto");
-%>
 
+    
+	String status = request.getParameter("status");
+    		  
+	Employee employee = (Employee) request.getAttribute("employee");
+	Payroll payroll = (Payroll) request.getAttribute("payroll");
+
+	
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +55,7 @@
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet" ><i class="fa-solid fa-person-walking-arrow-right"></i>Task</a>
      <a href="${pageContext.request.contextPath}/LeaveRequestServlet"><i class="fa-solid fa-user-check"></i> Leave Request</a>
+     <a href="${pageContext.request.contextPath}/EmployeeInfo2Servlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
      
      
@@ -111,20 +120,6 @@
     </div>
   </div>
 </div>
-
-<%  
-	String status = request.getParameter("status");
-    		  
-	Employee employee = (Employee) request.getAttribute("employee");
-	Payroll payroll = (Payroll) request.getAttribute("payroll");
-	
-	if (employee != null){
-		
-	}
-	
-
-%>
-
 
 <!-- Main Content-->
 <div class="content" id="main-content">

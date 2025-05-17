@@ -80,6 +80,8 @@ public class SupervisorProfileServlet extends HttpServlet {
 		            System.out.print("DAO called");
 		            
 		            if(dao.updateProfile(employee)) {
+		            	session.setAttribute("name", name);
+		            	
 		            	response.sendRedirect("SupervisorProfileServlet?status=update_success");
 		            } else {
 		            	response.sendRedirect("SupervisorProfileServlet?status=error");
