@@ -163,4 +163,22 @@ public class PayrollDAO {
         }
         return null; 
     }  
+    
+    public static boolean existsForMonth(int empId, Date createdDate) {
+        boolean exists = false;
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT 1 FROM payroll WHERE emp_id = ? AND MONTH(created_date) = MONTH(?) AND YEAR(created_date) = YEAR(?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, empId);
+            ps.setDate(2, createdDate);
+            ps.setDate(3, createdDate);
+            ResultSet rs = ps.executeQuery();
+            exists = rs.next(); // if there's at least one result, it exists
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    
 }

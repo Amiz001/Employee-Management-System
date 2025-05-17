@@ -40,7 +40,7 @@ public class Employee {
 	}
 
 	public Employee(int empId, String name, String email, String phone, String department, Date dob, String gender,
-			String role, int leaveCount, double basiSalary, String profilePhoto) {
+			String role, int leaveCount, double basicSalary, String profilePhoto) {
 		super();
 		this.empId = empId;
 		this.name = name;
@@ -50,6 +50,7 @@ public class Employee {
 		this.dob = dob;
 		this.gender = gender;
 		this.role = role;
+		this.basicSalary = basicSalary;
 		this.profilePhoto = profilePhoto;
 	}
 
@@ -137,6 +138,14 @@ public class Employee {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public double getBasicSalary() {
+		return basicSalary;
+	}
+
+	public void setBasicSalary(double basicSalary) {
+		this.basicSalary = basicSalary;
 	}
 
 	public String getProfilePhoto() {
