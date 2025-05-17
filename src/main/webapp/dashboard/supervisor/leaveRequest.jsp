@@ -134,6 +134,7 @@ String status = request.getParameter("status");
                 </div>
                 <tr>
                     <th>Leave ID</th>
+                    <th>Employee ID</th>
                     <th>Available Leaves</th>
                     <th>Leave Type</th>
                     <th>Start Date</th>
@@ -168,6 +169,7 @@ String status = request.getParameter("status");
 			
             <tr>
                   <td><%= leave.getLeaveId() %></td>
+                  <td><%= employee.getEmpId() %></td>
                   <td><%= employee.getLeaveCount() %></td>
 		          <td><%= leave.getLeaveType() %></td>
 		          <td><%= leave.getStartDate() %></td>
@@ -179,10 +181,10 @@ String status = request.getParameter("status");
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px;">                 
                     
                     <% if(leave.getStatus().equals("Pending")) {%> 
-                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept"><span class="material-symbols-outlined" id="update-icon" style="color:green">check</span></a>
-                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject"><span class="material-symbols-outlined" id="delete-icon">close</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept"><span class="material-symbols-outlined" id="update-icon" style="color:green">task_alt</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject"><span class="material-symbols-outlined" id="delete-icon">cancel</span></a>
                     <%} else if(leave.getStatus().equals("Approved") || leave.getStatus().equals("Rejected")){ %>
-                   	 	<p style="color:green">Resolved</p>
+                   	 	<p style="color:blue">Resolved</p>
                     <%} %>
                   </td>
             </tr>

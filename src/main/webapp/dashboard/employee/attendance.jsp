@@ -138,8 +138,12 @@ String status = request.getParameter("status");
             <tr>
                   <td><%= attendance.getAttendanceId() %></td>
 		          <td><%= attendance.getDate() %></td>
-		          <td><%= attendance.getCheckInTime() %></td>
-		          <td><%= attendance.getCheckOutTime() %></td>
+		         <td>
+				  <%= (attendance.getCheckInTime() != null) ? attendance.getCheckInTime() : "<span class='material-symbols-outlined'>horizontal_rule</span>" %>
+				</td>
+
+		          <td> <%= (attendance.getCheckOutTime() != null) ? attendance.getCheckOutTime() : "<span class='material-symbols-outlined'>horizontal_rule</span>" %>
+				</td>
 		          <td><%= attendance.getStatus() %></td>
             </tr>
             <%
