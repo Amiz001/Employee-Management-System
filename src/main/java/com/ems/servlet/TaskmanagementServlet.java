@@ -6,7 +6,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.ems.model.Leave;
 import com.ems.model.Taskmanagement;
+import com.ems.dao.LeaveDAO;
 import com.ems.dao.TaskmanagementDAO;
 
 @WebServlet("/TaskmanagementServlet")
@@ -17,6 +19,7 @@ public class TaskmanagementServlet extends HttpServlet {
             throws ServletException, IOException {
 
         List<Taskmanagement> taskDetails = TaskmanagementDAO.getAllDetails();
+        
         request.setAttribute("taskDetails", taskDetails);
         
         String status = null;

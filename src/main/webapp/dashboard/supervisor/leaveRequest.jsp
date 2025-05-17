@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="java.util.*, com.ems.model.Leave" %>
+<%@ page import="java.util.*, com.ems.model.Leave, com.ems.model.Employee" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -40,9 +40,9 @@
          <p id="role"><%= role %></p></div>
          	
     <div class="features">
-     <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp" ><i class="fa-solid fa-user"></i> Dashboard</a>
+     <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
-     <a href="${pageContext.request.contextPath}/LeaveServlet"class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
+     <a href="${pageContext.request.contextPath}/LeaveManageServlet" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
       <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
@@ -83,9 +83,40 @@
     </nav>
 </div>
 
+
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Updated successfully!
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+
+<%  
+String status = request.getParameter("status");
+%>
+
+
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Request Leave</h5>
+    <h5 id="main-title">Leave Request</h5>
     <div class="table-container">
         <table class="table table-striped my-table">
             <thead>
@@ -97,12 +128,12 @@
                     </div>
                    
                     <div class="toolbar-icons"> 
-                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
                     </div>
                 </div>
                 <tr>
                     <th>Leave ID</th>
+                    <th>Available Leaves</th>
                     <th>Leave Type</th>
                     <th>Start Date</th>
                     <th>End Date</th>
@@ -115,13 +146,28 @@
             
             <%
             List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
+    		List<Employee> employeeList = (List<Employee>) request.getAttribute("employeeList");
             
+    		int i=0;
+    		  
 		    if (leaveList != null) {
 		        for (Leave leave : leaveList) {
+		        
+		        	Employee employee = null;
+		        	int empid = leave.getEmpId();
+
+		        	for (Employee emp : employeeList) {
+		        	    if (emp.getEmpId() == empid) {
+		        	        employee = emp;
+		        	        break;
+		        	    }
+		        	}
+
 			%>
 			
             <tr>
                   <td><%= leave.getLeaveId() %></td>
+                  <td><%= employee.getLeaveCount() %></td>
 		          <td><%= leave.getLeaveType() %></td>
 		          <td><%= leave.getStartDate() %></td>
 		          <td><%= leave.getEndDate() %></td>
@@ -129,26 +175,29 @@
 		          <td><%= leave.getReason() %></td> 
 		          <td><%= leave.getStatus() %></td> 
 		          
-                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
-                       
-                  	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= leave.getLeaveId() %>', '<%= leave.getLeaveType()%>', '<%=leave.getStartDate()%>', '<%=leave.getEndDate()%>','<%=leave.getReason()%>')"></i>
-                    <a href="${pageContext.request.contextPath}/LeaveDeleteServlet?leaveId=<%= leave.getLeaveId() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px;">                 
                     
+                    <% if(leave.getStatus().equals("Pending")) {%> 
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept"><span class="material-symbols-outlined" id="update-icon" style="color:green">check</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject"><span class="material-symbols-outlined" id="delete-icon">close</span></a>
+                    <%} else if(leave.getStatus().equals("Approved") || leave.getStatus().equals("Rejected")){ %>
+                   	 	<p style="color:green">Resolved</p>
+                    <%} %>
                   </td>
             </tr>
             <%
+            i++;
 		        } 
 	    	} else {
 			%>
-			        <tr><td colspan="2" style="text-align: center">No leave records found</td></tr>
+			        <tr><td colspan="10" style="text-align: center;">No leave records found</td></tr>
 			<%
 			    }
 			%>
             
         </table>
     </div>
-</div> 
-
+</div>
 
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>

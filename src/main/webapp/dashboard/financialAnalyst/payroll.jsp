@@ -80,7 +80,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/FinanceProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </nav>
@@ -129,7 +129,6 @@ String status = request.getParameter("status");
                     </div>
                   
                     <div class="toolbar-icons"> 
-                    	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
 
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
 
@@ -186,55 +185,6 @@ String status = request.getParameter("status");
         </table>
     </div>
 </div> 
-    
-<!-- Insert Popup-->
-
-<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <form method="post" action="${pageContext.request.contextPath}/PayrollInsertServlet">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addEmployeeModalLabel">Employee Salary</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-  
-        <div class="modal-body custom-scroll">
-          <div class="mb-3">
-            <label for="emp_id" class="form-label">Employee ID</label>
-            <input type="number" class="form-control" name="emp_id" required>
-          </div>
-          
-          <div class="mb-3">
-            <label for="basic" class="form-label">Basic Salary</label>
-            <input type="number" class="form-control" name="basic" required>
-          </div>
-          
-          <div class="mb-3">
-            <label for="ot" class="form-label">Over Time</label>
-            <input type="number" class="form-control" name="ot" required>
-          </div>
-
-          <div class="row g-3">
-             <div class="mb-3">
-            <label for="allowance" class="form-label">Allowance</label>
-            <input type="number" class="form-control" name="allowance" required>
-          </div>
-          
-            <div class="col-md-6">
-              <label for="created_date" class="form-label">Date</label>
-              <input type="date" class="form-control" name="created_date" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-		  <button type="submit" class="btn btn-purple">Submit</button>
-		  <button type="button" class="btn btn-black" data-bs-dismiss="modal">Cancel</button>
-		</div>
-	    </form>
-	  </div>
-	</div>
-</div>
   
 
 <!-- Update Popup -->

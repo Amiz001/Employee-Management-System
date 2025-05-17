@@ -39,7 +39,7 @@ public class EmployeeDAO {
 		
 		Connection conn = DBConnection.getConnection();
 		
-		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, basicSalary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
@@ -50,7 +50,8 @@ public class EmployeeDAO {
         ps.setString(6, employee.getDepartment());
         ps.setDate(7, employee.getDob());
         ps.setString(8, employee.getGender());
-        ps.setString(9, employee.getProfilePhoto());
+        ps.setDouble(9, employee.getBasicSalary());
+        ps.setString(10, employee.getProfilePhoto());
         
         return ps.executeUpdate() > 0;
     }
@@ -60,7 +61,7 @@ public class EmployeeDAO {
     	
         Connection conn = DBConnection.getConnection();
         
-        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=? WHERE emp_id=?";
+        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=?, basicSalary=? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
@@ -70,7 +71,8 @@ public class EmployeeDAO {
         ps.setString(5, employee.getDepartment());
         ps.setDate(6, employee.getDob());
         ps.setString(7, employee.getGender());
-        ps.setInt(8, employee.getEmpId());
+        ps.setDouble(8, employee.getBasicSalary());
+        ps.setInt(9, employee.getEmpId());
         
         return ps.executeUpdate() > 0;
     }
@@ -173,12 +175,30 @@ public class EmployeeDAO {
 	        Date dob = rs.getDate("dob");
 	        String gender = rs.getString("gender");
 	        String role = rs.getString("role");
+            int leaveCount = rs.getInt("leave_count");
+            double basicSalary = rs.getDouble("basic_salary");
 	        String profilePhoto = rs.getString("profile_photo");
 
-	        Employee employee = new Employee(empId, name, email, phone, department, dob, gender, role, profilePhoto);
+	        Employee employee = new Employee(empId, name, email, phone, department, dob, gender, role, leaveCount, basicSalary, profilePhoto);
 	        employees.add(employee);
 	    }
 	    return employees;
+	}
+	
+	
+	//Payroll ID Validate
+	public static boolean exists(int emp_id) {
+		boolean found = false;
+		try (Connection conn = DBConnection.getConnection()) {
+			String sql = "SELECT 1 FROM employee WHERE emp_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, emp_id);
+			ResultSet rs = stmt.executeQuery();
+			found = rs.next();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return found;
 	}
     
 }

@@ -2,7 +2,6 @@ package com.ems.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +16,9 @@ import com.ems.dao.PayrollDAO;
 import com.ems.model.Employee;
 import com.ems.model.Payroll;
 
-@WebServlet("/EmployeeProfileServlet")
-public class EmployeeProfileServlet extends HttpServlet {
-	
+
+@WebServlet("/FinanceProfileServlet")
+public class FinanceProfileServlet extends HttpServlet {
 	private static final String UPLOAD_DIR = "assets/uploads";
 	String status = null;
    
@@ -42,12 +41,12 @@ public class EmployeeProfileServlet extends HttpServlet {
             request.setAttribute("employee", employee);
             
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/profile.jsp?status=" + status);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/financialAnalyst/profile.jsp?status=" + status);
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("./dashboard/employee/profile.jsp?status=" + status);
+            response.sendRedirect("./dashboard/financialAnalyst/profile.jsp?status=" + status);
         }
 	}
 	
@@ -81,14 +80,14 @@ public class EmployeeProfileServlet extends HttpServlet {
 		            
 		            if(dao.updateProfile(employee)) {
 		            	session.setAttribute("name", name);
-		                
-		            	response.sendRedirect("EmployeeProfileServlet?status=update_success");
+		            	response.sendRedirect("FinanceProfileServlet?status=update_success");
+		      
 		            } else {
-		            	response.sendRedirect("EmployeeProfileServlet?status=error");
+		            	response.sendRedirect("FinanceProfileServlet?status=error");
 		            }
 		   
 		        } catch (Exception e) {
-		        	response.sendRedirect("EmployeeProfileServlet?status=error");
+		        	response.sendRedirect("FinanceProfileServlet?status=error");
 		            e.printStackTrace();
 		        }  
 		    }

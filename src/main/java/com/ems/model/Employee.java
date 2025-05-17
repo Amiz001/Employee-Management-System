@@ -12,7 +12,10 @@ public class Employee {
     private Date dob;
     private String gender;
     private String role;
+    private int leaveCount;
+    private double basicSalary;
     private String profilePhoto;
+    
 
     public Employee() {}
 
@@ -37,8 +40,12 @@ public class Employee {
 	}
 
 	public Employee(int empId, String name, String email, String phone, String department, Date dob, String gender,
-			String role, String profilePhoto) {
+<<<<<<< HEAD
+			String role, int leaveCount, double basiSalary, String profilePhoto) {
+=======
+			String role, int leaveCount, double basicSalary, String profilePhoto) {
 		super();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 		this.empId = empId;
 		this.name = name;
 		this.email = email;
@@ -47,12 +54,17 @@ public class Employee {
 		this.dob = dob;
 		this.gender = gender;
 		this.role = role;
+<<<<<<< HEAD
+		this.leaveCount = leaveCount;
+		this.basicSalary = basiSalary;
+=======
+		this.basicSalary = basicSalary;
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 		this.profilePhoto = profilePhoto;
 	}
 
 	public Employee(String name, String email, String password, String phone, String department, Date dob,
 			String gender, String role, String profilePhoto) {
-		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -134,6 +146,25 @@ public class Employee {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+<<<<<<< HEAD
+	public int getLeaveCount() {
+		return leaveCount;
+	}
+
+	public void setLeaveCount(int leaveCount) {
+		this.leaveCount = leaveCount;
+	}
+
+=======
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+	public double getBasicSalary() {
+		return basicSalary;
+	}
+
+	public void setBasicSalary(double basicSalary) {
+		this.basicSalary = basicSalary;
 	}
 
 	public String getProfilePhoto() {
