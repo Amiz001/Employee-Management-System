@@ -42,15 +42,7 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
-<<<<<<< HEAD
-=======
-     <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
      <a href="${pageContext.request.contextPath}/EmployeeInfo2Servlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
-<<<<<<< HEAD
-=======
-      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
      <a href="${pageContext.request.contextPath}/LeaveManageServlet"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
