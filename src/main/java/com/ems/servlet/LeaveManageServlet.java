@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ems.dao.EmployeeDAO;
 import com.ems.dao.LeaveDAO;
+import com.ems.model.Employee;
 import com.ems.model.Leave;
 
 @WebServlet("/LeaveManageServlet")
@@ -19,25 +21,26 @@ public class LeaveManageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-
-        	HttpSession session = request.getSession(false);
-        	String email =(String) session.getAttribute("email");
-        	
+        try {   	
             LeaveDAO dao = new LeaveDAO();
-            List<Leave> leaves = dao.getLeaves(email);
+            List<Leave> leaves = dao.getAllLeaves();
+            
+            EmployeeDAO empdao = new EmployeeDAO();
+            List<Employee> employees = empdao.getEmployees();
             
             String status = null;
             status = request.getParameter("status");
 
             request.setAttribute("leaveList", leaves);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/leave.jsp?status=" + status);
+            request.setAttribute("employeeList", employees);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/supervisor/leaveRequest.jsp?status=" + status);
             dispatcher.forward(request, response);
             
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("./dashboard/employee/leave.jsp?error=Server error");
+            response.sendRedirect("./dashboard/supervisor/leaveRequest.jsp?status=error");
         }
     }
 }

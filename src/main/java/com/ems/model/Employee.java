@@ -41,7 +41,6 @@ public class Employee {
 
 	public Employee(int empId, String name, String email, String phone, String department, Date dob, String gender,
 			String role, int leaveCount, double basiSalary, String profilePhoto) {
-		super();
 		this.empId = empId;
 		this.name = name;
 		this.email = email;
@@ -50,12 +49,13 @@ public class Employee {
 		this.dob = dob;
 		this.gender = gender;
 		this.role = role;
+		this.leaveCount = leaveCount;
+		this.basicSalary = basiSalary;
 		this.profilePhoto = profilePhoto;
 	}
 
 	public Employee(String name, String email, String password, String phone, String department, Date dob,
 			String gender, String role, String profilePhoto) {
-		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -137,6 +137,22 @@ public class Employee {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public int getLeaveCount() {
+		return leaveCount;
+	}
+
+	public void setLeaveCount(int leaveCount) {
+		this.leaveCount = leaveCount;
+	}
+
+	public double getBasicSalary() {
+		return basicSalary;
+	}
+
+	public void setBasicSalary(double basicSalary) {
+		this.basicSalary = basicSalary;
 	}
 
 	public String getProfilePhoto() {

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.*, com.ems.model.Leave, com.ems.model.Employee" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -41,9 +42,7 @@
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/supervisor/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
-     <a href="${pageContext.request.contextPath}/dashboard/supervisor/leaveRequest.jsp" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
-     <a href="${pageContext.request.contextPath}/LogoutServlet" id="log-out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
-     <a href="${pageContext.request.contextPath}/LeaveServlet"class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
+     <a href="${pageContext.request.contextPath}/LeaveManageServlet" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
       <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
@@ -94,7 +93,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Task record successfully updated!
+      Updated successfully!
     </div>
   </div>
 
@@ -133,45 +132,65 @@ String status = request.getParameter("status");
                     </div>
                 </div>
                 <tr>
-                    
-            <th>Task ID</th>
-            <th>Title</th>
-            <th>Employee ID</th>
-            <th>Deadline</th>
-            <th>Start Date</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-       </thead>
+                    <th>Leave ID</th>
+                    <th>Available Leaves</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Total days</th>
+                    <th>Reason</th>
+                    <th>Status</th>  
+                    <th>Actions</th>         
+                </tr>
+            </thead>
             
             <%
-            List<Taskmanagement> taskList = (List<Taskmanagement>) request.getAttribute("taskDetails");
+            List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
+    		List<Employee> employeeList = (List<Employee>) request.getAttribute("employeeList");
             
-		    if (taskList != null) {
-		        for (Taskmanagement task : taskList) {
+    		int i=0;
+    		  
+		    if (leaveList != null) {
+		        for (Leave leave : leaveList) {
+		        
+		        	Employee employee = null;
+		        	int empid = leave.getEmpId();
+
+		        	for (Employee emp : employeeList) {
+		        	    if (emp.getEmpId() == empid) {
+		        	        employee = emp;
+		        	        break;
+		        	    }
+		        	}
+
 			%>
 			
-
             <tr>
-                <td><%= task.getTask_id() %></td>
-                <td><%= task.getTitle() %></td>
-                <td><%= task.getEmp_id() %></td>
-                <td><%= task.getDeadline() %></td>
-                <td><%= task.getStart_date() %></td>
-                <td><%= task.getStatus() %></td>
-                
-                <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
-                       
-                   <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= task.getTask_id() %>', '<%= task.getTitle()%>', '<%=task.getEmp_id()%>', '<%=task.getDeadline()%>','<%=task.getStart_date()%>','<%= task.getStatus() %>')"></i>
-                    <a href="${pageContext.request.contextPath}/TaskmanagementDeleteServlet?task_id=<%= task.getTask_id()%>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
-                </td>    
+                  <td><%= leave.getLeaveId() %></td>
+                  <td><%= employee.getLeaveCount() %></td>
+		          <td><%= leave.getLeaveType() %></td>
+		          <td><%= leave.getStartDate() %></td>
+		          <td><%= leave.getEndDate() %></td>
+		          <td><%= leave.getTotalDays() %></td>
+		          <td><%= leave.getReason() %></td> 
+		          <td><%= leave.getStatus() %></td> 
+		          
+                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px;">                 
+                    
+                    <% if(leave.getStatus().equals("Pending")) {%> 
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept"><span class="material-symbols-outlined" id="update-icon" style="color:green">check</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject"><span class="material-symbols-outlined" id="delete-icon">close</span></a>
+                    <%} else if(leave.getStatus().equals("Approved") || leave.getStatus().equals("Rejected")){ %>
+                   	 	<p style="color:green">Resolved</p>
+                    <%} %>
+                  </td>
             </tr>
-           
             <%
+            i++;
 		        } 
 	    	} else {
 			%>
-			        <tr><td colspan="2" style="text-align: center">No task records found</td></tr>
+			        <tr><td colspan="10" style="text-align: center;">No leave records found</td></tr>
 			<%
 			    }
 			%>
