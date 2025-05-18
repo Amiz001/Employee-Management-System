@@ -30,13 +30,13 @@ public class PayrollInsertServlet extends HttpServlet {
 			// Validate emp_id
 			if (emp_id <= 0 || !EmployeeDAO.exists(emp_id)) {
 				// Redirect to error page or show message
-				response.sendRedirect("./dashboard/financialAnalyst/employees.jsp?error=Invalid+Employee+ID");
+				response.sendRedirect("EmployeeInfoServlet?status=error&message=Payroll record already exists for this employee and month");
 				return;
 			}
 			
 			// Check if salary already exists for the month
 			if (PayrollDAO.existsForMonth(emp_id, created_date)) {
-			    response.sendRedirect("./dashboard/financialAnalyst/employees.jsp?error=Salary+already+exists+for+this+month");
+			    response.sendRedirect("EmployeeInfoServlet?status=error&message=Payroll record already exists for this employee and month");
 			    return;
 			}
 
@@ -52,10 +52,10 @@ public class PayrollInsertServlet extends HttpServlet {
 				response.sendRedirect("PayrollGetAllServlet?status=error");
 			}
 		} catch (NumberFormatException e) {
-			response.sendRedirect("./dashboard/financialAnalyst/employees.jsp?error=Invalid+Number+Format");
+			response.sendRedirect("EmployeeInfoServlet?status=error&message=Payroll record already exists for this employee and month");
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("./dashboard/financialAnalyst/employees.jsp?error=Server+Error");
+			response.sendRedirect("EmployeeInfoServlet?status=error&message=Payroll record already exists for this employee and month");
 		}
 	}
 }

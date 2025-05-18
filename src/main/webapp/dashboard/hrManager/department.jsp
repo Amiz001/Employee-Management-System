@@ -75,7 +75,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Leave record successfully updated!
+      Department record successfully updated!
     </div>
   </div>
 
@@ -304,3 +304,5 @@ String status = request.getParameter("status");
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>      
 </body>
 </html>
+
+

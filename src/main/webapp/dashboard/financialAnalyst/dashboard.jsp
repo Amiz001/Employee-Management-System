@@ -161,7 +161,7 @@
   <div class="col-md-6">
   <div class="calendar-card bg-white">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5>📊 Employee Attendance</h5>
+      <h5>📊 Employee Salary</h5>
       <button class="btn btn-outline-dark btn-sm rounded-pill" id="card-date">4 June 2024</button>
     </div>
 
@@ -170,10 +170,10 @@
     </div>
 
     <div class="row text-center mt-4">
-      <div class="col-6 col-md-3"><span class="badge bg-primary me-1">&nbsp;</span> Present: 100</div>
-      <div class="col-6 col-md-3"><span class="badge bg-warning me-1">&nbsp;</span> On Leave: 10</div>
-      <div class="col-6 col-md-3"><span class="badge bg-success me-1">&nbsp;</span> On Holiday: 25</div>
-      <div class="col-6 col-md-3"><span class="badge bg-purple me-1" style="background-color:#6f42c1;">&nbsp;</span> Absent: 04</div>
+      <div class="col-6 col-md-3"><span class="badge bg-primary me-1">&nbsp;</span> Basic: 1000</div>
+      <div class="col-6 col-md-3"><span class="badge bg-warning me-1">&nbsp;</span> OT: 900</div>
+      <div class="col-6 col-md-3"><span class="badge bg-success me-1">&nbsp;</span> Allowance: 950</div>
+      <div class="col-6 col-md-3"><span class="badge bg-purple me-1" style="background-color:#6f42c1;">&nbsp;</span> Total Salary: 1000</div>
     </div>
 
     <div class="text-center mt-3">
@@ -190,9 +190,9 @@
   new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Present', 'On Leave', 'On Holiday', 'Absent'],
+      labels: ['Basic', 'OT', 'Allowance', 'Total Salary'],
       datasets: [{
-        data: [100, 10, 25, 4],
+        data: [1000, 900, 950, 1000],
         backgroundColor: ['#0d6efd', '#ffc107', '#198754', '#6f42c1'],
         borderWidth: 0
       }]
