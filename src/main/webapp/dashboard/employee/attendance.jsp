@@ -59,7 +59,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a data-bs-toggle="modal" data-bs-target="#logoutModal" class="btn btn-purple">Log Out</a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-purple">Log Out</a>
       </div>
     </div>
   </div>
@@ -98,7 +98,7 @@
 
 
 <%  
-String status = request.getParameter("status");
+String status = request.getParameter("status");  		  
 %>
 
 <!-- Main Content-->
@@ -115,7 +115,7 @@ String status = request.getParameter("status");
                         <input type="text" id="searchInput" placeholder="Search...">
                     </div>
                    
-                    <div class="toolbar-icons"> 
+                    <div class="toolbar-icons">
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
                     </div>
                 </div>

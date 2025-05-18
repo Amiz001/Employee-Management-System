@@ -55,7 +55,7 @@ public class Employee {
 	}
 
 	public Employee(String name, String email, String password, String phone, String department, Date dob,
-			String gender, String role, String profilePhoto) {
+			String gender, String role, int leaveCount, double basicSalary, String profilePhoto) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -64,6 +64,8 @@ public class Employee {
 		this.dob = dob;
 		this.gender = gender;
 		this.role = role;
+		this.leaveCount = leaveCount;
+		this.basicSalary = basicSalary;
 		this.profilePhoto = profilePhoto;
 	}
 

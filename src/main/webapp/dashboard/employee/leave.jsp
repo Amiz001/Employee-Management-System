@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page import="java.util.*, com.ems.model.Leave" %>
+<%@ page import="java.util.*, com.ems.model.Leave, com.ems.model.Employee" %>
 
 <%
     if (session == null || session.getAttribute("role") == null) {
@@ -103,20 +103,59 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Something went wrong. Please try again!
+      <%= request.getParameter("message") %>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm" style="max-width: 400px; margin: auto;">
+      <div class="modal-header bg-danger text-white py-2">
+        <h6 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.9rem;"></button>
+      </div>
+      <div class="modal-body text-center py-3">
+        <p class="mb-1">Are you sure you want to delete this record?</p>
+        <small class="text-muted">This action cannot be undone.</small>
+      </div>
+      <div class="modal-footer justify-content-center py-2">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/LeaveDeleteServlet?leaveId=" id="deleteLink">
+          <button type="button" class="btn btn-danger" id="confirmDelete" style="min-width: 150px">Yes, Delete</button>
+        </a>
+      </div>
     </div>
   </div>
 </div>
 
 
+
+
 <%  
-String status = request.getParameter("status");
+	String status = request.getParameter("status");
+	    		  
+	Employee employee = (Employee) request.getAttribute("employee");
+	
+	List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
+	
+	boolean isPending = false;
+	
+	if (leaveList != null) {
+	    for (Leave leave : leaveList) {
+	    	if(leave.getStatus().equals("Pending")){
+	    		isPending = true;
+	    	}
+	    }
+	}   
 %>
+    		  
 
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Request Leave</h5>
-
+    <h5 id="main-title">Request Leave <span id="countDisplay">Leave Count: <%= employee.getLeaveCount() %></span></h5>
+    
     <div class="table-container">
         <table class="table table-striped my-table">
             <thead>
@@ -128,7 +167,9 @@ String status = request.getParameter("status");
                     </div>
                    
                     <div class="toolbar-icons"> 
+                    <% if(!isPending){%>  
                     	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
+                    <%} %>
                         <span class="material-symbols-outlined" id="download-icon">download</span>     
                     </div>
                 </div>
@@ -145,7 +186,6 @@ String status = request.getParameter("status");
             </thead>
             
             <%
-            List<Leave> leaveList = (List<Leave>) request.getAttribute("leaveList");
             
 		    if (leaveList != null) {
 		        for (Leave leave : leaveList) {
@@ -161,9 +201,11 @@ String status = request.getParameter("status");
 		          <td><%= leave.getStatus() %></td> 
 		          
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
-                       
+                     
+                     <% if(!(leave.getStatus().equals("Approved") || leave.getStatus().equals("Rejected"))){%>   
                   	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= leave.getLeaveId() %>', '<%= leave.getLeaveType()%>', '<%=leave.getStartDate()%>', '<%=leave.getEndDate()%>','<%=leave.getReason()%>')"></i>
-                    <a href="${pageContext.request.contextPath}/LeaveDeleteServlet?leaveId=<%= leave.getLeaveId() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                    <%} %>
+                    <a onclick="deleteForm('<%= leave.getLeaveId() %>')" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
                     
                   </td>
             </tr>
@@ -180,22 +222,33 @@ String status = request.getParameter("status");
     </div>
 </div> 
      
+     
+<%
+    java.time.LocalDate today = java.time.LocalDate.now();
+%>
+     
 <!-- Insert Popup-->
 
 <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <form method="post" action="${pageContext.request.contextPath}/leaveInsertServlet">
+      <form method="post" action="${pageContext.request.contextPath}/LeaveInsertServlet">
         <div class="modal-header">
           <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee Leave</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
         <div class="modal-body custom-scroll">
-          <div class="mb-3">
-            <label for="leaveType" class="form-label">Leave Type</label>
-            <input type="text" class="form-control" name="leaveType" required>
-          </div>
+          
+          <div class="col-md-12" style="margin-bottom: 15px">
+              <label for="role" class="form-label">Leave Type</label>
+              <select class="form-select" name="leaveType" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Annual">Annual</option>
+                <option value="Casual">Casual</option>
+                <option value="Sick">Sick</option>
+              </select>
+            </div>
 
           <div class="row g-3">
             <div class="col-md-6">
@@ -210,7 +263,7 @@ String status = request.getParameter("status");
 
           <div class="mt-3">
             <label for="reason" class="form-label">Reason</label>
-            <textarea class="form-control" name="reason" rows="3" required></textarea>
+            <textarea class="form-control" name="reason" rows="3" maxlength="500" required></textarea>
           </div>
         </div>
 
@@ -233,12 +286,17 @@ String status = request.getParameter("status");
           <h5 class="modal-title" id="addEmployeeModalLabel">Edit Employee Leave</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <div class="modal-body custom-scroll">
-          <div class="mb-3">
-            <label for="leaveType" class="form-label">Leave Type</label>
-            <input type="text" class="form-control" name="leaveType" value="" id="leaveType" required>
-          </div>
+	<div class="modal-body custom-scroll">
+      <div class="col-md-12" style="margin-bottom: 13px">
+              <label for="role" class="form-label">Leave Type</label>
+              <select class="form-select" name="leaveType" value="" id="leaveType" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Annual">Annual</option>
+                <option value="Casual">Casual</option>
+                <option value="Sick">Sick</option>
+              </select>
+            </div>
+            
 			<input type="hidden" class="form-control" name="leaveId" value="" id="leaveId" required>
           <div class="row g-3">
             <div class="col-md-6">
@@ -247,7 +305,7 @@ String status = request.getParameter("status");
             </div>
             <div class="col-md-6">
               <label for="endDate" class="form-label">End Date</label>
-              <input type="date" class="form-control" name="endDate" id="endDate" value="" required>
+              <input type="date" class="form-control" name="endDate" id="endDate" value="" required min="<?= java.time.LocalDate.now(); ?>">
             </div>
           </div>
 

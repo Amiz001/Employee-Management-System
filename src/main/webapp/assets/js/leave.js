@@ -1,13 +1,3 @@
-//update popup
-function fillUpdateForm(leaveId, leaveType, startDate, endDate, reason) {
-	
-	document.getElementById("leaveId").value = leaveId;
-    document.getElementById("leaveType").value = leaveType;
-    document.getElementById("startDate").value = startDate;
-    document.getElementById("endDate").value = endDate;
-	document.getElementById("reason").value = reason;
-}
-
 //alert trigger
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -26,7 +16,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	} else if (status === 'delete_success') {
 	   const toast = new bootstrap.Toast(document.getElementById('errorToast'));
 	   document.querySelector("#errorToast .toast-header .me-auto").textContent = "Success";
-	   document.querySelector("#errorToast .toast-body").textContent = "Leave record successfully deleted!";
 	   toast.show();   
    
     } else if (status === 'error') {
@@ -34,3 +23,49 @@ window.addEventListener('DOMContentLoaded', () => {
       toast.show();
     }
   });	
+  
+  
+  //insert popup validations
+	document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#addEmployeeModal form");
+    if (!form) return;
+
+    const startInput = form.querySelector("input[name='startDate']");
+    const endInput = form.querySelector("input[name='endDate']");
+
+    const today = new Date().toISOString().split("T")[0];
+    startInput.min = today;
+    endInput.min = today;
+
+    startInput.addEventListener("change", function () {
+		const startDate = new Date(startInput.value);
+		startDate.setDate(startDate.getDate() + 1);
+		const minEndDate = startDate.toISOString().split("T")[0];
+
+	    endInput.min = minEndDate;
+
+      if (endInput.value < startDate) {
+        endInput.value = startDate ;
+      }
+    });
+	
+  });
+  
+  
+	//update popup
+	function fillUpdateForm(leaveId, leaveType, startDate, endDate, reason) {	
+		
+		document.getElementById("leaveId").value = leaveId;
+	    document.getElementById("leaveType").value = leaveType;
+	    document.getElementById("startDate").value = startDate;
+	    document.getElementById("endDate").value = endDate;
+		document.getElementById("reason").value = reason;
+	}
+	
+	
+	//delete popup
+	function deleteForm(leaveId){	
+		document.getElementById("deleteLink").href += leaveId;
+	}
+
+

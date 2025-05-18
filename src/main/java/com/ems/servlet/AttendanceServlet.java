@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.ems.dao.AttendanceDAO;
 import com.ems.model.Attendance;
 
+
 @WebServlet("/AttendanceServlet")
 public class AttendanceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,6 +32,7 @@ public class AttendanceServlet extends HttpServlet {
             status = request.getParameter("status");
 
             request.setAttribute("attendanceList", attendances);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/employee/attendance.jsp?status=" + status);
             dispatcher.forward(request, response);
             

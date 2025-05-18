@@ -1,6 +1,7 @@
 package com.ems.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import com.ems.util.DBConnection;
 
 public class LeaveDAO {
 	
-	public boolean insertLeave(Leave leave) throws SQLException {
+	public boolean insertLeave(Leave leave, int leaveCount) throws SQLException {
 		
 		Connection conn = DBConnection.getConnection();
 		
@@ -25,8 +26,37 @@ public class LeaveDAO {
         ps.setDate(4, leave.getEndDate());
         ps.setString(5, leave.getReason());
         
-        return ps.executeUpdate() > 0;
+        if( ps.executeUpdate() > 0) {
+        	
+        	String update_sql = "UPDATE employee SET leave_count=? WHERE emp_id=?";
+        	ps = conn.prepareStatement(update_sql);
+        	
+        	ps.setInt(1, leaveCount);
+        	ps.setInt(2, leave.getEmpId());
+        	
+        	return ps.executeUpdate() > 0 ;
+        }
+        
+        return false;
     }
+	
+	public boolean hasOverlappingFutureLeave(int empId, Date startDate, Date endDate) throws SQLException {
+	    Connection conn = DBConnection.getConnection();
+	    String sql = "SELECT COUNT(*) FROM leave_request " +
+	                 "WHERE emp_id = ? " +
+	                 "AND status IN ('Pending', 'Approved') " +
+	                 "AND end_date >= CURRENT_DATE " +
+	                 "AND (start_date <= ? AND end_date >= ?)";
+	                 
+	    PreparedStatement ps = conn.prepareStatement(sql);
+	    ps.setInt(1, empId);
+	    ps.setDate(2, endDate);
+	    ps.setDate(3, startDate);
+
+	    ResultSet rs = ps.executeQuery();
+	    return rs.next() && rs.getInt(1) > 0;
+	}
+
 
 	
     public boolean updateLeave(Leave leave) throws SQLException {

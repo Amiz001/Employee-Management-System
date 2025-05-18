@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ems.dao.LeaveDAO;
 import com.ems.model.DashboardData;
 
-@WebServlet("/DashboardServlet")
-public class DashboardServlet {
+@WebServlet("/EmployeeDashboardServlet")
+public class EmployeeDashboardServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

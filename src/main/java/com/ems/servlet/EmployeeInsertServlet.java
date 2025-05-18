@@ -31,13 +31,15 @@ public class EmployeeInsertServlet extends HttpServlet {
 	        String department = request.getParameter("department");
 	        String gender = request.getParameter("gender");
 	        String role = request.getParameter("role");
+	        int leaveCount = Integer.parseInt(request.getParameter("leaveCount"));
+	        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
 
 	        String dobStr = request.getParameter("dob");    
 	        Date dob = Date.valueOf(dobStr);
 	        
 	        String profilePhoto = "default.jpg";
 	                   
-	        Employee employee = new Employee(name, email, password, phone, department, dob, gender, role, profilePhoto);
+	        Employee employee = new Employee(name, email, password, phone, department, dob, gender, role, leaveCount, basicSalary, profilePhoto);
 	        EmployeeDAO dao = new EmployeeDAO();
 	        
 	        if(dao.insertEmployee(employee)) {

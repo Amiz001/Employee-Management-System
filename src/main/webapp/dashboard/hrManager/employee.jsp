@@ -225,9 +225,15 @@
             </div>
           </div>
 
+
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" required>
+            <label for="leaveCount" class="form-label">Leave Count</label>
+            <input type="text" class="form-control" name="leaveCount" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="basicSalary" class="form-label">Basic Salary</label>
+            <input type="text" class="form-control" name="basicSalary" required>
           </div>
         </div>
 

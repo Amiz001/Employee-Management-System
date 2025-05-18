@@ -39,7 +39,7 @@ public class EmployeeDAO {
 		
 		Connection conn = DBConnection.getConnection();
 		
-		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, basicSalary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, leave_count, basic_salary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
@@ -50,8 +50,9 @@ public class EmployeeDAO {
         ps.setString(6, employee.getDepartment());
         ps.setDate(7, employee.getDob());
         ps.setString(8, employee.getGender());
-        ps.setDouble(9, employee.getBasicSalary());
-        ps.setString(10, employee.getProfilePhoto());
+        ps.setInt(9, employee.getLeaveCount());
+        ps.setDouble(10, employee.getBasicSalary());
+        ps.setString(11, employee.getProfilePhoto());
         
         return ps.executeUpdate() > 0;
     }
@@ -61,7 +62,7 @@ public class EmployeeDAO {
     	
         Connection conn = DBConnection.getConnection();
         
-        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=?, basicSalary=? WHERE emp_id=?";
+        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
@@ -71,8 +72,7 @@ public class EmployeeDAO {
         ps.setString(5, employee.getDepartment());
         ps.setDate(6, employee.getDob());
         ps.setString(7, employee.getGender());
-        ps.setDouble(8, employee.getBasicSalary());
-        ps.setInt(9, employee.getEmpId());
+        ps.setInt(8, employee.getEmpId());
         
         return ps.executeUpdate() > 0;
     }
@@ -148,6 +148,8 @@ public class EmployeeDAO {
                 rs.getDate("dob"),
                 rs.getString("gender"),
                 rs.getString("role"),
+                rs.getInt("leave_count"),
+                rs.getDouble("basic_salary"),
                 rs.getString("profile_photo")
             );
         }

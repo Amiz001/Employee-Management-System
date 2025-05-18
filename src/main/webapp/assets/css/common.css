@@ -317,6 +317,15 @@ margin-right: 10px;
 
 #delete-icon:hover {
 	color: #f04f04;
+}
+
+#countDisplay{
+	padding: 7px 15px;
+	border-radius: 8px;
+	font-size: 14px;
+	color: white;
+	background-color: #a05aff;
+	margin-left: 18px;
 }        
         
 .toolbar-icons .btnlogin-popup{
