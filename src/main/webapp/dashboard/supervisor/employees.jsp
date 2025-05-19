@@ -93,7 +93,7 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
                 <a href="${pageContext.request.contextPath}/SupervisorProfileServlet"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
         </div>
     </nav>
 </div>
@@ -149,12 +149,7 @@
 		          <td><%= employee.getRole() %></td>
 		          <td><%= employee.getBasicSalary() %></td>
 		          
-                  <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                                                                                                                                                                                                      
-                  	
-                  	<span style="color:#3a67d9; font-size: 20px; cursor:pointer; margin: 8px 0px" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" 
-                  	onclick="UpdateForm('<%=employee.getEmpId()%>','<%= employee.getBasicSalary() %>')">add_circle</span>
-                    
-                  </td>
+                 
             </tr>
             <%
 		        } 

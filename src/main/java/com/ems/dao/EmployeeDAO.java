@@ -11,7 +11,7 @@ public class EmployeeDAO {
 	
     public Employee validate(String email, String password) throws Exception {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "SELECT * FROM employee WHERE email = ? AND password = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class EmployeeDAO {
     
     public boolean insertEmployee(Employee employee) throws SQLException {
 		
-		Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
 		
 		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, leave_count, basic_salary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class EmployeeDAO {
 	
     public boolean updateEmployee(Employee employee) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class EmployeeDAO {
         
         try {
             
-        	Connection conn = DBConnection.getConnection();
+        	Connection conn = DBConnection.getInstance().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, emp.getName());
@@ -104,7 +104,7 @@ public class EmployeeDAO {
     
     public boolean deleteEmployee(int empId) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "DELETE FROM employee WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class EmployeeDAO {
     
     public boolean updatePassword(int empId, String password) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "UPDATE employee SET password = ? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class EmployeeDAO {
     
     public Employee getEmployeeById(int empId) throws SQLException {
     	
-    	Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
     	
     	String sql = "SELECT * FROM employee WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -160,7 +160,7 @@ public class EmployeeDAO {
 	public List<Employee> getEmployees() throws SQLException  {
 	    List<Employee> employees = new ArrayList<>();
 	
-	    Connection conn = DBConnection.getConnection();
+	    Connection conn = DBConnection.getInstance().getConnection();
 	    
 	    String sql = "SELECT * FROM employee";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -188,10 +188,10 @@ public class EmployeeDAO {
 	}
 	
 	
-	//Payroll ID Validate
+	//Employee ID Validate
 	public static boolean exists(int emp_id) {
 		boolean found = false;
-		try (Connection conn = DBConnection.getConnection()) {
+		try (Connection conn = DBConnection.getInstance().getConnection();) {
 			String sql = "SELECT 1 FROM employee WHERE emp_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, emp_id);
@@ -202,5 +202,10 @@ public class EmployeeDAO {
 		}
 		return found;
 	}
+	
+	
+	
+		
+	
     
 }

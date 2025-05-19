@@ -15,7 +15,7 @@ public class LeaveDAO {
 	
 	public boolean insertLeave(Leave leave, int leaveCount) throws SQLException {
 		
-		Connection conn = DBConnection.getConnection();
+		Connection conn = DBConnection.getInstance().getConnection();
 		
 		String sql = "INSERT INTO leave_request (emp_id, leave_type, start_date, end_date, reason) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class LeaveDAO {
     }
 	
 	public boolean hasOverlappingFutureLeave(int empId, Date startDate, Date endDate) throws SQLException {
-	    Connection conn = DBConnection.getConnection();
+		Connection conn = DBConnection.getInstance().getConnection();
 	    String sql = "SELECT COUNT(*) FROM leave_request " +
 	                 "WHERE emp_id = ? " +
 	                 "AND status IN ('Pending', 'Approved') " +
@@ -61,7 +61,7 @@ public class LeaveDAO {
 	
     public boolean updateLeave(Leave leave) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "UPDATE leave_request SET leave_type=?, start_date=?, end_date=?, reason=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class LeaveDAO {
     
     public boolean deleteLeave(int leaveId) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "DELETE FROM leave_request WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class LeaveDAO {
     
     public Leave getLeaveById(int leaveId) throws SQLException {
     	
-    	Connection conn = DBConnection.getConnection();
+    	Connection conn = DBConnection.getInstance().getConnection();
     	
     	String sql = "SELECT * FROM leave_request WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class LeaveDAO {
 	public List<Leave> getLeaves(String email) throws SQLException  {
 	    List<Leave> leaves = new ArrayList<>();
 	
-	    Connection conn = DBConnection.getConnection();
+	    Connection conn = DBConnection.getInstance().getConnection();
 	    
 	    String sql = "SELECT * FROM leave_request ls, employee em WHERE email=? AND ls.emp_id = em.emp_id";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -147,7 +147,7 @@ public class LeaveDAO {
 	    
 		List<Leave> leaves = new ArrayList<>();
 	
-	    Connection conn = DBConnection.getConnection();
+		Connection conn = DBConnection.getInstance().getConnection();
 	    
 	    String sql = "SELECT * FROM leave_request";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -172,7 +172,7 @@ public class LeaveDAO {
 	
 	public boolean updateStatus(int leaveId, String status) throws SQLException {
     	
-        Connection conn = DBConnection.getConnection();
+		Connection conn = DBConnection.getInstance().getConnection();
         
         String sql = "UPDATE leave_request SET status=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);

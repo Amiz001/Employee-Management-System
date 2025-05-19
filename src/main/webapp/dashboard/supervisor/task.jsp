@@ -81,7 +81,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/SupervisorProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
                 
         </div>
@@ -109,6 +109,27 @@
     </div>
     <div class="toast-body">
       Something went wrong. Please try again!
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm" style="max-width: 400px; margin: auto;">
+      <div class="modal-header bg-danger text-white py-2">
+        <h6 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.9rem;"></button>
+      </div>
+      <div class="modal-body text-center py-3">
+        <p class="mb-1">Are you sure you want to delete this record?</p>
+        <small class="text-muted">This action cannot be undone.</small>
+      </div>
+      <div class="modal-footer justify-content-center py-2">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/TaskmanagementDeleteServlet?task_id=" id="deleteLink"><button type="button" class="btn btn-danger" id="confirmDelete" style="min-width: 150px">Yes, Delete</button></a>
+
+      </div>
     </div>
   </div>
 </div>
@@ -167,8 +188,9 @@ String status = request.getParameter("status");
                 
                 <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                 
                        
-                   <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= task.getTask_id() %>', '<%= task.getTitle()%>', '<%=task.getEmp_id()%>', '<%=task.getDeadline()%>','<%=task.getStart_date()%>','<%= task.getStatus() %>')"></i>
-                    <a href="${pageContext.request.contextPath}/TaskmanagementDeleteServlet?task_id=<%= task.getTask_id()%>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+	                <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= task.getTask_id() %>', '<%= task.getTitle()%>', '<%=task.getEmp_id()%>', '<%=task.getDeadline()%>','<%=task.getStart_date()%>','<%= task.getStatus() %>')"></i>
+	                <a onclick="deleteForm('<%= task.getTask_id() %>')" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+     
                 </td>    
             </tr>
            

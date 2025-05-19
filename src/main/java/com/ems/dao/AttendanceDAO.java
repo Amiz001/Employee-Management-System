@@ -18,7 +18,7 @@ public class AttendanceDAO {
 	public List<Attendance> getAttendances(int empid) throws SQLException  {
 	    List<Attendance> attendances = new ArrayList<>();
 	
-	    Connection conn = DBConnection.getConnection();
+	    Connection conn = DBConnection.getInstance().getConnection();
 	    
 	    String sql = "SELECT * FROM attendance att, employee em WHERE em.emp_id=? AND att.emp_id = em.emp_id";
 	    PreparedStatement ps = conn.prepareStatement(sql);

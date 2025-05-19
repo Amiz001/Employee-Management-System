@@ -78,7 +78,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/SupervisorProfileServlet"><i class="fas fa-user"></i> Profile</a>
                <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
         </div>
     </nav>

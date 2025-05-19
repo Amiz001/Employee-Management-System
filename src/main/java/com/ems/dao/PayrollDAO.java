@@ -17,7 +17,7 @@ public class PayrollDAO {
         boolean isSuccess = false;
         String sql = "INSERT INTO payroll (emp_id, basic, ot, allowance, total_salary, created_date) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, emp_id);
@@ -41,7 +41,7 @@ public class PayrollDAO {
         List<Payroll> payment = new ArrayList<>();
         String sql = "SELECT * FROM payroll WHERE pay_id = ?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -70,7 +70,7 @@ public class PayrollDAO {
         List<Payroll> payments = new ArrayList<>();
         String sql = "SELECT * FROM payroll";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -97,7 +97,7 @@ public class PayrollDAO {
         boolean isSuccess = false;
         String sql = "UPDATE payroll SET emp_id = ?, basic = ?, ot = ?, allowance = ?, total_salary = ?, created_date = ? WHERE pay_id = ?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, emp_id);
@@ -122,7 +122,7 @@ public class PayrollDAO {
         boolean isSuccess = false;
         String sql = "DELETE FROM payroll WHERE pay_id = ?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, pay_id);
@@ -138,7 +138,7 @@ public class PayrollDAO {
     public static Payroll getByEmpId(int empid) {
         String sql = "SELECT * FROM payroll WHERE emp_id = ?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setInt(1, empid);
@@ -166,7 +166,7 @@ public class PayrollDAO {
     
     public static boolean existsForMonth(int empId, Date createdDate) {
         boolean exists = false;
-        try (Connection conn = DBConnection.getConnection()) {
+        try (Connection conn = DBConnection.getInstance().getConnection();) {
             String sql = "SELECT 1 FROM payroll WHERE emp_id = ? AND MONTH(created_date) = MONTH(?) AND YEAR(created_date) = YEAR(?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, empId);

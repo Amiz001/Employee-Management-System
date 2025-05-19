@@ -19,7 +19,7 @@ public class DepartmentDAO {
 	    ResultSet rs = null;
 
 	    try {
-	        con = DBConnection.getConnection();
+	    	Connection conn = DBConnection.getInstance().getConnection();
 	        String sql = "SELECT * FROM department";
 	        ps = con.prepareStatement(sql);
 	        rs = ps.executeQuery();
@@ -56,7 +56,7 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+        	Connection conn = DBConnection.getInstance().getConnection();
             String sql = "INSERT INTO department (dep_id,name, no_of_emp, phone, email, supervisor_id) VALUES (?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, dep_id);
@@ -91,7 +91,7 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+        	Connection conn = DBConnection.getInstance().getConnection();
             String sql = "DELETE FROM department WHERE dep_id = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, dep_id);
@@ -120,7 +120,7 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+        	Connection conn = DBConnection.getInstance().getConnection();
             String sql = "UPDATE department SET name = ?, no_of_emp = ?, phone = ?, email = ?, supervisor_id = ? WHERE dep_id = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, name);

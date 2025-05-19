@@ -81,7 +81,7 @@
         
         <div class="dropdown-menu" id="dropdownMenu">
                 <a href="${pageContext.request.contextPath}/SupervisorProfileServlet"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
         </div>
     </nav>
 </div>
@@ -104,8 +104,8 @@
       <div class="col-md-3">
         <div class="card card-stat" id="card2" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
           <div class="card-body">
-            <h3 class="fw-bold">5 Leaves</h3>
-            <p>Pending Leave Approvals</p>
+            <h3 class="fw-bold">12 Tasks</h3>
+            <p>Overall Task Count</p>
           </div>
         </div>
       </div>
@@ -120,8 +120,8 @@
       <div class="col-md-3">
         <div class="card card-stat" id="card4" style="background: linear-gradient(45deg, #e74a3b, #be2617);">
           <div class="card-body">
-            <h3 class="fw-bold">7 Tasks</h3>
-            <p>Pending Approvals</p>
+            <h3 class="fw-bold">200</h3>
+            <p>Employee Count</p>
           </div>
         </div>
       </div>
