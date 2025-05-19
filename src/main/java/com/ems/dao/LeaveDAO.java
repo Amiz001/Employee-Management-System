@@ -41,7 +41,11 @@ public class LeaveDAO {
     }
 	
 	public boolean hasOverlappingFutureLeave(int empId, Date startDate, Date endDate) throws SQLException {
+<<<<<<< HEAD
 	    Connection conn = DBConnection.getInstance().getConnection();
+=======
+		Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	    String sql = "SELECT COUNT(*) FROM leave_request " +
 	                 "WHERE emp_id = ? " +
 	                 "AND status IN ('Pending', 'Approved') " +
@@ -61,7 +65,11 @@ public class LeaveDAO {
 	
     public boolean updateLeave(Leave leave) throws SQLException {
     	
+<<<<<<< HEAD
         Connection conn = DBConnection.getInstance().getConnection();
+=======
+    	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "UPDATE leave_request SET leave_type=?, start_date=?, end_date=?, reason=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -78,7 +86,11 @@ public class LeaveDAO {
     
     public boolean deleteLeave(int leaveId) throws SQLException {
     	
+<<<<<<< HEAD
         Connection conn = DBConnection.getInstance().getConnection();
+=======
+    	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "DELETE FROM leave_request WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -147,7 +159,11 @@ public class LeaveDAO {
 	    
 		List<Leave> leaves = new ArrayList<>();
 	
+<<<<<<< HEAD
 	    Connection conn = DBConnection.getInstance().getConnection();
+=======
+		Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	    
 	    String sql = "SELECT * FROM leave_request";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -172,7 +188,11 @@ public class LeaveDAO {
 	
 	public boolean updateStatus(int leaveId, String status) throws SQLException {
     	
+<<<<<<< HEAD
         Connection conn = DBConnection.getInstance().getConnection();
+=======
+		Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "UPDATE leave_request SET status=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);

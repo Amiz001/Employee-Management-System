@@ -11,7 +11,11 @@ public class EmployeeDAO {
 	
     public Employee validate(String email, String password) throws Exception {
     	
+<<<<<<< HEAD
         Connection conn = DBConnection.getInstance().getConnection();
+=======
+    	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "SELECT * FROM employee WHERE email = ? AND password = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -188,10 +192,14 @@ public class EmployeeDAO {
 	}
 	
 	
-	//Payroll ID Validate
+	//Employee ID Validate
 	public static boolean exists(int emp_id) {
 		boolean found = false;
+<<<<<<< HEAD
 		try (Connection conn = DBConnection.getInstance().getConnection()) {
+=======
+		try (Connection conn = DBConnection.getInstance().getConnection();) {
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 			String sql = "SELECT 1 FROM employee WHERE emp_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, emp_id);
@@ -202,5 +210,10 @@ public class EmployeeDAO {
 		}
 		return found;
 	}
+	
+	
+	
+		
+	
     
 }

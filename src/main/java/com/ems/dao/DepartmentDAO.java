@@ -19,7 +19,11 @@ public class DepartmentDAO {
 	    ResultSet rs = null;
 
 	    try {
+<<<<<<< HEAD
 	    	con = DBConnection.getInstance().getConnection();
+=======
+	    	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	        String sql = "SELECT * FROM department";
 	        ps = con.prepareStatement(sql);
 	        rs = ps.executeQuery();
@@ -56,7 +60,11 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
+<<<<<<< HEAD
         	con = DBConnection.getInstance().getConnection();
+=======
+        	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
             String sql = "INSERT INTO department (dep_id,name, no_of_emp, phone, email, supervisor_id) VALUES (?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, dep_id);
@@ -91,7 +99,11 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
+<<<<<<< HEAD
         	con = DBConnection.getInstance().getConnection();
+=======
+        	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
             String sql = "DELETE FROM department WHERE dep_id = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, dep_id);
@@ -120,7 +132,11 @@ public class DepartmentDAO {
         PreparedStatement ps = null;
 
         try {
+<<<<<<< HEAD
         	con = DBConnection.getInstance().getConnection();
+=======
+        	Connection conn = DBConnection.getInstance().getConnection();
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
             String sql = "UPDATE department SET name = ?, no_of_emp = ?, phone = ?, email = ?, supervisor_id = ? WHERE dep_id = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, name);

@@ -166,7 +166,11 @@ public class PayrollDAO {
     
     public static boolean existsForMonth(int empId, Date createdDate) {
         boolean exists = false;
+<<<<<<< HEAD
         try (Connection conn = DBConnection.getInstance().getConnection()) {
+=======
+        try (Connection conn = DBConnection.getInstance().getConnection();) {
+>>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
             String sql = "SELECT 1 FROM payroll WHERE emp_id = ? AND MONTH(created_date) = MONTH(?) AND YEAR(created_date) = YEAR(?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, empId);

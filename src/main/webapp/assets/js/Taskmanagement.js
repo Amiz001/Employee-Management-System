@@ -34,3 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
       toast.show();
     }
   });	
+  
+  
+  //delete popup
+  	function deleteForm(task_id){	
+  		document.getElementById("deleteLink").href += task_id;
+  	}

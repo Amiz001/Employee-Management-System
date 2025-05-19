@@ -22,9 +22,15 @@ public class EmployeeInfo2Servlet extends HttpServlet {
         try {
             EmployeeDAO dao = new EmployeeDAO();
             List<Employee> employees = dao.getEmployees();
+            
+            String status = null;
+            String message = null;
+            
+            status = (String) request.getParameter("status");
+            message = (String) request.getParameter("message");
 
             request.setAttribute("employeeList", employees);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/supervisor/employees.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./dashboard/supervisor/employees.jsp?status=" + status +"&"+ message);
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
