@@ -23,13 +23,20 @@ public class LeaveStatusServlet extends HttpServlet {
 
         try {   
         	
+            int empId =  Integer.parseInt(request.getParameter("empId"));
         	int id =  Integer.parseInt(request.getParameter("leaveId"));
+        	int totalDays =  Integer.parseInt(request.getParameter("totalDays"));
         	String action = (String) request.getParameter("action");
         	
         	LeaveDAO dao = new LeaveDAO();
         	String status = null;
         	
+            EmployeeDAO empdao = new EmployeeDAO();
+            Employee emp = empdao.getEmployeeById(empId);
+            int leaveCount = emp.getLeaveCount();
+        	
         	if(action.equals("accept")) {
+        		 dao.updateLeaveCount(empId, leaveCount - totalDays);
         		 status = dao.updateStatus(id, "Approved") ? "update_success" : "error";
         	}
         	else if(action.equals("reject")) {

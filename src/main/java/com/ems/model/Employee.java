@@ -53,6 +53,7 @@ public class Employee {
 		this.basicSalary = basicSalary;
 		this.profilePhoto = profilePhoto;
 	}
+	
 
 	public Employee(String name, String email, String password, String phone, String department, Date dob,
 			String gender, String role, int leaveCount, double basicSalary, String profilePhoto) {

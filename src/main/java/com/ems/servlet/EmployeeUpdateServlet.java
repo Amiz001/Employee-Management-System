@@ -26,6 +26,8 @@ public class EmployeeUpdateServlet extends HttpServlet {
             String department = request.getParameter("department");
             String gender = request.getParameter("gender");
             String role = request.getParameter("role");
+            int leaveCount = Integer.parseInt(request.getParameter("leaveCount"));
+	        double basicSalary = Double.parseDouble(request.getParameter("basicSalary"));
 
             String dobStr = request.getParameter("dob");    
             Date dob = Date.valueOf(dobStr);
@@ -40,11 +42,13 @@ public class EmployeeUpdateServlet extends HttpServlet {
             employee.setGender(gender);
             employee.setRole(role);
             employee.setDob(dob);
+            employee.setLeaveCount(leaveCount);
+            employee.setBasicSalary(basicSalary);
             
             EmployeeDAO dao = new EmployeeDAO();
             
             if(dao.updateEmployee(employee)) {
-            	response.sendRedirect("EmployeeServlet");
+            	response.sendRedirect("EmployeeServlet?status=update_success");
             }
    
         } catch (Exception e) {

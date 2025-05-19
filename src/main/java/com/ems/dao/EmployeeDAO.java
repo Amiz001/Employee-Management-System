@@ -11,11 +11,7 @@ public class EmployeeDAO {
 	
     public Employee validate(String email, String password) throws Exception {
     	
-<<<<<<< HEAD
         Connection conn = DBConnection.getInstance().getConnection();
-=======
-    	Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "SELECT * FROM employee WHERE email = ? AND password = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -42,18 +38,18 @@ public class EmployeeDAO {
     public boolean insertEmployee(Employee employee) throws SQLException {
 		
     	Connection conn = DBConnection.getInstance().getConnection();
-		
-		String sql = "INSERT INTO employee (name, email, password, phone, role, department, dob, gender, leave_count, basic_salary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sql);
+    										
+		String sql = "INSERT INTO employee (name, email, password, phone, department, dob, gender, role, leave_count, basic_salary, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql); 
         
         ps.setString(1, employee.getName());
         ps.setString(2, employee.getEmail());
         ps.setString(3, employee.getPassword());
         ps.setString(4, employee.getPhone());
-        ps.setString(5, employee.getRole());
-        ps.setString(6, employee.getDepartment());
-        ps.setDate(7, employee.getDob());
-        ps.setString(8, employee.getGender());
+        ps.setString(5, employee.getDepartment());
+        ps.setDate(6, employee.getDob());
+        ps.setString(7, employee.getGender());
+        ps.setString(8, employee.getRole());
         ps.setInt(9, employee.getLeaveCount());
         ps.setDouble(10, employee.getBasicSalary());
         ps.setString(11, employee.getProfilePhoto());
@@ -66,7 +62,7 @@ public class EmployeeDAO {
     	
     	Connection conn = DBConnection.getInstance().getConnection();
         
-        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=? WHERE emp_id=?";
+        String sql = "UPDATE employee SET name=?, email=?, phone=?, role=?, department=?, dob=?, gender=?, leave_count=?, basic_salary=? WHERE emp_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, employee.getName());
@@ -76,7 +72,9 @@ public class EmployeeDAO {
         ps.setString(5, employee.getDepartment());
         ps.setDate(6, employee.getDob());
         ps.setString(7, employee.getGender());
-        ps.setInt(8, employee.getEmpId());
+        ps.setInt(8, employee.getLeaveCount());
+        ps.setDouble(9, employee.getBasicSalary());
+        ps.setInt(10, employee.getEmpId());
         
         return ps.executeUpdate() > 0;
     }
@@ -195,25 +193,18 @@ public class EmployeeDAO {
 	//Employee ID Validate
 	public static boolean exists(int emp_id) {
 		boolean found = false;
-<<<<<<< HEAD
-		try (Connection conn = DBConnection.getInstance().getConnection()) {
-=======
+		
 		try (Connection conn = DBConnection.getInstance().getConnection();) {
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+
 			String sql = "SELECT 1 FROM employee WHERE emp_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, emp_id);
 			ResultSet rs = stmt.executeQuery();
 			found = rs.next();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return found;
 	}
-	
-	
-	
-		
-	
-    
 }

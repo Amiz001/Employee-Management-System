@@ -96,6 +96,16 @@
       Leave record successfully updated!
     </div>
   </div>
+  
+  <div id="deleteToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Leave record successfully deleted!
+    </div>
+  </div>
 
   <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
@@ -103,7 +113,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      <%= request.getParameter("message") %>
+      <%= request.getParameter("message") %> 	
     </div>
   </div>
 </div>

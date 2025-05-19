@@ -1,11 +1,13 @@
 //update popup
-function fillUpdateForm(empId, name, email, phone, department, dob, gender, role) {
+function fillUpdateForm(empId, name, email, phone, department, dob, gender, role, leaveCount, basicSalary) {
     document.getElementById('empId').value = empId;
     document.getElementById('Ename').value = name;
     document.getElementById('email').value = email;
     document.getElementById('phone').value = phone;
     document.getElementById('department').value = department;
     document.getElementById('dob').value = dob;
+	document.getElementById('leaveCount').value = leaveCount;
+	document.getElementById('basicSalary').value = basicSalary;
     document.getElementById('Erole').value = role;
 
     if (gender === 'Male') {
@@ -14,3 +16,30 @@ function fillUpdateForm(empId, name, email, phone, department, dob, gender, role
       document.getElementById('genderFemale').checked = true;
     }
   }
+  
+  //alert trigger
+  window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get('status');
+
+	  if (status === 'update_success') {
+	    const toast = new bootstrap.Toast(document.getElementById('successToast'));
+	    document.querySelector("#successToast .toast-body").textContent = "Employee record successfully updated!";
+	    toast.show();
+	    
+	  } else if (status === 'add_success') {
+	     const toast = new bootstrap.Toast(document.getElementById('successToast'));
+	     document.querySelector("#successToast .toast-body").textContent = "Employee record successfully added!";
+	     toast.show();
+  	   
+	  	} else if (status === 'delete_success') {
+	  	   const toast = new bootstrap.Toast(document.getElementById('errorToast'));
+	  	   document.querySelector("#errorToast .toast-header .me-auto").textContent = "Success";
+	  	   document.querySelector("#errorToast .toast-body").textContent = "Employee record successfully deleted!";
+	  	   toast.show();   
+	     
+	      } else if (status === 'error') {
+	        const toast = new bootstrap.Toast(document.getElementById('errorToast'));
+	        toast.show();
+      }
+    });

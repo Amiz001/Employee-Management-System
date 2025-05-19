@@ -22,7 +22,7 @@ public class LeaveDeleteServlet extends HttpServlet {
             
             
             if(dao.deleteLeave(leaveId)) {
-            	response.sendRedirect("LeaveServlet?status=delete_success&message=Leave+record+successfully+deleted!");
+            	response.sendRedirect("LeaveServlet?status=delete_success");
             }
             else {
             	response.sendRedirect("LeaveServlet?status=error");

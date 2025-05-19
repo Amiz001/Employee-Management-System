@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ems.dao.EmployeeDAO;
 import com.ems.dao.TaskmanagementDAO;
 
 
@@ -27,6 +28,11 @@ public class TaskmanagementUpdateServlet extends HttpServlet {
 	    Date deadline = Date.valueOf(request.getParameter("deadline"));
 	    Date start_date = Date.valueOf(request.getParameter("start_date"));
 	    String status = request.getParameter("status");
+	    
+	    if (emp_id <= 0 || !EmployeeDAO.exists(emp_id)) {
+    		response.sendRedirect("TaskmanagementServlet?status=error&message=Invalid+Employee+Id");
+    		return;
+    	}
 
 	    boolean isTrue = TaskmanagementDAO.updatedata(task_id, title, emp_id, deadline, start_date, status);
 

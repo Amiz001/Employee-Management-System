@@ -23,12 +23,16 @@ public class TaskmanagementServlet extends HttpServlet {
         request.setAttribute("taskDetails", taskDetails);
         
         String status = null;
-        status = request.getParameter("status");
+        String message = null;
         
-        request.getRequestDispatcher("./dashboard/supervisor/task.jsp?status=" + status).forward(request, response);
-       
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        status = request.getParameter("status");
+        message = request.getParameter("message");
+        
+        request.getRequestDispatcher("./dashboard/supervisor/task.jsp?status=" + status + "&message=" + message).forward(request, response);
+
     }
+    
+    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

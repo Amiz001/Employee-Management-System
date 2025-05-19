@@ -43,6 +43,7 @@
 		</div>
         
         <div class="form-container">
+        	<!-- <h2 class="title">Core<span style="color: #a05aff;">HR</span></h2> -->
             <h2>Welcome Back!</h2>
             <p></p><br> 
 

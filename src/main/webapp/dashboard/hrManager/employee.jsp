@@ -81,11 +81,35 @@
     </nav>
 </div>
 
+<!--  Error and success alert messages -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
 
+  <div id="successToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Employee record successfully updated!
+    </div>
+  </div>
+  
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Employee record successfully deleted!
+    </div>
+  </div>
+</div>
+
+<% String status = request.getParameter("status"); %>
 
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Start working from here</h5>
+    <h5 id="main-title">Employee Details</h5>
     <div class="table-container">
         <table class="table table-striped my-table">
             <thead>
@@ -110,8 +134,9 @@
                     <th>Department</th>
                     <th>DOB</th>
                     <th>Gender</th>
-                    <th>Role</th>  
-                    <th>Profile Photo</th> 
+                    <th>Role</th>
+                    <th>Leave Count</th>
+                    <th>Basic Salary</th>  
                     <th>Actions</th>        
                 </tr>
             </thead>
@@ -125,7 +150,7 @@
 			%>
 			
             <tr>
-                  <td><%= employee.getEmpId() %></td>
+                  <td style="width:10px"><%= employee.getEmpId() %></td>
 		          <td><%= employee.getName() %></td>
 		          <td><%= employee.getEmail() %></td>
 		          <td><%= employee.getPhone() %></td>
@@ -133,10 +158,13 @@
 		          <td><%= employee.getDob() %></td> 
 		          <td><%= employee.getGender() %></td>
 		          <td><%= employee.getRole() %></td>
-		          <td><%= employee.getProfilePhoto() %></td>  
+		          <td  style="width:10px"><%= employee.getLeaveCount() %></td>
+		          <td><%= employee.getBasicSalary() %></td> 
 		          
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">                                                                                                                                                                                                      
-                  	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%= employee.getEmpId() %>', '<%= employee.getName() %>', '<%=employee.getEmail()%>', '<%=employee.getPhone()%>','<%=employee.getDepartment()%>', '<%= employee.getDob() %>', '<%= employee.getGender() %>', '<%= employee.getRole() %>')"></i>
+                  	<i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" 
+                  	onclick="fillUpdateForm('<%= employee.getEmpId() %>', '<%= employee.getName() %>', '<%=employee.getEmail()%>', '<%=employee.getPhone()%>','<%=employee.getDepartment()%>', '<%= employee.getDob() %>', '<%= employee.getGender() %>', '<%= employee.getRole() %>', '<%= employee.getLeaveCount() %>', '<%= employee.getBasicSalary() %>')"></i>
+                    
                     <a href="${pageContext.request.contextPath}/EmployeeDeleteServlet?empId=<%= employee.getEmpId() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
                     
                   </td>
@@ -224,8 +252,7 @@
               </div>
             </div>
           </div>
-
-
+			
           <div class="mb-3">
             <label for="leaveCount" class="form-label">Leave Count</label>
             <input type="text" class="form-control" name="leaveCount" required>
@@ -234,6 +261,11 @@
           <div class="mb-3">
             <label for="basicSalary" class="form-label">Basic Salary</label>
             <input type="text" class="form-control" name="basicSalary" required>
+          </div>
+        
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" required>
           </div>
         </div>
 
@@ -313,6 +345,16 @@
                 <label class="form-check-label" for="gender">Female</label>
               </div>
             </div>
+            
+            <div class="mb-3">
+            <label for="leaveCount" class="form-label">Leave Count</label>
+            <input type="text" class="form-control" name="leaveCount" id="leaveCount" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="basicSalary" class="form-label">Basic Salary</label>
+            <input type="text" class="form-control" name="basicSalary" id="basicSalary" required>
+          </div>
             
           </div>
         </div>

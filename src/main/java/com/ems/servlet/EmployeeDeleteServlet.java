@@ -19,7 +19,7 @@ public class EmployeeDeleteServlet extends HttpServlet {
             EmployeeDAO dao = new EmployeeDAO(); 
             dao.deleteEmployee(empId);
             
-            response.sendRedirect("EmployeeServlet");
+            response.sendRedirect("EmployeeServlet?status=delete_success");
             
         } catch (Exception e) {
             e.printStackTrace();

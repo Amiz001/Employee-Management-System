@@ -13,7 +13,7 @@ import com.ems.util.DBConnection;
 
 public class LeaveDAO {
 	
-	public boolean insertLeave(Leave leave, int leaveCount) throws SQLException {
+	public boolean insertLeave(Leave leave) throws SQLException {
 		
 		Connection conn = DBConnection.getInstance().getConnection();
 		
@@ -26,26 +26,12 @@ public class LeaveDAO {
         ps.setDate(4, leave.getEndDate());
         ps.setString(5, leave.getReason());
         
-        if( ps.executeUpdate() > 0) {
-        	
-        	String update_sql = "UPDATE employee SET leave_count=? WHERE emp_id=?";
-        	ps = conn.prepareStatement(update_sql);
-        	
-        	ps.setInt(1, leaveCount);
-        	ps.setInt(2, leave.getEmpId());
-        	
-        	return ps.executeUpdate() > 0 ;
-        }
-        
-        return false;
+        return ps.executeUpdate() > 0 ;
     }
 	
 	public boolean hasOverlappingFutureLeave(int empId, Date startDate, Date endDate) throws SQLException {
-<<<<<<< HEAD
-	    Connection conn = DBConnection.getInstance().getConnection();
-=======
+
 		Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	    String sql = "SELECT COUNT(*) FROM leave_request " +
 	                 "WHERE emp_id = ? " +
 	                 "AND status IN ('Pending', 'Approved') " +
@@ -62,14 +48,9 @@ public class LeaveDAO {
 	}
 
 
-	
     public boolean updateLeave(Leave leave) throws SQLException {
-    	
-<<<<<<< HEAD
-        Connection conn = DBConnection.getInstance().getConnection();
-=======
+
     	Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "UPDATE leave_request SET leave_type=?, start_date=?, end_date=?, reason=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -86,11 +67,7 @@ public class LeaveDAO {
     
     public boolean deleteLeave(int leaveId) throws SQLException {
     	
-<<<<<<< HEAD
-        Connection conn = DBConnection.getInstance().getConnection();
-=======
     	Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "DELETE FROM leave_request WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -159,11 +136,7 @@ public class LeaveDAO {
 	    
 		List<Leave> leaves = new ArrayList<>();
 	
-<<<<<<< HEAD
-	    Connection conn = DBConnection.getInstance().getConnection();
-=======
 		Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
 	    
 	    String sql = "SELECT * FROM leave_request";
 	    PreparedStatement ps = conn.prepareStatement(sql);
@@ -187,19 +160,29 @@ public class LeaveDAO {
 	}
 	
 	public boolean updateStatus(int leaveId, String status) throws SQLException {
-    	
-<<<<<<< HEAD
-        Connection conn = DBConnection.getInstance().getConnection();
-=======
+		
 		Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
         
         String sql = "UPDATE leave_request SET status=? WHERE leave_id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         
         ps.setString(1, status);
         ps.setInt(2, leaveId);
+ 
+        return ps.executeUpdate() > 0 ;
+    }
+	
+	
+	public boolean updateLeaveCount(int empId,  int leaveCount) throws SQLException {
+		
+		Connection conn = DBConnection.getInstance().getConnection();
         
-        return ps.executeUpdate() > 0;
+		String update_sql = "UPDATE employee SET leave_count=? WHERE emp_id=?";
+		PreparedStatement ps = conn.prepareStatement(update_sql);
+    	
+    	ps.setInt(1, leaveCount);
+    	ps.setInt(2, empId);
+    	
+    	return ps.executeUpdate() > 0 ;
     }
 }

@@ -14,15 +14,29 @@ window.addEventListener('click', function (e) {
 
 //Dark-Mode Toggle
 const toggleBtn = document.getElementById('darkModeToggle');
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-		
-		if (document.body.classList.contains('dark-mode')) {
-		    darkModeToggle.textContent = 'dark_mode'; 	
-		} else {
-		    darkModeToggle.textContent = 'light_mode'; 
-		}
-    });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        toggleBtn.textContent = 'dark_mode';
+    } else {
+        toggleBtn.textContent = 'light_mode';
+    }
+});
+
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    if (document.body.classList.contains('dark-mode')) {
+        toggleBtn.textContent = 'dark_mode';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        toggleBtn.textContent = 'light_mode';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+});
+
 	
 //search Bar function
 function filterTable() {

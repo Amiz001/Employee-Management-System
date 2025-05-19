@@ -14,8 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	   toast.show();
 	   
 	} else if (status === 'delete_success') {
-	   const toast = new bootstrap.Toast(document.getElementById('errorToast'));
-	   document.querySelector("#errorToast .toast-header .me-auto").textContent = "Success";
+	   const toast = new bootstrap.Toast(document.getElementById('deleteToast'));
 	   toast.show();   
    
     } else if (status === 'error') {

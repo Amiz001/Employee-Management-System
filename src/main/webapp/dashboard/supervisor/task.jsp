@@ -45,7 +45,7 @@
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet" class="active"><i class="fa-solid fa-list-check"></i>Task</a>
      <a href="${pageContext.request.contextPath}/EmployeeInfo2Servlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/LeaveManageServlet"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
-     <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a style="margin-top: 90px" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
 
@@ -108,7 +108,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Something went wrong. Please try again!
+      <%= request.getParameter("message") %>
     </div>
   </div>
 </div>
@@ -142,7 +142,7 @@ String status = request.getParameter("status");
 
 <!-- Main Content-->
 <div class="content">
-    <h5 id="main-title">Start working from here</h5>
+    <h5 id="main-title">Task Management</h5>
     <div class="table-container">
         <table class="table table-striped my-table">
             <thead>
@@ -206,6 +206,10 @@ String status = request.getParameter("status");
         </table>
     </div>
 </div> 
+
+<%
+    java.time.LocalDate today = java.time.LocalDate.now();
+%>
      
 <!-- Insert Popup-->
 
@@ -236,7 +240,7 @@ String status = request.getParameter("status");
             </div>
             <div class="col-md-6">
               <label for="start_date" class="form-label">Start Date</label>
-              <input type="date" class="form-control" name="start_date" required>
+              <input type="date" class="form-control" name="start_date" min="<%= today %>" required>
             </div>
           </div>
 

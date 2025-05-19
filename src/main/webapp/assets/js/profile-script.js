@@ -7,7 +7,6 @@ function fillUpdateForm(empId, name, email, phone, department, dob, gender, role
     document.getElementById('department').value = department;
     document.getElementById('dob').value = dob;
    	document.getElementById('Erole').value = role;
-	//document.getElementById('profilePhoto').value = profilePhoto;
 	document.getElementById("profileImg").src += profilePhoto;
 
     if (gender === 'Male') {
@@ -25,12 +24,12 @@ function fillUpdateForm(empId, name, email, phone, department, dob, gender, role
 
       if (status === 'update_success') {
         const toast = new bootstrap.Toast(document.getElementById('successToast'));
-  	  document.querySelector("#successToast .toast-body").textContent = "Leave record successfully updated!";
+  	  document.querySelector("#successToast .toast-body").textContent = "Profile successfully updated!";
         toast.show();
   	  
-  	} else if (status === 'add_success') {
+  	} else if (status === 'password_success') {
   	   const toast = new bootstrap.Toast(document.getElementById('successToast'));
-  	   document.querySelector("#successToast .toast-body").textContent = "Leave record successfully added!";
+  	   document.querySelector("#successToast .toast-body").textContent = "Password Changed successfully!";
   	   toast.show();
   	   
   	} else if (status === 'delete_success') {

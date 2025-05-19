@@ -26,11 +26,7 @@ public class TaskmanagementDAO {
 			
 			try {
 				//DB Connection Call
-<<<<<<< HEAD
-				conn=DBConnection.getInstance().getConnection();
-=======
-				Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+				conn = DBConnection.getInstance().getConnection();
 				stmt=conn.createStatement();
 				
 				//SQL Query
@@ -60,11 +56,7 @@ public class TaskmanagementDAO {
 			
 			try {
 				//DB Connection Call
-<<<<<<< HEAD
-				conn=DBConnection.getInstance().getConnection();
-=======
-				Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+				conn = DBConnection.getInstance().getConnection();
 				stmt=conn.createStatement();
 				
 				//Query
@@ -97,11 +89,7 @@ public class TaskmanagementDAO {
 			
 			try {
 				//DB Connection 
-<<<<<<< HEAD
-				conn=DBConnection.getInstance().getConnection();
-=======
-				Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+				conn = DBConnection.getInstance().getConnection();
 				stmt=conn.createStatement();
 				
 				//Query
@@ -131,11 +119,7 @@ public class TaskmanagementDAO {
 		public static boolean updatedata(int task_id, String title, int emp_id, Date deadline, Date start_date, String status) {
 		    boolean isSuccess = false;
 		    try {
-<<<<<<< HEAD
-		        conn = DBConnection.getInstance().getConnection();
-=======
-		    	Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+		    	conn = DBConnection.getInstance().getConnection();
 		        stmt = conn.createStatement();
 
 		        String sql = "UPDATE task SET title='" + title + "', emp_id=" + emp_id +
@@ -158,11 +142,8 @@ public class TaskmanagementDAO {
 		public static boolean deletedata(int task_id) {
 		    boolean isSuccess = false;
 		    try {
-<<<<<<< HEAD
 		        conn = DBConnection.getInstance().getConnection();
-=======
-		    	Connection conn = DBConnection.getInstance().getConnection();
->>>>>>> branch 'master' of https://github.com/Amiz001/Employee-Management-System.git
+
 		        stmt = conn.createStatement();
 
 		        String sql = "DELETE FROM task WHERE task_id=" + task_id;

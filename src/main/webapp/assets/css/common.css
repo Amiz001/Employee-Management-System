@@ -561,3 +561,147 @@ body.dark-mode .toolbar-icons #download-icon {
 body.dark-mode .toolbar-icons span:hover {
     background-color: #333;
 }
+
+/*---Dashboard - darkmode---*/
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-mode .card .card-title {
+  color: #ffffff;
+}
+
+.dark-mode .announcement-item {
+  background-color: #2a2a2a;
+  border: 1px solid #333;
+  color: #ccc;
+}
+
+.dark-mode .text-muted {
+  color: #999 !important;
+}
+
+.calendar-card {
+  background-color: #ffffff; 
+  color: #000;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.dark-mode .calendar-card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+.dark-mode .announcement-item {
+  background-color: #2a2a2a;
+  color: #ccc;
+}
+.dark-mode .announcement-item:hover {
+  background-color: #3a3a3a;
+}
+
+.dark-mode .btn-outline-dark {
+  color: #ccc;
+  border-color: #555;
+}
+
+.dark-mode .btn-outline-dark:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .badge.bg-primary {
+  background-color: #0d6efd;
+}
+.dark-mode .badge.bg-warning {
+  background-color: #ffc107;
+}
+.dark-mode .badge.bg-success {
+  background-color: #198754;
+}
+.dark-mode .badge.bg-purple {
+  background-color: #6f42c1;
+}
+
+/* Dashboard - dark mode scroll bar*/
+.dark-mode .announcement-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-mode .announcement-scroll::-webkit-scrollbar-track {
+  background: #1e1e1e;  
+}
+
+.dark-mode .announcement-scroll::-webkit-scrollbar-thumb {
+  background-color: #444; 
+  border-radius: 4px;
+}
+
+.dark-mode .announcement-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/*Form Dark mode styles*/
+
+.dark-mode .modal-content {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #333;
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  border-color: #333;
+  background-color: #2a2a2a;
+}
+
+.dark-mode .btn-close {
+  filter: invert(1);
+}
+
+.dark-mode .modal-content .form-control,
+.dark-mode .modal-content .form-select,
+.dark-mode .modal-content textarea {
+  background-color: #2b2b2b;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+.dark-mode .modal-content .form-control:focus,
+.dark-mode .modal-content .form-select:focus,
+.dark-mode .modal-content textarea:focus {
+  background-color: #333;
+  color: #fff;
+  border-color: #777;
+  box-shadow: none;
+}
+
+.dark-mode .modal-content .form-label {
+  color: #ccc;
+}
+
+.dark-mode .btn-black {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-mode .btn-black:hover {
+  background-color: #444;
+}
+
+.dark-mode .btn-purple {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+.dark-mode .btn-purple:hover {
+  background-color: #5a33a5;
+}
+
+
+

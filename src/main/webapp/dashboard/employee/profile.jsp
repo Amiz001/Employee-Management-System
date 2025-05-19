@@ -102,7 +102,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Leave record successfully updated!
+      Profile successfully updated!
     </div>
   </div>
 
@@ -325,7 +325,6 @@
         const newPswdInput = document.getElementById('pswd1');
         const confirmPswdInput = document.getElementById('pswd2');
 
-        // Server-side current password (rendered into JS from JSP)
         const serverCurrentPassword = '<%= employee.getPassword() %>';
 
         form.addEventListener('submit', function (e) {

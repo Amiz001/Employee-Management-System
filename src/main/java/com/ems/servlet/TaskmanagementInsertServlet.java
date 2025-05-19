@@ -28,8 +28,7 @@ public class TaskmanagementInsertServlet extends HttpServlet {
         
         // Validate emp_id
     	if (emp_id <= 0 || !EmployeeDAO.exists(emp_id)) {
-    		// Redirect to error page or show message
-    		response.sendRedirect("EmployeeInfo2Servlet?status=error&message=Invalid Employee Id");
+    		response.sendRedirect("TaskmanagementServlet?status=error&message=Invalid+Employee+Id");
     		return;
     	}
     	
@@ -45,10 +44,10 @@ public class TaskmanagementInsertServlet extends HttpServlet {
   
     	
     } catch (NumberFormatException e) {
-    	response.sendRedirect("EmployeeInfo2Servlet?status=error&message=Invalid Employee Id");
+    	response.sendRedirect("EmployeeInfo2Servlet?status=error&message=Invalid+Employee+Id");
     } catch (Exception e) {
     	e.printStackTrace();
-    	response.sendRedirect("EmployeeInfo2Servlet?status=error&message=Invalid Employee Id");
+    	response.sendRedirect("EmployeeInfo2Servlet?status=error&message=Invalid+Employee+Id");
     }
   }  
     

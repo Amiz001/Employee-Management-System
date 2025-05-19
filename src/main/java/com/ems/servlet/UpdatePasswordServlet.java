@@ -24,7 +24,7 @@ public class UpdatePasswordServlet extends HttpServlet {
         	EmployeeDAO dao = new EmployeeDAO();
 
             if (dao.updatePassword(empId, password)) {
-            	response.sendRedirect("EmployeeProfileServlet?status=update_success"); 
+            	response.sendRedirect("EmployeeProfileServlet?status=password_success"); 
             } else {
             	response.sendRedirect("EmployeeProfileServlet?status=error"); 
             }

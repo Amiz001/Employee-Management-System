@@ -44,7 +44,7 @@
      <a href="${pageContext.request.contextPath}/TaskmanagementServlet"><i class="fa-solid fa-list-check"></i>Task</a>
      <a href="${pageContext.request.contextPath}/EmployeeInfo2Servlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
      <a href="${pageContext.request.contextPath}/LeaveManageServlet" class="active"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave Requests</a>
-     <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
+     <a style="margin-top: 90px" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
 
 
@@ -181,8 +181,8 @@ String status = request.getParameter("status");
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px;">                 
                     
                     <% if(leave.getStatus().equals("Pending")) {%> 
-                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept"><span class="material-symbols-outlined" id="update-icon" style="color:green">task_alt</span></a>
-                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject"><span class="material-symbols-outlined" id="delete-icon">cancel</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=accept&totalDays=<%= leave.getTotalDays() %>&empId=<%= employee.getEmpId() %>"><span class="material-symbols-outlined" id="update-icon" style="color:green">task_alt</span></a>
+                  		<a href="LeaveStatusServlet?leaveId=<%= leave.getLeaveId()%>&action=reject&totalDays=<%= leave.getTotalDays() %>&empId=<%= employee.getEmpId() %>"><span class="material-symbols-outlined" id="delete-icon">cancel</span></a>
                     <%} else if(leave.getStatus().equals("Approved") || leave.getStatus().equals("Rejected")){ %>
                    	 	<p style="color:blue">Resolved</p>
                     <%} %>
