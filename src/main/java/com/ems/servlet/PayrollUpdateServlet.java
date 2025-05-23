@@ -17,7 +17,7 @@ public class PayrollUpdateServlet extends HttpServlet {
     throws ServletException, IOException {
         
         try {
-            // Get form parameters
+            
             int pay_id = Integer.parseInt(request.getParameter("pay_id"));
             int emp_id = Integer.parseInt(request.getParameter("emp_id"));
             double basic = Double.parseDouble(request.getParameter("basic"));
@@ -28,7 +28,6 @@ public class PayrollUpdateServlet extends HttpServlet {
             // Calculate total salary
             double total_salary = basic + ot + allowance;
 
-            // Create Payroll object
             Payroll payroll = new Payroll();
             payroll.setPay_id(pay_id);
             payroll.setEmp_id(emp_id);
@@ -38,7 +37,6 @@ public class PayrollUpdateServlet extends HttpServlet {
             payroll.setTotal_salary(total_salary);
             payroll.setCreated_date(created_date);
 
-            // Update payroll in DB
             boolean isUpdated = PayrollDAO.updatedata(pay_id,emp_id,basic,ot,allowance,total_salary,created_date);
 
 

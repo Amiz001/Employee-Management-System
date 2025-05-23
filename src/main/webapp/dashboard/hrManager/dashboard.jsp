@@ -159,7 +159,7 @@
 
 
   <div class="col-md-6">
-  <div class="calendar-card bg-white">
+  <div class="calendar-card">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h5>📊 Employee Count</h5>
       <button class="btn btn-outline-dark btn-sm rounded-pill" id="card-date">4 June 2024</button>

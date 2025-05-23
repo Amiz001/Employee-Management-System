@@ -52,7 +52,7 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-      <a href="${pageContext.request.contextPath}/EmployeeInfoServlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
+      <a href="${pageContext.request.contextPath}/EmployeeInfoServlet"><i class="fa-solid fa-address-book"></i> Employee Info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
@@ -102,7 +102,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-      Leave record successfully updated!
+      Profile successfully updated!
     </div>
   </div>
 
@@ -318,7 +318,7 @@
   </div>
   
   	<script> 
-  //delete form validation
+    //delete form validation
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.querySelector('#passwordModal form');
         const currentPswdInput = document.getElementById('currentPswd');

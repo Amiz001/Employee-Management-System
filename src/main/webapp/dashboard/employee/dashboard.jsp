@@ -56,7 +56,7 @@
         <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-dark">
+      <div class="modal-body text-dark" id="modal-body">
         Are you sure you want to log out from your account?
       </div>
       <div class="modal-footer">
@@ -102,7 +102,7 @@
       <div class="col-md-3">
         <div class="card card-stat" id="card2" style="background: linear-gradient(45deg, #1cc88a, #17a673);">
           <div class="card-body">
-            <h3 class="fw-bold">6 Days</h3>
+            <h3 class="fw-bold">18 Days</h3>
             <p>Remaining Leaves</p>
           </div>
         </div>
@@ -110,7 +110,7 @@
       <div class="col-md-3">
         <div class="card card-stat" id="card3" style="background: linear-gradient(45deg, #f6c23e, #dda20a);">
           <div class="card-body">
-            <h3 class="fw-bold">Rs. 120,000</h3>
+            <h3 class="fw-bold">Rs. 50,000</h3>
             <p>Salary</p>
           </div>
         </div>

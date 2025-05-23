@@ -44,7 +44,7 @@
          <p id="role"><%= role %></p></div>
          	
     <div class="features">
-     <a href="${pageContext.request.contextPath}/dashboard/employee/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
+     <a href="${pageContext.request.contextPath}/dashboard/hrManager/dashboard.jsp" class="active"><i class="fa-solid fa-user"></i> Dashboard</a>
      <a href="${pageContext.request.contextPath}/EmployeeServlet"><i class="fa-solid fa-users"></i>Employee</a>
      <a href="${pageContext.request.contextPath}/DepartmentServlet"><i class="fa-solid fa-cube"></i> Department</a>
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
@@ -80,7 +80,7 @@
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="${pageContext.request.contextPath}/EmployeeProfileServlet"><i class="fas fa-user"></i> Profile</a>
+                <a href="${pageContext.request.contextPath}/HRManagerProfileServlet"><i class="fas fa-user"></i> Profile</a>
                 <a data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt" ></i> Logout</a>
         </div>
     </nav>

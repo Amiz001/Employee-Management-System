@@ -663,6 +663,7 @@ body.dark-mode .toolbar-icons span:hover {
   filter: invert(1);
 }
 
+
 .dark-mode .modal-content .form-control,
 .dark-mode .modal-content .form-select,
 .dark-mode .modal-content textarea {

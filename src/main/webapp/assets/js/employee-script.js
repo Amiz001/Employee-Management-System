@@ -43,3 +43,33 @@ function fillUpdateForm(empId, name, email, phone, department, dob, gender, role
 	        toast.show();
       }
     });
+	
+	//download icon employee
+	function downloadEmployeeExcel() {
+	   const table = document.querySelector('table');
+	   const wb = XLSX.utils.book_new();
+	   const ws_data = [];
+
+	   const selectedColumnIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; 
+
+	   const headerRow = [];
+	   const headerCells = table.querySelectorAll('thead th');
+	   selectedColumnIndices.forEach(index => {
+	     headerRow.push(headerCells[index].textContent);
+	   });
+	   ws_data.push(headerRow);
+
+	   const dataRows = table.querySelectorAll('tbody tr');
+	   dataRows.forEach(row => {
+	     const rowData = [];
+	     const cells = row.querySelectorAll('td');
+	     selectedColumnIndices.forEach(index => {
+	       rowData.push(cells[index].textContent);
+	     });
+	     ws_data.push(rowData);
+	   });
+
+	   const ws = XLSX.utils.aoa_to_sheet(ws_data);
+	   XLSX.utils.book_append_sheet(wb, ws, 'Employee Details');
+	   XLSX.writeFile(wb, 'employee_details_selected.xlsx');
+	   }

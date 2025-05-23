@@ -43,7 +43,7 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/EmployeeInfoServlet"><i class="fa-solid fa-address-book"></i> Employee info</a>
+     <a href="${pageContext.request.contextPath}/EmployeeInfoServlet"><i class="fa-solid fa-address-book"></i> Employee Info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
@@ -110,6 +110,28 @@
   </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm" style="max-width: 400px; margin: auto;">
+      <div class="modal-header bg-danger text-white py-2">
+        <h6 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.9rem;"></button>
+      </div>
+      <div class="modal-body text-center py-3">
+        <p class="mb-1">Are you sure you want to delete this record?</p>
+        <small class="text-muted">This action cannot be undone.</small>
+      </div>
+      <div class="modal-footer justify-content-center py-2">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/PayrollDeleteServlet?pay_id=" id="deleteLink">
+          <button type="button" class="btn btn-danger" id="confirmDelete" style="min-width: 150px">Yes, Delete</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%  
 String status = request.getParameter("status");
@@ -129,9 +151,7 @@ String status = request.getParameter("status");
                     </div>
                   
                     <div class="toolbar-icons"> 
-
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
-
+                        <span class="material-symbols-outlined" id="download-icon" onclick="downloadExcel()">download</span>
                     </div>
                 </div>
                 <tr>
@@ -152,8 +172,7 @@ String status = request.getParameter("status");
 		    if (payList != null) {
 		        for (Payroll payroll : payList) {
 			%>
-            
-           
+                      
             <tr>
 
                   <td><%= payroll.getPay_id() %></td>
@@ -165,12 +184,8 @@ String status = request.getParameter("status");
                   <td><%= payroll.getCreated_date() %></td>
                               
                   <td  style="display:flex; justify-content:center; align-items:center; gap:10px">               
-
-                       
                        <i class="fa-regular fa-pen-to-square" id="update-icon" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal" onclick="fillUpdateForm('<%=payroll.getPay_id()%>', '<%=payroll.getEmp_id()%>', '<%=payroll.getBasic()%>', '<%=payroll.getOt()%>', '<%=payroll.getAllowance()%>',  '<%=payroll.getCreated_date()%>')"></i>
-                        <a href="${pageContext.request.contextPath}/PayrollDeleteServlet?pay_id=<%= payroll.getPay_id() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
-                       
-                     
+                       <a onclick="deleteForm('<%= payroll.getPay_id() %>')" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>                     
                   </td>
             </tr>
             <%
@@ -185,9 +200,7 @@ String status = request.getParameter("status");
         </table>
     </div>
 </div> 
-  
 
-<!-- Update Popup -->
 
 <div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="updateEmployeeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -201,16 +214,15 @@ String status = request.getParameter("status");
         <div class="modal-body custom-scroll">
            <div class="mb-3">
             <label for="emp_id" class="form-label">Employee ID</label>
-            <input type="number" class="form-control" name="emp_id" value="" id="updateemp_id" required>
+            <input type="number" class="form-control" name="emp_id" value="" id="updateemp_id" readonly>
           </div>
           
 	      <div class="mb-3">
             <label for="basic" class="form-label">Basic Salary</label>
-            <input type="number" class="form-control" name="basic" value="" id="updatebasic" required>
+            <input type="number" class="form-control" name="basic" value="" id="updatebasic" readonly>
           </div>
           
           <input type="hidden" class="form-control" name="pay_id" value="" id="updatepay_id" required>
-          
          
           <div class="mb-3">
             <label for="ot" class="form-label">Over Time</label>
@@ -238,7 +250,7 @@ String status = request.getParameter("status");
 	</div>
 </div>
   
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/payroll-script.js"></script>

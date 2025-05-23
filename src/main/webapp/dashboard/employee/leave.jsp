@@ -180,7 +180,7 @@
                     <% if(!isPending){%>  
                     	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
                     <%} %>
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+                        <span class="material-symbols-outlined" id="download-icon" onclick="downloadExcel()">download</span>     
                     </div>
                 </div>
                 <tr>
@@ -333,7 +333,7 @@
 	  </div>
 	</div>
 </div>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/leave.js"></script>

@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Employee info</title>
+<title>Employee Info</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -42,7 +42,7 @@
          	
     <div class="features">
      <a href="${pageContext.request.contextPath}/dashboard/financialAnalyst/dashboard.jsp"><i class="fa-solid fa-user"></i> Dashboard</a>
-     <a href="${pageContext.request.contextPath}/EmployeeInfoServlet" class="active"><i class="fa-solid fa-address-book"></i> Employee info</a>
+     <a href="${pageContext.request.contextPath}/EmployeeInfoServlet" class="active"><i class="fa-solid fa-address-book"></i> Employee Info</a>
      <a href="${pageContext.request.contextPath}/PayrollGetAllServlet"><i class="fa-solid fa-file-invoice-dollar"></i> Payroll</a>
      <a href="" id="log-out" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></div>
 </div>
@@ -101,7 +101,7 @@
 <div class="content">
     <h5 id="main-title">Employee Details</h5>
     <div class="table-container">
-        <table class="table table-striped">
+        <table class="table table-striped my-table">
             <thead>
 
                 <div class="search-toolbar">   
@@ -111,7 +111,7 @@
                     </div>
                    
                     <div class="toolbar-icons"> 
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+                        <span class="material-symbols-outlined" id="download-icon" onclick="downloadEmployeeColumnsExcel()">download</span>     
                      
                     </div>
                 </div>
@@ -168,7 +168,6 @@
     </div>
 </div> 
 
-<!-- Insert Popup-->
 
 <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -182,12 +181,12 @@
         <div class="modal-body custom-scroll">
           <div class="mb-3">
             <label for="emp_id" class="form-label">Employee ID</label>
-            <input type="text" class="form-control" name="emp_id" id="emp_idid" required>
+            <input type="text" class="form-control" name="emp_id" id="emp_idid" readonly>
           </div>
           
           <div class="mb-3">
             <label for="basic" class="form-label">Basic Salary</label>
-            <input type="text" class="form-control" name="basic" id="basicc" required>
+            <input type="text" class="form-control" name="basic" id="basicc" readonly>
           </div>
           
           <div class="mb-3">
@@ -216,8 +215,8 @@
 	  </div>
 	</div>
 </div>
-  
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/payroll-script.js"></script>

@@ -90,6 +90,29 @@
   </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-sm" style="max-width: 400px; margin: auto;">
+      <div class="modal-header bg-danger text-white py-2">
+        <h6 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.9rem;"></button>
+      </div>
+      <div class="modal-body text-center py-3">
+        <p class="mb-1">Are you sure you want to delete this record?</p>
+        <small class="text-muted">This action cannot be undone.</small>
+      </div>
+      <div class="modal-footer justify-content-center py-2">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+        <a href="${pageContext.request.contextPath}/DepartmentDeleteServlet?dep_id=" id="deleteLink">
+          <button type="button" class="btn btn-danger" id="confirmDelete" style="min-width: 150px">Yes, Delete</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <% 
 String status = request.getParameter("status");
 %>
@@ -105,8 +128,8 @@ String status = request.getParameter("status");
         </div>
         
         <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <a href="${pageContext.request.contextPath}/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="${pageContext.request.contextPath}/HRManagerProfileServlet"><i class="fas fa-user"></i> Profile</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt" ></i> Logout</a>
         </div>
     </nav>
 </div>
@@ -125,7 +148,7 @@ String status = request.getParameter("status");
                    
                     <div class="toolbar-icons"> 
                     	<span id="add-icon" class="material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">add_circle</span>
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+                        <span class="material-symbols-outlined" id="download-icon" onclick="downloadDepartmentExcel()">download</span>     
                     </div>
                 </div>
         <table class="table table-striped my-table">
@@ -165,7 +188,7 @@ String status = request.getParameter("status");
    onclick="fillUpdateForm('<%= department.getDep_id() %>', '<%= department.getName()%>', '<%=department.getNo_of_emp()%>', '<%=department.getPhone()%>','<%=department.getEmail()%>','<%=department.getSupervisor_id() %>')">
 </i>
 
-                    <a href="${pageContext.request.contextPath}/DepartmentDeleteServlet?dep_id=<%= department.getDep_id() %>"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
+                    <a onclick="deleteForm('<%= department.getDep_id() %>')" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"><i class="fa-solid fa-trash-can" id="delete-icon"></i></a>
                     
                   </td>
             </tr>
@@ -211,7 +234,7 @@ String status = request.getParameter("status");
 
           <div class="mt-3">
             <label for="phone" class="form-label">Phone</label>
-            <input type="text" class="form-control" name="phone" required>
+            <input type="text" class="form-control" name="phone"  pattern="^[0-9]{10}$" title="Enter a 10-digit phone number" required>
           </div>
           
           <div class="mt-3">
@@ -265,19 +288,13 @@ String status = request.getParameter("status");
 
           <div class="mt-3">
             <label for="phone" class="form-label">Phone</label>
-            <input type="text" class="form-control" name="phone" id="updatephone" required>
+            <input type="text" class="form-control" name="phone" id="updatephone"  pattern="^[0-9]{10}$" title="Enter a 10-digit phone number" required>
           </div>
           
           <div class="mt-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" id="updateemail" required>
           </div>
-          
-          <!--  <div class="mt-3">
-            <label for="supervisor_id" class="form-label">Supervisor Id</label>
-            <input type="text" class="form-control" name="supervisor_id" id="updatesupervisor_id" required>
-          </div>-->
-          
            <div class="mt-3">
 			  <label for="supervisor_id" class="form-label">Supervisor Id</label>
 			  <input type="text" class="form-control" name="supervisor_id" id="updatesupervisor_id" required>
@@ -295,7 +312,7 @@ String status = request.getParameter("status");
     </div>
   </div>
 </div>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/department.js"></script>
@@ -304,5 +321,3 @@ String status = request.getParameter("status");
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>      
 </body>
 </html>
-
-

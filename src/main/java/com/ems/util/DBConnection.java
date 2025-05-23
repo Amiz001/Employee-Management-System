@@ -4,21 +4,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
-    private static Connection conn = null;
 
-    private DBConnection() {}
+    private static DBConnection instance;
 
-    public static Connection getConnection() {
-        if (conn == null) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ems", "root", "@emmawatson");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private final String URL = "jdbc:mysql://localhost:3306/ems";
+    private final String USER = "root";
+    private final String PASS = "@emmawatson";
+
+    private DBConnection() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return conn;
+    }
+
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            instance = new DBConnection();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USER, PASS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
-
-

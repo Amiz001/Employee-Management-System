@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginBtn = document.getElementById('loginBtn');
     const alertBox = document.getElementById('alert');
     const form = document.getElementById('Form');
-    const serverMessage = document.getElementById('serverMessage'); // optional hidden element to receive servlet error
+    const serverMessage = document.getElementById('serverMessage');
 
     if (!loginBtn || !alertBox || !form) return;
 
-    // Show message if servlet sends back an error (like incorrect password)
+    // Show message if servlet sends back an error 
     if (serverMessage && serverMessage.textContent.trim() !== '') {
         showAlert(serverMessage.textContent.trim(), 'alert-error');
     }
@@ -20,10 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Reset alert box
         alertBox.style.display = 'none';
-        alertBox.className = 'alert'; // Reset classes
-        alertBox.textContent = ''; // Clear previous message
+        alertBox.className = 'alert'; 
+        alertBox.textContent = ''; 
 
-        // Force reflow to reset animation
         void alertBox.offsetWidth;
 
         // Frontend input validation
@@ -38,17 +37,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // If all checks pass, show success message
-        // showAlert('Login Successful', 'alert-success');
+         showAlert('Login Successful', 'alert-success');
 
         // Delay submission to allow user to read success message
         setTimeout(() => {
-            form.submit(); // servlet will handle actual authentication
+            form.submit(); 
         }, 2000);
     });
 
     function showAlert(message, type) {
         alertBox.textContent = message;
-        alertBox.classList.add(type, 'fade-in'); // Add alert style and animation
+        alertBox.classList.add(type, 'fade-in'); 
         alertBox.style.display = 'block';
     }
 });

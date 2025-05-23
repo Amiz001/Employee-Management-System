@@ -112,7 +112,7 @@
                     </div>
                    
                     <div class="toolbar-icons"> 
-                        <span class="material-symbols-outlined" id="download-icon">download</span>     
+                        <span class="material-symbols-outlined" id="download-icon" onclick="downloadEmployeeExcel()">download</span>     
                      
                     </div>
                 </div>
@@ -163,11 +163,10 @@
         </table>
     </div>
 </div> 
-
-
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 	<script src="https://kit.fontawesome.com/55f983e54b.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/Taskmanagement.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/payroll-script.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

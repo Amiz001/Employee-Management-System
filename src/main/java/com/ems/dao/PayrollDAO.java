@@ -19,7 +19,7 @@ public class PayrollDAO {
 
         try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+         
             pstmt.setInt(1, emp_id);
             pstmt.setDouble(2, basic);
             pstmt.setDouble(3, ot);
@@ -135,6 +135,7 @@ public class PayrollDAO {
         return isSuccess;
     }
     
+    //Profile ID Validate
     public static Payroll getByEmpId(int empid) {
         String sql = "SELECT * FROM payroll WHERE emp_id = ?";
 
@@ -162,25 +163,23 @@ public class PayrollDAO {
             e.printStackTrace();
         }
         return null; 
-    }  
+    } 
     
+    //Payroll Date Validate
     public static boolean existsForMonth(int empId, Date createdDate) {
         boolean exists = false;
-
         try (Connection conn = DBConnection.getInstance().getConnection();) {
-
             String sql = "SELECT 1 FROM payroll WHERE emp_id = ? AND MONTH(created_date) = MONTH(?) AND YEAR(created_date) = YEAR(?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, empId);
             ps.setDate(2, createdDate);
             ps.setDate(3, createdDate);
             ResultSet rs = ps.executeQuery();
-            exists = rs.next(); // if there's at least one result, it exists
+            exists = rs.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return exists;
     }
-
     
 }

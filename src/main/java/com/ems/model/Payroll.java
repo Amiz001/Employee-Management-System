@@ -12,7 +12,7 @@ public class Payroll {
 	private double total_salary;
 	private Date created_date;
 	
-	 public Payroll() {}
+	public Payroll() {}
 	
 	public Payroll(int pay_id, int emp_id, double basic, double ot, double allowance, double total_salary, Date created_date) {
 		super();
@@ -80,6 +80,5 @@ public class Payroll {
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
 	}
-
 
 }
