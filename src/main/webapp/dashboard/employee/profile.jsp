@@ -192,7 +192,7 @@
             <i class="bi bi-download"></i> Download Payroll
           </button>
           
-          <img src="${pageContext.request.contextPath}/assets/images/payment.svg" style="width:200px; position:absolute; right: 10%; bottom: 8%">
+          <img src="${pageContext.request.contextPath}/assets/images/payment.svg" style="width:200px; margin: 50px 230px">
         </div>
       </div>
     </div>
